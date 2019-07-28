@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_action_gestion_volver_atras"
+        android:title="volver"
+        android:icon="@mipmap/iconovolver"
+        app:showAsAction="always"
+        android:orderInCategory="1"/>
+
+    <item
+        android:id="@+id/menu_action_gestion_gohome"
+        android:title="volver"
+        android:icon="@mipmap/iconomenuppal"
+        app:showAsAction="always"
+        android:orderInCategory="2"/>
+
+    <item
+        android:id="@+id/menu_action_gestion_editar_elemento"
+        android:title="editar"
+        android:icon="@mipmap/iconoeditar"
+        app:showAsAction="always"
+        android:orderInCategory="3"/>
+
+    <item
+        android:id="@+id/menu_action_gestion_eliminar_elemento"
+        android:title="eliminar"
+        android:icon="@mipmap/iconoeliminar"
+        app:showAsAction="always"
+        android:orderInCategory="4" />
+</menu>

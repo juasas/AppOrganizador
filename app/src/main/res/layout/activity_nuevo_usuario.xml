@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_match"
+    tools:context=".NuevoUsuarioActivity">
+
+    <TextView
+        android:id="@+id/nuevo_usuario_titulo"
+        style="@style/estilo_comun_textos"
+        android:text="@string/nuevo_usuario"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/nuevo_usuario_subtitulo"
+        style="@style/estilo_comun_textos"
+        android:layout_below="@+id/nuevo_usuario_titulo"
+        android:textColor="@color/colorPrimaryDark"
+        android:textAlignment = "center"
+        android:text="@string/introduzca_los_datos_para_crear_nuevo_usuario" />
+
+    <LinearLayout
+        android:id = "@+id/nuevo_usuario_grupo_cajas"
+        style="@style/estilo_linear_cajas"
+        android:layout_below="@+id/nuevo_usuario_subtitulo">
+
+        <RelativeLayout
+            style="@style/match_wrap">
+
+            <ImageView
+                android:id="@+id/nuevo_usuario_icono_mail"
+                style="@style/estilo_iconos"
+                android:src="@mipmap/account"/>
+
+            <EditText
+                android:id="@+id/nuevo_usuario_caja_mail"
+                android:layout_toRightOf="@+id/nuevo_usuario_icono_mail"
+                style="@style/estilo_cajas"
+                android:hint="@string/identificador_e_mail"
+                android:inputType="textEmailAddress"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/match_wrap">
+
+            <ImageView
+                android:id="@+id/nuevo_usuario_icono_nombre"
+                style="@style/estilo_iconos"
+                android:src="@mipmap/icononombre"/>
+
+            <EditText
+                android:id="@+id/nuevo_usuario_caja_nombre"
+                android:layout_toRightOf="@+id/nuevo_usuario_icono_nombre"
+                style="@style/estilo_cajas"
+                android:hint="@string/su_nombre"
+                android:maxLength="40"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/match_wrap">
+
+            <ImageView
+                android:id="@+id/nuevo_usuario_icono_pass"
+                style="@style/estilo_iconos"
+                android:src="@mipmap/iconopass"/>
+
+            <EditText
+                android:id="@+id/nuevo_usuario_caja_pass"
+                android:layout_toRightOf="@+id/nuevo_usuario_icono_pass"
+                style="@style/estilo_cajas"
+                android:hint="@string/contrase_a"
+                android:inputType="textPassword" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/match_wrap">
+
+            <ImageView
+                android:id="@+id/nuevo_usuario_icono_repite_pass"
+                style="@style/estilo_iconos"
+                android:src="@mipmap/iconopass"/>
+
+            <EditText
+                android:id="@+id/nuevo_usuario_caja_repite_pass"
+                style="@style/estilo_cajas"
+                android:layout_toRightOf="@+id/nuevo_usuario_icono_repite_pass"
+                android:hint="@string/confirmar_contrasena"
+                android:inputType="textPassword" />
+            </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/nuevo_usuario_boton_borrar"
+        style="@style/estilo_boton"
+        android:layout_below="@+id/nuevo_usuario_grupo_cajas"
+        android:text="@string/boton_borrar_campos"
+        android:onClick="resetear"/>
+
+    <LinearLayout
+        android:id = "@+id/nuevo_usuario_grupo_botones"
+        style = "@style/estilo_linear_botones_cajas"
+        android:layout_below = "@+id/nuevo_usuario_boton_borrar">
+
+        <Button
+            android:id="@+id/nuevo_usuario_boton_aceptar"
+            style="@style/estilo_botones"
+            android:layout_marginLeft="20dp"
+            android:text="@string/boton_aceptar"
+            android:onClick="aceptar"/>
+
+        <Button
+            android:id="@+id/nuevo_usuario_boton_acceso"
+            style="@style/estilo_botones"
+            android:layout_marginRight="20dp"
+            android:text="@string/boton_volver"
+            android:onClick="volver"/>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_match"
+    tools:context=".MostrarCategoriaActivity">
+
+    <RelativeLayout
+    style="@style/match_match">
+
+        <TextView
+            android:id="@+id/mostrar_cat_titulo"
+            style="@style/estilo_comun_textos"
+            android:textSize = "40sp"
+            android:textAlignment = "center"
+            android:text="@string/detalle_de_categorIa" />
+
+        <ImageView
+            android:id="@+id/mostrar_cat_icono_ayuda"
+            style="@style/estilo_ayuda"
+            android:layout_below="@+id/mostrar_cat_titulo"/>
+
+        <LinearLayout
+            android:id="@+id/editar_cat_grupo_cajas"
+            style="@style/estilo_linear_cajas"
+            android:layout_below="@+id/mostrar_cat_icono_ayuda">
+
+            <TextView
+                style="@style/estilo_etiquetas"
+                android:text="@string/nombre_de_la_categorIa"/>
+
+            <TextView
+                android:id="@+id/mostrar_cat_caja_nombre"
+                style="@style/estilo_etiquetas_contenido" />
+
+            <TextView
+                style="@style/estilo_etiquetas"
+                android:text="Detalle de la Categoría:" />
+
+            <TextView
+                android:id="@+id/mostrar_cat_caja_detalle"
+                style="@style/estilo_etiquetas_contenido" />
+
+            <TextView
+                android:id="@+id/mostrar_categoria_cajaid"
+                style="@style/estilo_etiquetas"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
+

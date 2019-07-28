@@ -1,0 +1,29 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+    <Button
+        android:id="@+id/BtnAlerta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cuadro de diálogo: Alerta" />
+    <Button
+        android:id="@+id/BtnConfirmacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cuadro de diálogo: Confirmación" />
+    <Button
+        android:id="@+id/BtnSeleccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cuadro de diálogo: Selección" />
+    <Button
+        android:id="@+id/BtnCustom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cuadro de diálogo: Custom" />
+</LinearLayout>

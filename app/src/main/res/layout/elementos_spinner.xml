@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_wrap"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/nombre_elemento"
+        style="@style/estilo_cajas"
+        android:layout_centerVertical="true"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark" />
+</RelativeLayout>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_match"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id = "@+id/login_titulo"
+        style = "@style/estilo_comun_textos"
+        android:textSize = "40sp"
+        android:layout_alignParentTop = "true"
+        android:textAlignment = "center"
+        android:text = "@string/organizador_de_pertenencias"/>
+
+    <ImageView
+        android:id="@+id/login_icono_ayuda"
+        style="@style/estilo_ayuda"
+        android:layout_below="@+id/login_titulo"/>
+
+    <TextView
+        android:id="@+id/login_subtitulo"
+        style="@style/estilo_comun_textos"
+        android:layout_below="@+id/login_icono_ayuda"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/por_favor_introduzca_sus_credenciales" />
+
+    <LinearLayout
+        android:id = "@+id/login_grupo_cajas"
+        style="@style/estilo_linear_cajas"
+        android:layout_below="@+id/login_subtitulo">
+
+        <RelativeLayout
+            style="@style/match_wrap">
+
+            <ImageView
+                android:id="@+id/login_icono_mail"
+                style="@style/estilo_iconos"
+                android:src="@mipmap/account"/>
+
+            <EditText
+                android:id="@+id/login_caja_mail"
+                android:layout_toRightOf="@+id/login_icono_mail"
+                style="@style/estilo_cajas"
+                android:hint="@string/identificador_e_mail"
+                android:inputType="textEmailAddress" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/match_wrap">
+
+            <ImageView
+                android:id="@+id/login_icono_pass"
+                style="@style/estilo_iconos"
+                android:src="@mipmap/iconopass"/>
+
+            <EditText
+                android:id="@+id/login_caja_pass"
+                android:layout_toRightOf="@+id/login_icono_pass"
+                style="@style/estilo_cajas"
+                android:hint="@string/contrase_a"
+                android:inputType="textPassword" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id = "@+id/login_grupo_botones"
+        style = "@style/estilo_linear_botones_cajas"
+        android:layout_below = "@+id/login_grupo_cajas">
+
+    <Button
+        android:id="@+id/login_boton_borrar"
+        style="@style/estilo_botones"
+        android:layout_marginLeft="20dp"
+        android:text="@string/borrar_campos"
+        android:onClick="borrarCajas"/>
+
+    <Button
+        android:id="@+id/login_boton_acceso"
+        style="@style/estilo_botones"
+        android:layout_marginRight="20dp"
+        android:text="@string/acceder"
+        android:onClick="acceder"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/login_boton_cerrar"
+        style="@style/estilo_boton"
+        android:layout_below="@+id/login_grupo_botones"
+        android:text="@string/cerrar_aplicaci_n"
+        android:onClick="cerrarApp"/>
+
+    <TextView
+        android:id="@+id/login_nuevo_usuario"
+        style="@style/estilo_comun_textos"
+        android:layout_below="@+id/login_boton_cerrar"
+        android:text="@string/crear_nuevo_usuario"
+        android:textSize="20sp"
+        android:onClick="crearNuevoUsuario"/>
+</RelativeLayout>

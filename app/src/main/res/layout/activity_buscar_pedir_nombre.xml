@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_match"
+    tools:context=".BuscarPedirNombreActivity">
+
+    <TextView
+        android:id="@+id/buscar_pedir_nombre_titulo"
+        style="@style/estilo_comun_textos"
+        android:textSize = "40sp"
+        android:text="Buscar por nombre" />
+
+    <EditText
+        android:id="@+id/buscar_pedir_nombre_caja_nombre"
+        style="@style/estilo_cajas"
+        android:hint="Introduzca nombre de pertenencia"
+        android:layout_below="@+id/buscar_pedir_nombre_titulo"/>
+
+    <Button
+        android:id="@+id/buscar_pedir_nombre_boton_buscar"
+        style="@style/estilo_boton"
+        android:text="Buscar"
+        android:onClick="buscar"
+        android:layout_below="@+id/buscar_pedir_nombre_caja_nombre"/>
+</RelativeLayout>

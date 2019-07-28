@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_match"
+    tools:context=".EditarPertenenciaActivity">
+
+    <RelativeLayout
+        style="@style/match_match">
+
+        <TextView
+            android:id="@+id/editar_pert_titulo"
+            style="@style/estilo_comun_textos"
+            android:textSize="40sp"
+            android:text="Editar Pertenencia"/>
+
+        <ImageView
+            android:id="@+id/editar_pert_icono_ayuda"
+            style="@style/estilo_ayuda"
+            android:layout_below="@+id/editar_pert_titulo" />
+
+        <LinearLayout
+            android:id="@+id/editar_pert_grupo_cajas"
+            style="@style/estilo_linear_cajas"
+            android:layout_below="@+id/editar_pert_icono_ayuda">
+
+            <TextView
+                style="@style/estilo_etiquetas"
+                android:text="Nombre de la Pertenencia:" />
+
+            <EditText
+                android:id="@+id/editar_pert_caja_nombre"
+                style="@style/estilo_cajas"
+                android:hint="Introduzca nuevo nombre"
+                android:maxLength="50"/>
+
+            <TextView
+                style="@style/estilo_etiquetas"
+                android:text="(Opcional) Detalle de la pertenencia, máx. 150 caracteres:" />
+
+            <EditText
+                android:id="@+id/editar_pert_caja_detalle"
+                style="@style/estilo_cajas"
+                android:hint="@string/introduzca_nuevo_detalle"
+                android:maxLength="150" />
+
+            <TextView
+                style="@style/estilo_etiquetas"
+                android:text="Seleccione una nueva Categoría para la Pertenencia:" />
+
+            <Spinner
+                android:id="@+id/editar_pert_sp_categoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                style="@style/estilo_etiquetas"
+                android:text="Seleccione una nueva Ubicación para la Pertenencia:" />
+
+            <Spinner
+                android:id="@+id/editar_pert_sp_ubic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/editar_pert_boton_limpiar"
+            style="@style/estilo_boton"
+            android:layout_below="@+id/editar_pert_grupo_cajas"
+            android:layout_marginTop="20dp"
+            android:text="@string/borrar_campos2"
+            android:onClick="resetear"/>
+
+        <FrameLayout
+            android:id="@+id/editar_pert_guardar"
+            style="@style/match_match"
+            android:layout_below="@+id/editar_pert_boton_limpiar">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/editar_pert_fab"
+                style="@style/estilo_fab"
+                android:onClick="guardarPertenencia"
+                android:src="@mipmap/iconook"
+                app:fabSize="normal" />
+        </FrameLayout>
+    </RelativeLayout>
+</ScrollView>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/elementos_lista_maleta_icono_elemento"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/elementos_lista_maleta_icono_elemento"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/elementos_lista_maleta_etiq_nombre_elemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Nombre:"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/elementos_lista_maleta_nombre_elemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_toRightOf="@+id/elementos_lista_maleta_etiq_nombre_elemento"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/elementos_lista_maleta_etiq_cat_elemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="false"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentRight="false"
+                android:layout_alignParentBottom="false"
+                android:layout_centerInParent="false"
+                android:layout_centerHorizontal="false"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:singleLine="false"
+                android:text="Categoría:"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/elemtos_lista_maleta_cat_elemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="35dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_toRightOf="@+id/elementos_lista_maleta_etiq_cat_elemento"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/elementos_lista_maleta_etiq_ubic_elemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Ubicación:"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/elementos_lista_maleta_ubic_elemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_toRightOf="@+id/elementos_lista_maleta_etiq_ubic_elemento"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <CheckBox
+            android:id="@+id/elementos_lista_maleta_check_elemento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="Seleccionar"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+    </LinearLayout>
+</RelativeLayout>

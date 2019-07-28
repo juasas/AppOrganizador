@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_match"
+    tools:context=".MaletaPpalActivity">
+
+    <TextView
+        android:id="@+id/maleta_ppal_titulo"
+        style="@style/estilo_comun_textos"
+        android:textSize = "40sp"
+        android:layout_alignParentTop = "true"
+        android:textAlignment = "center"
+        android:text="Mi Maleta" />
+
+    <ImageView
+        android:id="@+id/maleta_ppal_icono_ayuda"
+        style="@style/estilo_ayuda"
+        android:layout_below="@+id/maleta_ppal_titulo" />
+
+    <TextView
+        android:id="@+id/maleta_ppal_subtitulo"
+        style="@style/estilo_comun_textos"
+        android:layout_below="@+id/maleta_ppal_icono_ayuda"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/seleccione_una_opcion" />
+
+    <Button
+        android:id="@+id/maleta_ppal_boton_entrar_hacer_maleta"
+        style="@style/estilo_boton"
+        android:layout_below="@+id/maleta_ppal_subtitulo"
+        android:text="Hacer maleta"
+        android:background="@drawable/presionarboton"
+        android:onClick="entrarHacerMaleta"/>
+
+    <Button
+        android:id="@+id/maleta_ppal_boton_deshacer_maleta"
+        style="@style/estilo_boton"
+        android:layout_below="@+id/maleta_ppal_boton_entrar_hacer_maleta"
+        android:text="Deshacer Maleta"
+        android:background="@drawable/presionarboton"
+        android:onClick="deshacerMaleta"/>
+
+    <Button
+        android:id="@+id/maleta_ppal_ver_maleta"
+        style="@style/estilo_boton"
+        android:text="Ver maleta"
+        android:layout_below="@+id/maleta_ppal_boton_deshacer_maleta"
+        android:background="@drawable/presionarboton"
+        android:onClick="verMaleta"/>
+</RelativeLayout>

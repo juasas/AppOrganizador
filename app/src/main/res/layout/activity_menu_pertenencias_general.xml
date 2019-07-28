@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_match"
+    tools:context=".MenuPertenenciasGeneralActivity">
+
+    <TextView
+        android:id="@+id/menu_pertenencias_general_titulo"
+        style="@style/estilo_comun_textos"
+        android:textSize = "40sp"
+        android:text="Gestión de Pertenencias" />
+
+    <ImageView
+        android:id="@+id/menu_pertenencias_general_icono_ayuda"
+        style="@style/estilo_ayuda"
+        android:layout_below="@+id/menu_pertenencias_general_titulo" />
+
+    <TextView
+        android:id="@+id/menu_pertenencias_general_subtitulo"
+        style="@style/estilo_comun_textos"
+        android:layout_below="@+id/menu_pertenencias_general_icono_ayuda"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/seleccione_una_opcion" />
+
+    <Button
+        android:id="@+id/menu_pertenencias_general_boton_entrar_ubic"
+        style="@style/estilo_boton"
+        android:text="@string/boton_mis_ubicaciones"
+        android:background="@drawable/presionarboton"
+        android:layout_below="@+id/menu_pertenencias_general_subtitulo"
+        android:onClick="entrarUbicacionesPpal"/>
+
+    <Button
+        android:id="@+id/menu_pertenencias_general_boton_entrar_cat"
+        style="@style/estilo_boton"
+        android:text="Mis Categorias"
+        android:background="@drawable/presionarboton"
+        android:layout_below="@+id/menu_pertenencias_general_boton_entrar_ubic"
+        android:onClick="entrarCategoriasPpal"/>
+
+    <Button
+        android:id="@+id/menu_pertenencias_general_boton_entrar_pert"
+        style="@style/estilo_boton"
+        android:text="@string/boton_mis_pertenencias"
+        android:background="@drawable/presionarboton"
+        android:layout_below="@+id/menu_pertenencias_general_boton_entrar_cat"
+        android:onClick="entrarPertenenciasPpal"/>
+
+    <Button
+        android:id="@+id/menu_pertenencias_general_boton_entrar_maleta"
+        style="@style/estilo_boton"
+        android:text="@string/boton_mi_maleta"
+        android:background="@drawable/presionarboton"
+        android:layout_below="@+id/menu_pertenencias_general_boton_entrar_pert"
+        android:onClick="entrarMaletaPpal"/>
+
+</RelativeLayout>

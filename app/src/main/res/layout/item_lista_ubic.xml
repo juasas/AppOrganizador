@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_wrap"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/item_lista_ubic_icono_elemento"
+        style="@style/estilo_icono_listas"
+        app:srcCompat="@mipmap/iconoubicacion" />
+
+    <TextView
+        android:id="@+id/item_lista_ubic_nombre_elemento"
+        style="@style/estilo_caja_listas"
+        android:layout_toRightOf="@+id/item_lista_ubic_icono_elemento"
+        android:onClick="mostrarElemento"/>
+</RelativeLayout>

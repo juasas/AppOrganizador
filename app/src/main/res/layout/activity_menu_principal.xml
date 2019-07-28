@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_match"
+    tools:context=".MenuPrincipalActivity">
+
+    <TextView
+        android:id="@+id/menu_ppal_titulo"
+        style="@style/estilo_comun_textos"
+        android:textSize = "40sp"/>
+
+    <ImageView
+        android:id="@+id/menu_ppal_icono_ayuda"
+        style="@style/estilo_ayuda"
+        android:layout_below="@+id/menu_ppal_titulo" />
+
+    <TextView
+        android:id="@+id/menu_ppal_subtitulo"
+        style="@style/estilo_comun_textos"
+        android:layout_below="@+id/menu_ppal_icono_ayuda"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/seleccione_una_opcion" />
+
+    <Button
+        android:id="@+id/menu_ppal_boton_entrar_gestion_pert"
+        style="@style/estilo_boton"
+        android:text="Gestión de Pertenencias"
+        android:background="@drawable/presionarboton"
+        android:layout_below="@+id/menu_ppal_subtitulo"
+        android:onClick="entrarPertenenciasPpal"/>
+
+    <Button
+        android:id="@+id/menu_ppal_boton_entrar_gestion_usu"
+        style="@style/estilo_boton"
+        android:text="Gestión de usuario"
+        android:background="@drawable/presionarboton"
+        android:layout_below="@+id/menu_ppal_boton_entrar_gestion_pert"
+        android:onClick="entrarUsuPpal"/>
+
+    <Button
+        android:id="@+id/menu_ppal_boton_salir"
+        style="@style/estilo_boton"
+        android:text="@string/boton_cerrar_sesion"
+        android:background="@drawable/presionarboton"
+        android:layout_below="@+id/menu_ppal_boton_entrar_gestion_usu"
+        android:onClick="cerrarSesion"/>
+</RelativeLayout>

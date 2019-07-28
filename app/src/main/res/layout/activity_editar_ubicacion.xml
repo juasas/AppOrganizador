@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_match"
+    tools:context=".EditarUbicacionActivity">
+
+    <RelativeLayout
+        style="@style/match_match">
+
+        <TextView
+            android:id="@+id/editar_ubic_titulo"
+            style="@style/estilo_comun_textos"
+            android:textSize="40sp"
+            android:text="Editar Ubicación"/>
+
+        <ImageView
+            android:id="@+id/editar_ubic_icono_ayuda"
+            style="@style/estilo_ayuda"
+            android:layout_below="@+id/editar_ubic_titulo" />
+
+        <LinearLayout
+            android:id = "@+id/editar_ubic_grupo_cajas"
+            style="@style/estilo_linear_cajas"
+            android:layout_below="@+id/editar_ubic_icono_ayuda">
+
+            <TextView
+                style="@style/estilo_etiquetas"
+                android:text="(Obligatorio) Nombre de la Ubicación, máx. 50 caracteres:" />
+
+            <EditText
+                android:id="@+id/editar_ubic_caja_nombre"
+                style="@style/estilo_cajas"
+                android:hint="Introduzca nuevo nombre"
+                android:maxLength="50"/>
+
+            <TextView
+                style="@style/estilo_etiquetas"
+                android:text="(Opcional) Detalle de la Ubicación, máx. 150 caracteres:" />
+
+            <EditText
+                android:id="@+id/editar_ubic_caja_detalle"
+                style="@style/estilo_cajas"
+                android:hint="Introduzca nuevo detalle"
+                android:maxLength="150"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/editar_ubic_boton_limpiar"
+            style="@style/estilo_boton"
+            android:layout_below="@+id/editar_ubic_grupo_cajas"
+            android:layout_marginTop="20dp"
+            android:text="Borrar Campos"
+            android:onClick="resetear"/>
+
+        <FrameLayout
+            android:id="@+id/editar_ubic_guardar"
+            style="@style/match_match"
+            android:layout_below="@+id/editar_ubic_boton_limpiar">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/editar_ubic_fab"
+                style="@style/estilo_fab"
+                android:onClick="guardar"
+                android:src="@mipmap/iconook"
+                app:fabSize="normal" />
+        </FrameLayout>
+    </RelativeLayout>
+</ScrollView>

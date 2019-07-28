@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.juasa.apporganizador">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/iconoapp"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".BuscarPedirCategoriaActivity" />
+        <activity android:name=".BuscarPedirColorActivity" />
+        <activity android:name=".BuscarPedirNombreActivity" />
+        <activity android:name=".BuscarPedirUbicacionActivity" />
+        <activity android:name=".CategoriasPpalActivity" />
+        <activity android:name=".CrearCategoriaActivity" />
+        <activity android:name=".CrearPertenenciaActivity" />
+        <activity android:name=".CrearUbicacionActivity" />
+        <activity android:name=".EditarPertenenciaActivity" />
+        <activity android:name=".EditarUbicacionActivity" />
+        <activity android:name=".MenuPertenenciasGeneralActivity" />
+        <activity android:name=".MenuPrincipalActivity" />
+        <activity android:name=".MostrarPertenenciaActivity" />
+        <activity android:name=".MostrarCategoriaActivity" />
+        <activity android:name=".MostrarUbicacionActivity" />
+        <activity android:name=".NuevoUsuarioActivity" />
+        <activity android:name=".UbicacionesPpalActivity" />
+        <activity android:name=".EditarCategoriaActivity" />
+        <activity android:name=".PertenenciasPpalActivity" />
+        <activity android:name=".MaletaPpalActivity" />
+        <activity android:name=".HacerMaletaActivity" />
+        <activity android:name=".FotografiaPpalActivity"></activity>
+    </application>
+
+</manifest>

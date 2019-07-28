@@ -1,0 +1,156 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name = "match_wrap">
+        <item name = "android:layout_width">match_parent</item>
+        <item name = "android:layout_height">wrap_content</item>
+    </style>
+
+    <style name = "match_match">
+        <item name = "android:layout_width">match_parent</item>
+        <item name = "android:layout_height">match_parent</item>
+    </style>
+
+    <style name = "wrap_wrap">
+        <item name = "android:layout_width">wrap_content</item>
+        <item name = "android:layout_height">wrap_content</item>
+    </style>
+
+    <style name = "estilo_cajas" parent = "match_wrap">
+        <item name = "android:textColorHint">@color/colorHint</item>
+        <item name = "android:textColor">@color/colorPrimaryDark</item>
+        <item name = "android:textSize">18sp</item>
+        <!--<item name = "android:layout_marginTop">10dp</item>-->
+        <item name = "android:layout_marginBottom">10dp</item>
+        <item name = "android:layout_marginLeft">5dp</item>
+        <item name = "android:background">@color/colorPrimarySoft</item>
+        <item name = "android:padding">5dp</item>
+        <item name = "android:layout_centerVertical">true</item>
+    </style>
+
+    <style name = "estilo_cajas_2" parent = "estilo_cajas">
+        <item name = "android:textColorHint">@color/colorHint</item>
+        <item name = "android:textColor">@color/colorPrimaryDark</item>
+        <item name = "android:textSize">18sp</item>
+        <item name = "android:layout_marginTop">10dp</item>
+        <item name = "android:layout_marginLeft">5dp</item>
+        <item name = "android:background">@color/colorPrimarySoft</item>
+        <item name = "android:padding">5dp</item>
+        <item name = "android:layout_centerVertical">true</item>
+    </style>
+
+    <style name = "estilo_linear_cajas" parent = "match_wrap">
+        <item name = "android:layout_marginLeft">16dp</item>
+        <item name = "android:layout_marginRight">16dp</item>
+        <item name = "android:layout_marginTop">20dp</item>
+        <item name = "android:orientation">vertical</item>
+    </style>
+
+    <style name = "estilo_iconos" parent = "wrap_wrap">
+        <item name = "android:layout_centerVertical">true</item>
+    </style>
+
+    <style name = "estilo_linear_botones_cajas" parent = "wrap_wrap">
+        <item name = "android:layout_marginTop">20dp</item>
+        <item name = "android:orientation">horizontal</item>
+        <item name = "android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name = "estilo_botones" parent = "wrap_wrap">
+        <item name = "android:background">@drawable/presionarboton</item>
+        <item name = "android:layout_marginLeft">20dp</item>
+        <item name = "android:textColor">@color/colorPrimary</item>
+        <item name = "android:padding">10dp</item>
+        <item name = "android:textSize">20sp</item>
+    </style>
+
+    <style name = "estilo_comun_textos" parent = "wrap_wrap">
+        <item name = "android:layout_marginTop">10dp</item>
+        <item name = "android:textColor">@color/colorPrimary</item>
+        <item name = "android:layout_centerHorizontal">true</item>
+        <item name = "android:textSize">18sp</item>
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+    <style name = "estilo_texto" parent = "wrap_wrap">
+        <item name = "android:layout_marginRight">10dp</item>
+        <item name = "android:textColor">@color/colorPrimaryDark</item>
+        <item name = "android:textSize">20sp</item>
+        <item name = "android:layout_gravity">center_vertical</item>
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+    <style name = "estilo_fab" parent = "wrap_wrap">
+        <item name = "android:layout_margin">16dp</item>
+        <item name = "android:backgroundTint">@color/colorPrimaryDark</item>
+        <item name = "android:layout_gravity">bottom|end</item>
+    </style>
+
+    <style name = "estilo_boton" parent = "match_wrap">
+        <item name = "android:layout_marginTop">30dp</item>
+        <item name = "android:layout_marginLeft">60dp</item>
+        <item name = "android:layout_marginRight">60dp</item>
+        <item name = "android:textColor">@color/colorPrimary</item>
+        <item name = "android:textSize">20sp</item>
+        <item name = "android:background">@drawable/presionarboton</item>
+    </style>
+
+    <style name = "estilo_spinner" parent = "estilo_cajas">
+        <item name = "android:layout_marginBottom">8dp</item>
+        <item name = "android:textColor">@color/colorPrimaryDark</item>
+        <item name = "android:textSize">20sp</item>
+        <item name = "android:padding">5dp</item>
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+    <style name = "estilo_etiquetas" parent = "match_wrap">
+        <item name = "android:layout_marginBottom">2dp</item>
+        <item name = "android:textColor">@color/colorPrimaryDark</item>
+        <item name = "android:textSize">20sp</item>
+        <item name = "android:padding">5dp</item>
+        <item name = "android:textStyle">bold</item>
+    </style>
+    <!--Para las etiquetas que tienen información-->
+    <style name = "estilo_etiquetas_contenido" parent = "estilo_etiquetas">
+        <item name = "android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="estiloCuadrodDialogo" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--color de los botones-->
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <!--color del titulo y mensajes-->
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <!--color del fondo del cuadro-->
+        <item name="android:windowBackground">@color/colorAccent</item>
+        <item name = "android:textSize">20sp</item>
+        <item name = "android:textStyle">bold</item>
+    </style>
+
+    <style name = "estilo_ayuda" parent = "wrap_wrap">
+        <item name = "android:src">@mipmap/iconoayuda</item>
+        <item name = "android:layout_alignParentRight">true</item>
+        <item name = "android:layout_marginRight">5dp</item>
+        <item name = "android:layout_gravity">right</item>
+        <item name = "android:onClick">ayuda</item>
+    </style>
+
+    <style name = "estilo_icono_listas">
+        <item name = "android:layout_marginLeft">10dp</item>
+        <item name = "android:layout_width">40dp</item>
+        <item name = "android:layout_height">40dp</item>
+        <item name = "android:layout_centerVertical">true</item>
+        <item name = "android:scaleType">fitXY</item>
+    </style>
+
+    <style name = "estilo_caja_listas" parent = "wrap_wrap">
+        <item name = "android:layout_centerVertical">true</item>
+        <item name = "android:layout_marginLeft">10dp</item>
+        <item name = "android:textSize">25sp</item>
+        <item name = "android:textColor">@color/colorPrimary</item>
+        <item name = "android:textStyle">bold</item>
+    </style>
+</resources>
