@@ -1,11 +1,10 @@
 package com.example.juasa.apporganizador;
 
 import android.content.Intent;
+
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +28,6 @@ public class HacerMaletaActivity extends AppCompatActivity {
     private TextView pertenenciaCajaTexto;
     private TextView cajaSubtitulo1;
     private FloatingActionButton fab;
-    private CheckBox checkBox;
     private View padre;
     private Bundle extras;
 
@@ -38,9 +36,10 @@ public class HacerMaletaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hacer_maleta);
         controlador = new Controlador_base_datos(this);
-        listaPertenencias = (ListView) findViewById(R.id.hacer_maleta_lista_pertenencias);
         cajaSubtitulo1 = findViewById(R.id.hacer_maleta_subtitulo);
         fab = findViewById(R.id.hacer_maleta_fab);
+        listaPertenencias = findViewById(R.id.hacer_maleta_lista_pertenencias);
+        listaPertenencias.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         recibirParametros();
     }
 
@@ -82,7 +81,6 @@ public class HacerMaletaActivity extends AppCompatActivity {
                     } else {
                         pertenenciasCursorAdapter = new PertenenciasCursorAdapter(this, controlador.obtenerPertenenciasPorMaleta());
                         listaPertenencias.setAdapter(pertenenciasCursorAdapter);
-
                     }
                     break;
             }
@@ -95,17 +93,29 @@ public class HacerMaletaActivity extends AppCompatActivity {
             Toast mensaje = Toast.makeText(this, "No existe ninguna Pertenencia", Toast.LENGTH_LONG);
             mensaje.show();
         } else {
-            maletaCursorAdapter = new MaletaCursorAdapter(this, controlador.obtenerPertenencias());
+            maletaCursorAdapter = new MaletaCursorAdapter(this, controlador.obtenerPertenencias(null));
             listaPertenencias.setAdapter(maletaCursorAdapter);
         }
     }
 
     public void confirmarHacerMaleta(View view) {
-        int count = listaPertenencias.getAdapter().getCount();
+        int cuantos = listaPertenencias.getAdapter().getCount();
+        //SparseBooleanArray marcados = listaPertenencias.getCheckedItemPositions();
 
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < cuantos; i++) {
+            //  if (marcados.get(i)){
+            //    padre = (View) checkBox.getParent();
+            //  pertenenciaCajaTexto = (TextView) padre.findViewById(R.id.elementos_lista_maleta_nombre_elemento);
+            // nombrePertenencia = pertenenciaCajaTexto.getText().toString();
+            //controlador.actualizarCampoHacerMaleta(nombrePertenencia);
+            //}
+
+            //Cursor c = ((MaletaCursorAdapter)listaPertenencias.getAdapter()).getCursor();
+            //LauncherActivity.ListItem item = (LauncherActivity.ListItem) listaPertenencias.getItemAtPosition(i);
+
             ViewGroup row = (ViewGroup) listaPertenencias.getChildAt(i);
-            checkBox = (CheckBox) row.findViewById(R.id.elementos_lista_maleta_check_elemento);
+
+            CheckBox checkBox = row.findViewById(R.id.elementos_lista_maleta_check_elemento);
 
             if (checkBox.isChecked()) {
                 padre = (View) checkBox.getParent();
@@ -114,8 +124,8 @@ public class HacerMaletaActivity extends AppCompatActivity {
                 controlador.actualizarCampoHacerMaleta(nombrePertenencia);
             }
         }
-        datos.numeroMaleta = 1;
-        Intent intento = new Intent(this, MaletaPpalActivity.class);
-        startActivity(intento);
+            datos.numeroMaleta = 1;
+            Intent intento = new Intent(this, MaletaPpalActivity.class);
+            startActivity(intento);
+        }
     }
-}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_match"
+    tools:context=".MenuUsuarioGeneralActivity">
+
+    <TextView
+        android:id="@+id/menu_usuario_general_titulo"
+        style="@style/estilo_comun_textos"
+        android:textSize = "40sp"
+        android:layout_alignParentTop = "true"
+        android:textAlignment = "center"
+        android:text="Gestión de Usuario" />
+
+    <ImageView
+        android:id="@+id/menu_usuario_general_icono_ayuda"
+        style="@style/estilo_ayuda"
+        android:layout_below="@+id/menu_usuario_general_titulo" />
+
+    <TextView
+        android:id="@+id/menu_usuario_general_subtitulo"
+        style="@style/estilo_comun_textos"
+        android:layout_below="@+id/menu_usuario_general_icono_ayuda"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/seleccione_una_opcion" />
+
+    <Button
+        android:id="@+id/menu_usuario_general_boton_entrar_estadisticas"
+        style="@style/estilo_boton"
+        android:text="Mis estadísticas"
+        android:background="@drawable/presionarboton"
+        android:layout_below="@+id/menu_usuario_general_subtitulo"
+        android:onClick="entrarEstadisticas"/>
+
+    <Button
+        android:id="@+id/menu_usuario_general_boton_entrar_cambiar_pass"
+        style="@style/estilo_boton"
+        android:text="Cambiar Password"
+        android:background="@drawable/presionarboton"
+        android:layout_below="@+id/menu_usuario_general_boton_entrar_estadisticas"
+        android:onClick="entrarCambiarPass"/>
+
+    <Button
+        android:id="@+id/menu_usuario_general_boton_entrar_borrar"
+        style="@style/estilo_boton"
+        android:text="Borrar Tablas"
+        android:background="@drawable/presionarboton"
+        android:layout_below="@+id/menu_usuario_general_boton_entrar_cambiar_pass"
+        android:onClick="entrarBorrarTablas"/>
+
+</RelativeLayout>

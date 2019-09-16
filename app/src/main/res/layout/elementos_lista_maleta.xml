@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="10dp"
+    tools:context=".HacerMaletaActivity">
 
     <ImageView
         android:id="@+id/elementos_lista_maleta_icono_elemento"
@@ -112,7 +113,6 @@
             android:id="@+id/elementos_lista_maleta_check_elemento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
             android:text="Seleccionar"
             android:textSize="16sp"
             android:textColor="@color/colorPrimaryDark"

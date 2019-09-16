@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
 import com.example.juasa.apporganizador.datos.Datos;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class LoginActivity extends AppCompatActivity {
 
     private Controlador_base_datos controlador;
@@ -67,8 +70,8 @@ public class LoginActivity extends AppCompatActivity {
 
                             datos.usuario = usuarioBuscado.getNombre();
                             datos.mail = mail;
-
-                            if (usuarioBuscado.getPassword().equals(pass)) {
+                            String passEncriptada= Encriptacion.encriptarPass(pass);
+                            if (usuarioBuscado.getPassword().equals(passEncriptada)) {
                                 if (controlador.existe(controlador.TABLA_USUARIOS, "MALETA", "T"))
                                     datos.numeroMaleta = 1;
                                 intento = new Intent(this, MenuPrincipalActivity.class);
@@ -106,5 +109,20 @@ public class LoginActivity extends AppCompatActivity {
     public void cerrarApp (View view){
         intento = new Intent(this, NuevoUsuarioActivity.class);
         startActivity(intento);}
+
+    public String encriptarPass (String password){
+        String passEncriptada = "";
+        try {
+            byte[] passByte = password.getBytes();
+            MessageDigest md = MessageDigest.getInstance("SHA");
+            md.update(passByte);
+            byte[] resumenHash = md.digest();
+            passEncriptada = new String(resumenHash);
+        }catch (NoSuchAlgorithmException e) {
+            Toast mensaje = Toast.makeText(this, "No se puede encriptar password", Toast.LENGTH_LONG);
+            mensaje.show();
+        }
+        return passEncriptada;
+    }
 }
 

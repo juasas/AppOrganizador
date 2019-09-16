@@ -9,6 +9,9 @@ import android.widget.Toast;
 
 import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class NuevoUsuarioActivity extends AppCompatActivity {
     private Controlador_base_datos controlador;
     private Entrada_Salida salida;
@@ -66,7 +69,8 @@ public class NuevoUsuarioActivity extends AppCompatActivity {
                                 mensaje.show();
                             } else {
                                 if (!controlador.existe(controlador.TABLA_USUARIOS, "MAIL", mail)) {
-                                    controlador.anadirUsuario(mail, nombre, pass);
+                                    String passEncriptada= Encriptacion.encriptarPass(pass);
+                                    controlador.anadirUsuario(mail, nombre, passEncriptada);
                                     Toast mensaje = Toast.makeText(this, "Usuario almacenado correctamente", Toast.LENGTH_LONG);
                                     mensaje.show();
                                     intento = new Intent(this, LoginActivity.class);

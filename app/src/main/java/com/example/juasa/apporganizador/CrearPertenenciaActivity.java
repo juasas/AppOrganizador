@@ -64,6 +64,7 @@ public class CrearPertenenciaActivity extends AppCompatActivity {
         nombrePertenencia = cajaNombre.getText().toString().toUpperCase();
         detallePertenencia = cajaDetalle.getText().toString().toUpperCase();
         categoriaPertenencia = spinnerCategoria.getSelectedItem().toString().toUpperCase();
+
         idCategoria = controlador.obtenerIdCategoria(categoriaPertenencia);
         ubicacionPertenencia = spinnerUbicacion.getSelectedItem().toString().toUpperCase();
         idUbicacion = controlador.obtenerIdUbicacion(ubicacionPertenencia);

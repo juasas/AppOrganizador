@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.juasa.apporganizador">
+
+    <uses-permission-sdk-23
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission-sdk-23
+        android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -8,11 +14,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -38,7 +45,10 @@
         <activity android:name=".PertenenciasPpalActivity" />
         <activity android:name=".MaletaPpalActivity" />
         <activity android:name=".HacerMaletaActivity" />
-        <activity android:name=".FotografiaPpalActivity"></activity>
+        <activity android:name=".FotografiaPpalActivity" />
+        <activity android:name=".MenuUsuarioGeneralActivity" />
+        <activity android:name=".MostrarEstadisticaActivity" />
+        <activity android:name=".CambiarPassWordActivity"></activity>
     </application>
 
 </manifest>

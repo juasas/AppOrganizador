@@ -36,7 +36,7 @@
         android:text="Gestión de usuario"
         android:background="@drawable/presionarboton"
         android:layout_below="@+id/menu_ppal_boton_entrar_gestion_pert"
-        android:onClick="entrarUsuPpal"/>
+        android:onClick="entrarUsuarioPpal"/>
 
     <Button
         android:id="@+id/menu_ppal_boton_salir"

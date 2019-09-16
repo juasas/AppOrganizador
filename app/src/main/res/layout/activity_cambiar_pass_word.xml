@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_match"
+    tools:context=".CambiarPassWordActivity">
+
+    <TextView
+        android:id="@+id/cambiar_pass_titulo"
+        style="@style/estilo_comun_textos"
+        android:text="Cambiar Contraseña"
+        android:layout_alignParentTop = "true"
+        android:textAlignment = "center"
+        android:textSize="40sp" />
+
+    <ImageView
+        android:id="@+id/cambiar_pass_icono_ayuda"
+        style="@style/estilo_ayuda"
+        android:layout_below="@+id/cambiar_pass_titulo" />
+
+    <TextView
+        android:id="@+id/cambiar_pass_subtitulo"
+        style="@style/estilo_comun_textos"
+        android:layout_below="@+id/cambiar_pass_icono_ayuda"
+        android:textColor="@color/colorPrimaryDark"
+        android:textAlignment = "center"
+        android:text="Introduzca la nueva contraseña" />
+
+    <LinearLayout
+        android:id = "@+id/cambiar_pass_grupo_cajas"
+        style="@style/estilo_linear_cajas"
+        android:layout_below="@+id/cambiar_pass_subtitulo">
+
+        <RelativeLayout
+            style="@style/match_wrap">
+
+            <ImageView
+                android:id="@+id/cambiar_pass_icono_pass"
+                style="@style/estilo_iconos"
+                android:src="@mipmap/iconopass"/>
+
+            <EditText
+                android:id="@+id/cambiar_pass_caja_pass"
+                android:layout_toRightOf="@+id/cambiar_pass_icono_pass"
+                style="@style/estilo_cajas"
+                android:hint="Contraseña"
+                android:inputType="textPassword" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/match_wrap">
+
+            <ImageView
+                android:id="@+id/cambiar_pass_icono_repite_pass"
+                style="@style/estilo_iconos"
+                android:src="@mipmap/iconopass"/>
+
+            <EditText
+                android:id="@+id/cambiar_pass_caja_repite_pass"
+                style="@style/estilo_cajas"
+                android:layout_toRightOf="@+id/cambiar_pass_icono_repite_pass"
+                android:hint="Confirmar contraseña"
+                android:inputType="textPassword" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/cambiar_pass_boton_borrar"
+        style="@style/estilo_boton"
+        android:layout_below="@+id/cambiar_pass_grupo_cajas"
+        android:text="Borrar Campos"
+        android:onClick="resetear"/>
+
+    <LinearLayout
+        android:id = "@+id/cambiar_pass_grupo_botones"
+        style = "@style/estilo_linear_botones_cajas"
+        android:layout_below = "@+id/cambiar_pass_boton_borrar">
+
+        <Button
+            android:id="@+id/cambiar_pass_boton_aceptar"
+            style="@style/estilo_botones"
+            android:layout_marginLeft="20dp"
+            android:text="Aceptar"
+            android:onClick="aceptar"/>
+
+        <Button
+            android:id="@+id/cambiar_pass_boton_acceso"
+            style="@style/estilo_botones"
+            android:layout_marginRight="20dp"
+            android:text="Volver"
+            android:onClick="volver"/>
+    </LinearLayout>
+</RelativeLayout>

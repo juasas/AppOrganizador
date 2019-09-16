@@ -8,6 +8,8 @@
     <TextView
         android:id="@+id/menu_pertenencias_general_titulo"
         style="@style/estilo_comun_textos"
+        android:layout_alignParentTop = "true"
+        android:textAlignment = "center"
         android:textSize = "40sp"
         android:text="Gestión de Pertenencias" />
 

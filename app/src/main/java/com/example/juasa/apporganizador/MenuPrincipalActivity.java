@@ -50,8 +50,8 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         startActivity(intento);
     }
 
-    public void entrarUsuPpal(View view) {
-        intento = new Intent(this, CategoriasPpalActivity.class);
+    public void entrarUsuarioPpal(View view) {
+        intento = new Intent(this, MenuUsuarioGeneralActivity.class);
         startActivity(intento);
     }
 

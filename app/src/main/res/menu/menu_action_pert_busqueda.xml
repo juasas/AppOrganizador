@@ -30,15 +30,15 @@
         android:orderInCategory="2"/>
 
     <item
-        android:id="@+id/menu_action_pert_busqueda_buscar_color"
-        android:title="Buscar por Detalle"
+        android:id="@+id/menu_action_pert_busqueda_buscar_ubic"
+        android:title="Buscar por Ubicación"
         android:icon="@mipmap/iconomenuppal"
         app:showAsAction="never"
         android:orderInCategory="3"/>
 
     <item
-        android:id="@+id/menu_action_pert_busqueda_buscar_ubic"
-        android:title="Buscar por Ubicación"
+        android:id="@+id/menu_action_pert_listado_alfabetico"
+        android:title="Listado alfabetico"
         android:icon="@mipmap/iconomenuppal"
         app:showAsAction="never"
         android:orderInCategory="4"/>

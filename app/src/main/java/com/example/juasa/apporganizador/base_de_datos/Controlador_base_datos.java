@@ -3,6 +3,7 @@ package com.example.juasa.apporganizador.base_de_datos;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
@@ -14,10 +15,13 @@ import com.example.juasa.apporganizador.Ubicacion;
 import com.example.juasa.apporganizador.Usuario;
 import com.example.juasa.apporganizador.datos.Datos;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Controlador_base_datos extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String NOMBRE_BD = Datos.mail + "miBD";
+    private static final String NOMBRE_BD = "miBD";
     public static final String TABLA_USUARIOS = "USUARIO";
     public static final String TABLA_UBICACIONES = "MIS_UBICACIONES";
     public static final String TABLA_CATEGORIAS = "MIS_CATEGORIAS";
@@ -34,7 +38,6 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
                     TABLA_PERTENENCIAS + ".NOMBRE_PERT, " + TABLA_PERTENENCIAS + ".DETALLE_PERT, " +
                     TABLA_CATEGORIAS + ".NOMBRE_CATEGORIA, " + TABLA_UBICACIONES + ".NOMBRE_UBICACION"
     };
-
 
     private String clausulaWhere = " WHERE " + TABLA_CATEGORIAS + ".ID_CATEGORIA = " +
             TABLA_PERTENENCIAS + ".ID_CATEGORIA_PERT AND " +
@@ -55,13 +58,13 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLA_USUARIOS + " (MAIL VARCHAR PRIMARY KEY, NOMBRE_USUARIO TEXT NOT NULL, PASSWORD TEXT, MALETA TEXT)");
+        db.execSQL("CREATE TABLE " + TABLA_USUARIOS + " (MAIL VARCHAR PRIMARY KEY, NOMBRE_USUARIO TEXT NOT NULL, PASSWORD TEXT, FECHA_ALTA DATA, MALETA TEXT)");
         db.execSQL("CREATE TABLE " + TABLA_UBICACIONES + " (ID_UBICACION INTEGER PRIMARY KEY AUTOINCREMENT, NOMBRE_UBICACION TEXT NOT NULL, DESCRIPCION_UBICACION TEXT)");
         db.execSQL("CREATE TABLE " + TABLA_CATEGORIAS + " (ID_CATEGORIA INTEGER PRIMARY KEY AUTOINCREMENT, NOMBRE_CATEGORIA TEXT NOT NULL, DESCRIPCION_CATEGORIA TEXT)");
         db.execSQL("CREATE TABLE " + TABLA_PERTENENCIAS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, ID_PERT INTEGER, NOMBRE_PERT TEXT NOT NULL, DETALLE_PERT TEXT, " +
-                   "ID_CATEGORIA_PERT INTEGER NOT NULL, ID_UBICACION_PERT INTEGER NOT NULL, FOTO_PERT TEXT, MALETA_PERT TEXT, " +
-                   "FOREIGN KEY (ID_CATEGORIA_PERT) REFERENCES " + TABLA_CATEGORIAS + "(ID_CATEGORIA) ON DELETE CASCADE ON UPDATE CASCADE,"  +
-                   "FOREIGN KEY (ID_UBICACION_PERT) REFERENCES " + TABLA_UBICACIONES + "(ID_UBICACION) ON DELETE CASCADE ON UPDATE CASCADE)");
+                "ID_CATEGORIA_PERT INTEGER NOT NULL, ID_UBICACION_PERT INTEGER NOT NULL, FOTO_PERT TEXT, MALETA_PERT TEXT, " +
+                "FOREIGN KEY (ID_CATEGORIA_PERT) REFERENCES " + TABLA_CATEGORIAS + "(ID_CATEGORIA) ON DELETE CASCADE ON UPDATE CASCADE," +
+                "FOREIGN KEY (ID_UBICACION_PERT) REFERENCES " + TABLA_UBICACIONES + "(ID_UBICACION) ON DELETE CASCADE ON UPDATE CASCADE)");
     }
 
     @Override
@@ -112,10 +115,13 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
     }
 
     public void anadirUsuario(String mail, String nombre, String pass) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String date = sdf.format(new Date());
         ContentValues registro = new ContentValues();
         registro.put("MAIL", mail);
         registro.put("NOMBRE_USUARIO", nombre);
         registro.put("PASSWORD", pass);
+        registro.put("FECHA_ALTA", date);
         registro.put("MALETA", "F");
 
         //Abrir base de datos
@@ -344,16 +350,15 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
         return pertenencia;
     }
 
-    public Cursor obtenerPertenencias() {
-
-        String querySQL = "SELECT " + cabeceraDatos + "FROM " + TABLA_PERTENENCIAS + ", " +
-                           TABLA_CATEGORIAS + ", " + TABLA_UBICACIONES + clausulaWhere;
+    public Cursor obtenerPertenencias(String ordenado) {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery(querySQL, null);
+        SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
 
-        return cursor;
+        builder.setTables(CABECERA_JOIN_UBIC_CAT_PERT);
+
+        return builder.query(db, CabeceraColumnasJoin, null, null, null, null, ordenado);
     }
 
     public int numRegistrosTabla(String nombreTabla) {
@@ -380,6 +385,19 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
         String whereClause = String.format("%s=?", "NOMBRE_PERT");
         String[] whereArgs = {nombrePertenencia};
         db.delete(TABLA_PERTENENCIAS, whereClause, whereArgs);
+        db.close();
+    }
+
+    public void actualizarPassword(String nuevaPass) {
+        //Abrir la bd
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues registro = new ContentValues();
+        registro.put("PASSWORD", nuevaPass);
+
+        db.update(TABLA_USUARIOS, registro, null, null);
+
         db.close();
     }
 
@@ -420,64 +438,27 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
         registro.put("ID_PERT", pertenencia.getIdPertenencia());
         registro.put("NOMBRE_PERT", pertenencia.getNombrePertenencia());
         registro.put("DETALLE_PERT", pertenencia.getDetallePertenencia());
-        registro.put("ID_CATEGORIA_PERT", iDcat) ;
-        registro.put("ID_UBICACION_PERT", iDubic) ;
+        registro.put("ID_CATEGORIA_PERT", iDcat);
+        registro.put("ID_UBICACION_PERT", iDubic);
         registro.put("FOTO_PERT", "");
         String whereClause = String.format("%s=?", "NOMBRE_PERT");
         String[] whereArgs = {nombreAntiguo};
-        db.update(TABLA_PERTENENCIAS, registro, whereClause,whereArgs);
-
+        db.update(TABLA_PERTENENCIAS, registro, whereClause, whereArgs);
         db.close();
     }
 
-    public Cursor obtenerPertenenciasPorCat(String categoriaBuscada) {
-        String cadena =" WHERE ((SELECT ID_CATEGORIA FROM MIS_CATEGORIAS WHERE NOMBRE_CATEGORIA = '" + categoriaBuscada +
-                       "') = ID_UBICACION_PERT)";
-        //Abrir la bd
+    public Cursor listadoPertenencias(String campoBuscado, String tipoBuscado) {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        //Consulta
+        String seleccion = String.format("%s=?", tipoBuscado);
+        String[] argumentos = {campoBuscado};
 
-        Cursor cursor;
+        SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
 
-        return db.rawQuery("SELECT * FROM " + TABLA_PERTENENCIAS + cadena, null);
-    }
+        builder.setTables(CABECERA_JOIN_UBIC_CAT_PERT);
 
-    public Cursor obtenerPertenenciasPorUbic(String ubicacion_buscada) {
-
-        //Abrir la bd
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        //Consulta
-
-        Cursor cursor;
-        return db.rawQuery("SELECT * FROM " + TABLA_PERTENENCIAS + " WHERE UBICACION_PERT = '" + ubicacion_buscada + "'", null);
-    }
-
-    public Cursor obtenerPertenenciasPorNombre(String nombre_buscado) {
-
-        //Abrir la bd
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        //Consulta
-
-        Cursor cursor;
-        return db.rawQuery("SELECT * FROM " + TABLA_PERTENENCIAS + " WHERE NOMBRE_PERT = '" + nombre_buscado + "'", null);
-    }
-
-    public Cursor obtenerPertenenciasPorColor(String color_buscado) {
-
-        //Abrir la bd
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        //Consulta
-
-        Cursor cursor;
-        return db.rawQuery("SELECT * FROM " + TABLA_PERTENENCIAS + " WHERE COLOR_PERT = '" + color_buscado + "'", null);
+        return builder.query(db, CabeceraColumnasJoin, seleccion, argumentos, null, null, null);
     }
 
     public int numRegistrosIguales(String nombre_tabla, String nombreCampo, String valor) {
@@ -537,13 +518,13 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
 
     public int numAparicionesCategoriaTablaPert(int valor) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM MIS_PERTENENCIAS"  + " WHERE ID_CATEGORIA_PERT = " + valor, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM MIS_PERTENENCIAS" + " WHERE ID_CATEGORIA_PERT = " + valor, null);
         return cursor.getCount();
     }
 
     public int numAparicionesUbicacionTablaPert(int valor) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM MIS_PERTENENCIAS"  + " WHERE ID_UBICACION_PERT = " + valor, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM MIS_PERTENENCIAS" + " WHERE ID_UBICACION_PERT = " + valor, null);
         return cursor.getCount();
     }
 
@@ -587,7 +568,7 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
         return idUbicacion;
     }
 
-    public boolean comprobarSiMaleta (String nombrePert) {
+    public boolean comprobarSiMaleta(String nombrePert) {
         String query, campoMaleta;
         Boolean estaTrue = false;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -600,6 +581,32 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
                 estaTrue = true;
         }
         return estaTrue;
+    }
+
+    public int estadisticas(String tabla) {
+        String query;
+        int num;
+        SQLiteDatabase db = this.getReadableDatabase();
+        query = "SELECT * FROM " + tabla;
+        Cursor cursor = db.rawQuery(query, null);
+        return cursor.getCount();
+    }
+
+    public String obtenerFecha() {
+        String query, campoFecha = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        query = "SELECT FECHA_ALTA FROM " + TABLA_USUARIOS;
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            campoFecha = (cursor.getString(0));
+        }
+        return campoFecha;
+    }
+
+    public void borrarTabla(String tabla){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(tabla, null, null);
     }
 }
 
