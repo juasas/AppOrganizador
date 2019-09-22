@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
+import com.example.juasa.apporganizador.datos.Datos;
 
 public class CrearPertenenciaActivity extends AppCompatActivity {
     private Controlador_base_datos controlador;
@@ -68,6 +69,7 @@ public class CrearPertenenciaActivity extends AppCompatActivity {
         idCategoria = controlador.obtenerIdCategoria(categoriaPertenencia);
         ubicacionPertenencia = spinnerUbicacion.getSelectedItem().toString().toUpperCase();
         idUbicacion = controlador.obtenerIdUbicacion(ubicacionPertenencia);
+        fotoPertenencia = Datos.nombreFoto;
 
         if (nombrePertenencia.isEmpty()) {
             Toast mensaje = Toast.makeText(this, "El campo obligatorio NOMBRE no puede estar vacío", Toast.LENGTH_LONG);
@@ -120,8 +122,16 @@ public class CrearPertenenciaActivity extends AppCompatActivity {
     }
 
     public void entrarMenuFoto(View view){
-        intento = new Intent(this, FotografiaPpalActivity.class);
-        startActivity(intento);
+        //if (!cajaNombre.getText().toString().toUpperCase().equals("")){
+            nombrePertenencia= cajaNombre.getText().toString().toUpperCase();
+            intento = new Intent(this, FotografiaPpalActivity.class);
+            //intento.putExtra("nombreFoto", nombrePertenencia);
+            startActivity(intento);
+        //} else {
+          //  Toast mensaje = Toast.makeText(this, "Antes de tomar la foto debe escribir un nombre " +
+            //        "para la pertenecia", Toast.LENGTH_LONG);
+            //mensaje.show();
+        //}
     }
 }
 

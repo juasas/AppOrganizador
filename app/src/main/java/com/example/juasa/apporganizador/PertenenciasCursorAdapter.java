@@ -2,6 +2,7 @@ package com.example.juasa.apporganizador;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.juasa.apporganizador.datos.Datos;
+
+import java.io.File;
+
 public class PertenenciasCursorAdapter extends CursorAdapter {
 
     private ImageView cajaIcono;
     private TextView cajaNombre, cajaCategoria, cajaUbicacion;
-    private String icono, nombre, categoria, ubicacion;
+    private String imagen, nombre, categoria, ubicacion;
 
     public PertenenciasCursorAdapter(Context context, Cursor c) {
         super(context, c, 0);
@@ -31,15 +36,25 @@ public class PertenenciasCursorAdapter extends CursorAdapter {
         cajaNombre = (TextView) view.findViewById(R.id.elementos_lista_nombre_elemento);
         cajaCategoria = (TextView) view.findViewById(R.id.elemtos_lista_cat_elemento);
         cajaUbicacion = (TextView) view.findViewById(R.id.elementos_lista_ubic_elemento);
-//        icono = cursor.getString(cursor.getColumnIndex("FOTO_PERT"));
+
+        //cajaIcono.setImageResource(R.mipmap.iconopertenencia);
+
+
         //if (icono.equals(null)){
 
   //      } else {
-            cajaIcono.setImageResource(R.mipmap.iconopertenencia);//}
-            nombre = cursor.getString(cursor.getColumnIndex("NOMBRE_PERT"));
-
+            //}
+        nombre = cursor.getString(cursor.getColumnIndex("NOMBRE_PERT"));
         categoria = cursor.getString(cursor.getColumnIndex("NOMBRE_CATEGORIA"));
         ubicacion = cursor.getString(cursor.getColumnIndex("NOMBRE_UBICACION"));
+        imagen = cursor.getString(cursor.getColumnIndex("FOTO_PERT"));
+
+        if (imagen == null){
+            cajaIcono.setImageResource(R.mipmap.iconopertenencia);
+        } else {
+            String rutaImagen = Datos.rutaImagenes + imagen;
+            cajaIcono.setImageBitmap(BitmapFactory.decodeFile(rutaImagen));
+        }
 
         cajaNombre.setText(nombre);
         cajaCategoria.setText(categoria);

@@ -20,10 +20,18 @@
             style="@style/estilo_ayuda"
             android:layout_below="@+id/mostrar_pert_titulo"/>
 
+        <ImageView
+            android:id="@+id/mostrar_pert_imagen"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/mostrar_pert_icono_ayuda"
+            android:padding="10dp"/>
+
         <LinearLayout
             android:id="@+id/mostrar_pert_grupo_cajas"
             style="@style/estilo_linear_cajas"
-            android:layout_below="@+id/mostrar_pert_icono_ayuda">
+            android:layout_below="@+id/mostrar_pert_imagen">
 
             <TextView
                 style="@style/estilo_etiquetas"

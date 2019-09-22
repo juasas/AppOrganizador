@@ -1,6 +1,7 @@
 package com.example.juasa.apporganizador;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -12,18 +13,21 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.example.juasa.apporganizador.datos.Datos;
+
 import java.io.File;
-import java.io.IOException;
 
 public class FotografiaPpalActivity extends AppCompatActivity {
 
@@ -32,7 +36,6 @@ public class FotografiaPpalActivity extends AppCompatActivity {
     private static int SELECCIONAR_FOTO=2;
     private static final int PERMISSION_REQUEST_CAMERA = 0;
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
-    private String nombreFoto = "";
     private RadioButton rb_camara, rb_galeria;
     private ImageView imagen;
     private final static String [] PERMISOS = {
@@ -165,7 +168,7 @@ public class FotografiaPpalActivity extends AppCompatActivity {
                 // Si la petición es cancelada, el array resultante estará vacío.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // El permiso ha sido concedido.
-                    mensaje = "Permiso concedido";
+                    mensaje = "No ha concedido Permiso para acceder a la CÁMARA. Debe concederlo";
                     mostrar(mensaje);
                     continuar();
                 } else {
@@ -194,10 +197,6 @@ public class FotografiaPpalActivity extends AppCompatActivity {
         return;
     }
 
-    public void continuar1(){
-
-    }
-
     /* Checks if external storage is available for read and write */
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
@@ -221,15 +220,25 @@ public class FotografiaPpalActivity extends AppCompatActivity {
         //Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         //startActivityForResult(i,0);
         //ocultar();
-        intentoCamara = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        //File carpeta = new File(Environment.getExternalStorageDirectory(),"prueba");
-        File carpeta = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "prueba");
-
-        carpeta.mkdirs();
-        File imagen = new File(carpeta, "Foto.jpg");
-        Uri uriImagenGuardada = Uri.fromFile(carpeta);
-        intentoCamara.putExtra(MediaStore.EXTRA_OUTPUT, uriImagenGuardada);
-        startActivityForResult(intentoCamara,TOMAR_FOTO);
+        final EditText cajaTexto = new EditText(this);
+        AlertDialog builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
+                .setTitle("Nombre de la foto")
+                .setMessage("Introduzca un nombre de la foto sin extensión")
+                .setView(cajaTexto)
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        Datos.nombreFoto = cajaTexto.getText().toString() + ".jpg";
+                        File carpeta = new File(getExternalFilesDir(null), Datos.nombreFoto);
+                        intentoCamara = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        Uri uriImagenGuardada = Uri.fromFile(carpeta);
+                        intentoCamara.putExtra(MediaStore.EXTRA_OUTPUT, uriImagenGuardada);
+                        startActivityForResult(intentoCamara,TOMAR_FOTO);
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .create();
+        builder.show();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -237,12 +246,25 @@ public class FotografiaPpalActivity extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             //Creamos un bitmap con la imagen recientemente
             //almacenada en la memoria
-            Bitmap bMap = BitmapFactory.decodeFile(
-                    getExternalFilesDir(Environment.DIRECTORY_PICTURES)+
-                            "/prueba/"+"Foto.jpg");
+            File imgFile = new File(getExternalFilesDir(null)+"/"+Datos.nombreFoto);
+            if(imgFile.exists()){
+                Bitmap bMap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                imagen.setImageBitmap(bMap);
+            }
+            //Bitmap bMap = BitmapFactory.decodeFile(
+                    //getExternalFilesDir(null)+"/"+Datos.nombreFoto;
+
             //Añadimos el bitmap al imageView para
             //mostrarlo por pantalla
-            imagen.setImageBitmap(bMap);
+
+
+
+            //intento = new Intent(this, CrearPertenenciaActivity.class);
+            //startActivity(intento);
+            //} else {
+            //  Toast mensaje = Toast.makeText(this, "Antes de tomar la foto debe escribir un nombre " +
+            //        "para la pertenecia", Toast.LENGTH_LONG);
+            //mensaje.show();
         }
     }
 

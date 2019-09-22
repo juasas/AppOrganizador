@@ -2,6 +2,7 @@ package com.example.juasa.apporganizador;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,14 +10,17 @@ import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
+import com.example.juasa.apporganizador.datos.Datos;
 
 public class MostrarPertenenciaActivity extends AppCompatActivity {
 
     private Controlador_base_datos controlador;
+    private ImageView cajaFoto;
     private TextView cajaCat, cajaUbic, cajaNombre, cajaDetalle;
     private Bundle extras;
     private int id_pert;
@@ -112,6 +116,14 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
         cajaDetalle.setText(detallePert);
         cajaCat.setText(categoriaPert);
         cajaUbic.setText(ubicacionPert);
+
+        if (fotoPert == null){
+            cajaFoto.setImageResource(R.mipmap.iconopertenencia);
+        } else {
+            String rutaImagen = Datos.rutaImagenes + fotoPert;
+            cajaFoto.setImageBitmap(BitmapFactory.decodeFile(rutaImagen));
+        }
+
     }
 
     public void inicializar(){
@@ -119,7 +131,7 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
         cajaDetalle = (TextView) findViewById(R.id.mostrar_pert_caja_detalle);
         cajaCat = (TextView) findViewById(R.id.mostrar_pert_caja_cat);
         cajaUbic = (TextView) findViewById(R.id.mostrar_pert_caja_ubic);
-        //cajaFoto = (TextView) findViewById(R.id.mostrar_pert_cajaUbic);
+        cajaFoto = (ImageView) findViewById(R.id.mostrar_pert_imagen);
         }
 
     public void escribir () {

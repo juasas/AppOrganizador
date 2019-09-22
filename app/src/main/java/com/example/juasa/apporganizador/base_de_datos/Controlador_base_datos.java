@@ -36,7 +36,8 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
     private final String[] CabeceraColumnasJoin = new String[]{
             TABLA_PERTENENCIAS + "._id, " + TABLA_PERTENENCIAS + ".ID_PERT, " +
                     TABLA_PERTENENCIAS + ".NOMBRE_PERT, " + TABLA_PERTENENCIAS + ".DETALLE_PERT, " +
-                    TABLA_CATEGORIAS + ".NOMBRE_CATEGORIA, " + TABLA_UBICACIONES + ".NOMBRE_UBICACION"
+                    TABLA_CATEGORIAS + ".NOMBRE_CATEGORIA, " + TABLA_UBICACIONES + ".NOMBRE_UBICACION, " +
+                    TABLA_PERTENENCIAS + ".FOTO_PERT"
     };
 
     private String clausulaWhere = " WHERE " + TABLA_CATEGORIAS + ".ID_CATEGORIA = " +
@@ -50,7 +51,8 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
 
     private String cabeceraDatos = TABLA_PERTENENCIAS + "._id, " + TABLA_PERTENENCIAS + ".ID_PERT, " +
             TABLA_PERTENENCIAS + ".NOMBRE_PERT, " + TABLA_PERTENENCIAS + ".DETALLE_PERT, " +
-            TABLA_CATEGORIAS + ".NOMBRE_CATEGORIA, " + TABLA_UBICACIONES + ".NOMBRE_UBICACION ";
+            TABLA_CATEGORIAS + ".NOMBRE_CATEGORIA, " + TABLA_UBICACIONES + ".NOMBRE_UBICACION, " +
+            TABLA_PERTENENCIAS + ".FOTO_PERT ";
 
     public Controlador_base_datos(Context context) {
         super(context, NOMBRE_BD, null, DATABASE_VERSION);
@@ -343,6 +345,7 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
             pertenencia.setDetallePertenencia(cursor.getString(3));
             pertenencia.setNombreCategoriaPertenencia(cursor.getString(4));
             pertenencia.setNombreUbicacionPertenencia(cursor.getString(5));
+            pertenencia.setFotoPertenencia(cursor.getString(6));
 
             //pertenencia.setFotoPertenencia(cursor.getString(5));
         }
