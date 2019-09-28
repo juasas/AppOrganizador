@@ -36,20 +36,12 @@ public class PertenenciasCursorAdapter extends CursorAdapter {
         cajaNombre = (TextView) view.findViewById(R.id.elementos_lista_nombre_elemento);
         cajaCategoria = (TextView) view.findViewById(R.id.elemtos_lista_cat_elemento);
         cajaUbicacion = (TextView) view.findViewById(R.id.elementos_lista_ubic_elemento);
-
-        //cajaIcono.setImageResource(R.mipmap.iconopertenencia);
-
-
-        //if (icono.equals(null)){
-
-  //      } else {
-            //}
         nombre = cursor.getString(cursor.getColumnIndex("NOMBRE_PERT"));
         categoria = cursor.getString(cursor.getColumnIndex("NOMBRE_CATEGORIA"));
         ubicacion = cursor.getString(cursor.getColumnIndex("NOMBRE_UBICACION"));
         imagen = cursor.getString(cursor.getColumnIndex("FOTO_PERT"));
 
-        if (imagen == null){
+        if ((imagen == null) || (imagen.equals(""))){
             cajaIcono.setImageResource(R.mipmap.iconopertenencia);
         } else {
             String rutaImagen = Datos.rutaImagenes + imagen;

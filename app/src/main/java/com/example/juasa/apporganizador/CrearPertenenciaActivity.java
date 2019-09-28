@@ -1,6 +1,7 @@
 package com.example.juasa.apporganizador;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
@@ -25,12 +27,14 @@ public class CrearPertenenciaActivity extends AppCompatActivity {
     private String categoriaPertenencia, nombrePertenencia, detallePertenencia, ubicacionPertenencia, fotoPertenencia;
     private Intent intento;
     private int idCategoria, idUbicacion;
+    private TextView cajaTextoFoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_pertenencia);
         inicializar();
+        actualizarTextoFoto();
         actualizarUI_spinners();
     }
 
@@ -58,11 +62,22 @@ public class CrearPertenenciaActivity extends AppCompatActivity {
         spinnerCategoria = findViewById(R.id.crear_pert_sp_categoria);
         spinnerUbicacion = findViewById(R.id.crear_pert_sp_ubic);
         cajaNombre = (EditText) findViewById(R.id.crear_pert_caja_nombre);
+        cajaNombre.setText(Datos.nombrePertenenciaGeneral);
         cajaDetalle = (EditText) findViewById(R.id.crear_pert_caja_detalle);
+        cajaTextoFoto = (TextView) findViewById(R.id.crear_pert_caja_textoFoto);
+    }
+
+    public void actualizarTextoFoto (){
+        if ((Datos.nombreFoto.equals(""))){
+            cajaTextoFoto.setText("Esta pertenencia no tiene fotografía");
+        } else {
+            cajaTextoFoto.setText(Datos.nombreFoto);
+        }
     }
 
     public void crearNuevaPertenencia(View view) {
         nombrePertenencia = cajaNombre.getText().toString().toUpperCase();
+        Datos.nombrePertenenciaGeneral=nombrePertenencia;
         detallePertenencia = cajaDetalle.getText().toString().toUpperCase();
         categoriaPertenencia = spinnerCategoria.getSelectedItem().toString().toUpperCase();
 
@@ -77,6 +92,7 @@ public class CrearPertenenciaActivity extends AppCompatActivity {
         } else {{
             if (!controlador.existe(controlador.TABLA_PERTENENCIAS, "NOMBRE_PERT", nombrePertenencia)) {
                 controlador.anadirPertenencia(nombrePertenencia, detallePertenencia, idCategoria, idUbicacion, fotoPertenencia);
+                Datos.nombreFoto = "";
                 Toast mensaje = Toast.makeText(this, "Pertenencia almacenada correctamente", Toast.LENGTH_LONG);
                 mensaje.show();
                 intento = new Intent(this, PertenenciasPpalActivity.class);
@@ -90,10 +106,8 @@ public class CrearPertenenciaActivity extends AppCompatActivity {
     }
 
     public void resetear(View view) {
-        //crear_pertenencia_cajaTipo.setText("");
         cajaNombre.setText("");
         cajaDetalle.setText("");
-        //crear_pertenencia_cajaUbic.setText("");
     }
 
     public void actualizarUI_spinners() {
@@ -122,16 +136,8 @@ public class CrearPertenenciaActivity extends AppCompatActivity {
     }
 
     public void entrarMenuFoto(View view){
-        //if (!cajaNombre.getText().toString().toUpperCase().equals("")){
-            nombrePertenencia= cajaNombre.getText().toString().toUpperCase();
-            intento = new Intent(this, FotografiaPpalActivity.class);
-            //intento.putExtra("nombreFoto", nombrePertenencia);
-            startActivity(intento);
-        //} else {
-          //  Toast mensaje = Toast.makeText(this, "Antes de tomar la foto debe escribir un nombre " +
-            //        "para la pertenecia", Toast.LENGTH_LONG);
-            //mensaje.show();
-        //}
+        intento = new Intent(this, FotografiaPpalActivity.class);
+        startActivity(intento);
     }
 }
 

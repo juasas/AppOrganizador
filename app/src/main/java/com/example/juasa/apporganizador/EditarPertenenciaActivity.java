@@ -1,6 +1,7 @@
 package com.example.juasa.apporganizador;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,15 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
+import com.example.juasa.apporganizador.datos.Datos;
 
 public class EditarPertenenciaActivity extends AppCompatActivity {
 
     private Controlador_base_datos controlador;
-    private EditText cajaNombre, cajaDetalle;
+    private EditText cajaNombre, cajaDetalle, cajaTextoFoto;
     private Bundle extras;
     private int id_pert, idCategoria, idUbicacion;
     private String nombreCategoriaPert, nombrePert, detallePert, nombreUbicacionPert, nombreAntiguo;
-    //private String foto_pert;
+    private String fotoPert;
     private View view;
     private Pertenencia pertenencia;
     private Spinner spinnerCategoria, spinnerUbicacion;
@@ -41,21 +43,22 @@ public class EditarPertenenciaActivity extends AppCompatActivity {
         llenarPertenencia();
     }
 
-        public void inicializar (){
-            cajaNombre = (EditText) findViewById(R.id.editar_pert_caja_nombre);
-            cajaDetalle = (EditText) findViewById(R.id.editar_pert_caja_detalle);
-            spinnerCategoria = findViewById(R.id.editar_pert_sp_categoria);
-            spinnerUbicacion = findViewById(R.id.editar_pert_sp_ubic);
-        }
+    public void inicializar() {
+        cajaNombre = (EditText) findViewById(R.id.editar_pert_caja_nombre);
+        cajaDetalle = (EditText) findViewById(R.id.editar_pert_caja_detalle);
+        spinnerCategoria = findViewById(R.id.editar_pert_sp_categoria);
+        spinnerUbicacion = findViewById(R.id.editar_pert_sp_ubic);
+        cajaTextoFoto = (EditText) findViewById(R.id.editar_pert_caja_textoFoto);
+    }
 
     @Override
-    public boolean onCreateOptionsMenu (Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_action_secundario, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected (MenuItem item ) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_action_secundario_volver_atras:
                 Intent intento = new Intent(this, PertenenciasPpalActivity.class);
@@ -76,15 +79,21 @@ public class EditarPertenenciaActivity extends AppCompatActivity {
             detallePert = extras.getString("detalle_pert");
             nombreCategoriaPert = extras.getString("categoria_pert");
             nombreUbicacionPert = extras.getString("ubicacion_pert");
-            //foto_pert = extras.getString("foto_desc");
+            fotoPert = extras.getString("foto_pert");
         }
     }
 
-    public void llenarPertenencia(){
+    public void llenarPertenencia() {
         cajaNombre.setText(nombrePert);
         cajaDetalle.setText(detallePert);
         spinnerCategoria.setSelection(obtenerPosicionItem(spinnerCategoria, nombreCategoriaPert));
         spinnerUbicacion.setSelection(obtenerPosicionItem(spinnerUbicacion, nombreUbicacionPert));
+
+        if ((fotoPert == null) || (fotoPert.equals(""))) {
+            cajaTextoFoto.setText("Esta pertenencia no tiene fotografía");
+        } else {
+            cajaTextoFoto.setText(fotoPert);
+        }
     }
 
     public void guardarPertenencia(View view) {
@@ -101,6 +110,7 @@ public class EditarPertenenciaActivity extends AppCompatActivity {
         pertenencia.setIdPertenencia(id_pert);
         pertenencia.setNombrePertenencia(cajaNombre.getText().toString().toUpperCase());
         pertenencia.setDetallePertenencia(cajaDetalle.getText().toString());
+        pertenencia.setFotoPertenencia(cajaTextoFoto.getText().toString());
 
         //int idCat = controlador.obtenerIdCategoria(pertenencia.getCategoriaPertenencia());
         //ubic = controlador.obtenerUbicacion(pertenencia.getUbicacionPertenencia());
@@ -109,7 +119,7 @@ public class EditarPertenenciaActivity extends AppCompatActivity {
             mensaje.show();
         } else {
             int numApariciones = controlador.numRegistrosIguales(Controlador_base_datos.TABLA_PERTENENCIAS,
-                                                    "NOMBRE_PERT", pertenencia.getNombrePertenencia());
+                    "NOMBRE_PERT", pertenencia.getNombrePertenencia());
             if ((numApariciones == 0) || ((numApariciones != 0) && (pertenencia.getNombrePertenencia().equals(nombreAntiguo)))) {
                 controlador.actualizarPertenencia(pertenencia, idCategoria, idUbicacion, nombreAntiguo);
                 Toast mensaje = Toast.makeText(this, "Pertenencia editada y almacenada correctamente", Toast.LENGTH_LONG);
@@ -124,7 +134,8 @@ public class EditarPertenenciaActivity extends AppCompatActivity {
             }
         }
     }
-    public void resetear (View view){
+
+    public void resetear(View view) {
         inicializar();
         cajaNombre.setText("");
         cajaDetalle.setText("");
@@ -158,9 +169,26 @@ public class EditarPertenenciaActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AYUDA")
                 .setMessage("Introduzca los nuevos valores que quiera dar a esta Pertenencia y " +
-                            "pulse  el botón azul redondo en parte inferior derecha de la pantalla " +
-                            "para aceptar")
+                        "pulse  el botón azul redondo en parte inferior derecha de la pantalla " +
+                        "para aceptar")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
-        dialog.show();}
+        dialog.show();
+    }
+
+    public void entrarMenuFoto(View view) {
+        intento = new Intent(this, FotografiaPpalActivity.class);
+        guardarDatosPertenencia();
+        startActivity(intento);
+    }
+
+    public void guardarDatosPertenencia (){
+        Datos.pertenenciaGlobal.setIdPertenencia(id_pert);
+        Datos.pertenenciaGlobal.setNombrePertenencia(nombrePert);
+        Datos.pertenenciaGlobal.setDetallePertenencia(detallePert);
+        Datos.pertenenciaGlobal.setNombreUbicacionPertenencia(nombreUbicacionPert);
+        Datos.pertenenciaGlobal.setNombreCategoriaPertenencia(nombreCategoriaPert);
+        Datos.pertenenciaGlobal.setFotoPertenencia(fotoPert);
+        Datos.pertenenciaGlobal.setIdPertenencia(id_pert);
+    }
 }

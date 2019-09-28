@@ -62,6 +62,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true" />
+
+            <TextView
+                style="@style/estilo_etiquetas"
+                android:text="Archivo de Foto:" />
+
+            <TextView
+                android:id="@+id/crear_pert_caja_textoFoto"
+                style="@style/estilo_etiquetas_contenido"
+                android:layout_marginBottom="40dp"/>
         </LinearLayout>
 
         <Button

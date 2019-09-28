@@ -21,7 +21,7 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
 
     private Controlador_base_datos controlador;
     private ImageView cajaFoto;
-    private TextView cajaCat, cajaUbic, cajaNombre, cajaDetalle;
+    private TextView cajaCat, cajaUbic, cajaNombre, cajaDetalle, cajaTextoFoto;
     private Bundle extras;
     private int id_pert;
     private String categoriaPert, ubicacionPert, nombrePert, detallePert, fotoPert, cadena;
@@ -73,7 +73,7 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
                 intento1.putExtra("detalle_pert", detallePert);
                 intento1.putExtra("categoria_pert", categoriaPert);
                 intento1.putExtra("ubicacion_pert", ubicacionPert);
-                //intento1.putExtra("foto_pert", foto_pert);
+                intento1.putExtra("foto_pert", fotoPert);
                 startActivity(intento1);
                 break;
             case R.id.menu_action_gestion_eliminar_elemento:
@@ -117,13 +117,14 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
         cajaCat.setText(categoriaPert);
         cajaUbic.setText(ubicacionPert);
 
-        if (fotoPert == null){
+        if ((fotoPert == null) || (fotoPert.equals(""))){
             cajaFoto.setImageResource(R.mipmap.iconopertenencia);
+            cajaTextoFoto.setText("Esta pertenencia no tiene fotografía");
         } else {
             String rutaImagen = Datos.rutaImagenes + fotoPert;
             cajaFoto.setImageBitmap(BitmapFactory.decodeFile(rutaImagen));
+            cajaTextoFoto.setText(fotoPert);
         }
-
     }
 
     public void inicializar(){
@@ -132,6 +133,7 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
         cajaCat = (TextView) findViewById(R.id.mostrar_pert_caja_cat);
         cajaUbic = (TextView) findViewById(R.id.mostrar_pert_caja_ubic);
         cajaFoto = (ImageView) findViewById(R.id.mostrar_pert_imagen);
+        cajaTextoFoto =(TextView) findViewById(R.id.mostrar_pert_caja_textoFoto);
         }
 
     public void escribir () {
