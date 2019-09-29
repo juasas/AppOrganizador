@@ -97,7 +97,7 @@
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/crear_pert_fab"
                 style="@style/estilo_fab"
-                android:onClick="crearNuevaPertenencia"
+                android:onClick="queHacer"
                 android:src="@mipmap/iconook"
                 app:fabSize="normal" />
         </FrameLayout>

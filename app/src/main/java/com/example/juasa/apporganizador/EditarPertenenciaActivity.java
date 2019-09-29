@@ -24,8 +24,7 @@ public class EditarPertenenciaActivity extends AppCompatActivity {
     private EditText cajaNombre, cajaDetalle, cajaTextoFoto;
     private Bundle extras;
     private int id_pert, idCategoria, idUbicacion;
-    private String nombreCategoriaPert, nombrePert, detallePert, nombreUbicacionPert, nombreAntiguo;
-    private String fotoPert;
+    private String nombrePert, detallePert, nombreUbicacionPert, nombreCategoriaPert, nombreAntiguo, fotoPert;
     private View view;
     private Pertenencia pertenencia;
     private Spinner spinnerCategoria, spinnerUbicacion;
@@ -36,19 +35,13 @@ public class EditarPertenenciaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_pertenencia);
-        controlador = new Controlador_base_datos(this);
-        recibirParametros();
+
+        //recibirParametros();
         inicializar();
+        cargarDatos();
         actualizarUI_spinners();
         llenarPertenencia();
-    }
-
-    public void inicializar() {
-        cajaNombre = (EditText) findViewById(R.id.editar_pert_caja_nombre);
-        cajaDetalle = (EditText) findViewById(R.id.editar_pert_caja_detalle);
-        spinnerCategoria = findViewById(R.id.editar_pert_sp_categoria);
-        spinnerUbicacion = findViewById(R.id.editar_pert_sp_ubic);
-        cajaTextoFoto = (EditText) findViewById(R.id.editar_pert_caja_textoFoto);
+        //actualizarTextoFoto();
     }
 
     @Override
@@ -70,6 +63,25 @@ public class EditarPertenenciaActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void inicializar() {
+        controlador = new Controlador_base_datos(this);
+        cajaNombre = (EditText) findViewById(R.id.editar_pert_caja_nombre);
+        cajaDetalle = (EditText) findViewById(R.id.editar_pert_caja_detalle);
+        spinnerCategoria = findViewById(R.id.editar_pert_sp_categoria);
+        spinnerUbicacion = findViewById(R.id.editar_pert_sp_ubic);
+        cajaTextoFoto = (EditText) findViewById(R.id.editar_pert_caja_textoFoto);
+    }
+
+    public void cargarDatos (){
+        id_pert = Datos.pertenenciaGlobal.getIdPertenencia();
+        nombrePert = Datos.pertenenciaGlobal.getNombrePertenencia();
+        nombreAntiguo = nombrePert;
+        detallePert = Datos.pertenenciaGlobal.getDetallePertenencia();
+        nombreCategoriaPert = Datos.pertenenciaGlobal.getNombreCategoriaPertenencia();
+        nombreUbicacionPert = Datos.pertenenciaGlobal.getNombreUbicacionPertenencia();
+        fotoPert = Datos.pertenenciaGlobal.getFotoPertenencia();
+    }
+
     public void recibirParametros() {
         extras = getIntent().getExtras();
         if (extras != null) {
@@ -80,20 +92,33 @@ public class EditarPertenenciaActivity extends AppCompatActivity {
             nombreCategoriaPert = extras.getString("categoria_pert");
             nombreUbicacionPert = extras.getString("ubicacion_pert");
             fotoPert = extras.getString("foto_pert");
+            if (((fotoPert == null) || (fotoPert.equals(""))) && (Datos.nombreFoto.equals(""))) {
+                cajaTextoFoto.setText("Esta pertenencia no tiene fotografía");
+            } else {
+                if ((fotoPert == null) || (fotoPert.equals(""))) {
+                    cajaTextoFoto.setText("Esta pertenencia no tiene fotografía");
+                } else {
+                    if ((fotoPert != null) || (!fotoPert.equals(""))) {
+                        cajaTextoFoto.setText(fotoPert);
+                    } else {
+                        if (!Datos.nombreFoto.equals(""))
+                            cajaTextoFoto.setText(Datos.nombreFoto);
+                    }
+                }
+            }
         }
     }
 
     public void llenarPertenencia() {
-        cajaNombre.setText(nombrePert);
-        cajaDetalle.setText(detallePert);
-        spinnerCategoria.setSelection(obtenerPosicionItem(spinnerCategoria, nombreCategoriaPert));
-        spinnerUbicacion.setSelection(obtenerPosicionItem(spinnerUbicacion, nombreUbicacionPert));
+            cajaNombre.setText(nombrePert);
+            cajaDetalle.setText(detallePert);
+            spinnerCategoria.setSelection(obtenerPosicionItem(spinnerCategoria, nombreCategoriaPert));
+            spinnerUbicacion.setSelection(obtenerPosicionItem(spinnerUbicacion, nombreUbicacionPert));
 
-        if ((fotoPert == null) || (fotoPert.equals(""))) {
-            cajaTextoFoto.setText("Esta pertenencia no tiene fotografía");
-        } else {
-            cajaTextoFoto.setText(fotoPert);
-        }
+            if ((fotoPert == null) || (fotoPert.equals("")))
+                cajaTextoFoto.setText("Esta pertenencia no tiene fotografía");
+            else
+                cajaTextoFoto.setText(fotoPert);
     }
 
     public void guardarPertenencia(View view) {
@@ -139,6 +164,7 @@ public class EditarPertenenciaActivity extends AppCompatActivity {
         inicializar();
         cajaNombre.setText("");
         cajaDetalle.setText("");
+        cajaTextoFoto.setText("");
     }
 
     public void actualizarUI_spinners() {
@@ -177,18 +203,26 @@ public class EditarPertenenciaActivity extends AppCompatActivity {
     }
 
     public void entrarMenuFoto(View view) {
+        guardarDatos();
         intento = new Intent(this, FotografiaPpalActivity.class);
-        guardarDatosPertenencia();
         startActivity(intento);
     }
 
-    public void guardarDatosPertenencia (){
+    public void actualizarTextoFoto (){
+        if ((Datos.nombreFoto.equals(""))){
+            cajaTextoFoto.setText("Esta pertenencia no tiene fotografía");
+        } else {
+            cajaTextoFoto.setText(Datos.nombreFoto);
+        }
+    }
+
+    private void guardarDatos(){
         Datos.pertenenciaGlobal.setIdPertenencia(id_pert);
         Datos.pertenenciaGlobal.setNombrePertenencia(nombrePert);
         Datos.pertenenciaGlobal.setDetallePertenencia(detallePert);
-        Datos.pertenenciaGlobal.setNombreUbicacionPertenencia(nombreUbicacionPert);
         Datos.pertenenciaGlobal.setNombreCategoriaPertenencia(nombreCategoriaPert);
+        Datos.pertenenciaGlobal.setNombreUbicacionPertenencia(nombreUbicacionPert);
         Datos.pertenenciaGlobal.setFotoPertenencia(fotoPert);
-        Datos.pertenenciaGlobal.setIdPertenencia(id_pert);
+
     }
 }

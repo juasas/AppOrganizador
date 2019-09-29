@@ -47,7 +47,7 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
             categoriaPert = extras.getString("categoria_pert");
             ubicacionPert = extras.getString("ubicacion_pert");
             fotoPert = extras.getString("foto_pert");
-            }
+        }
     }
 
     @Override
@@ -67,13 +67,20 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
                 startActivity(intento);
                 break;
             case R.id.menu_action_gestion_editar_elemento:
-                intento1 = new Intent(this, EditarPertenenciaActivity.class);
-                intento1.putExtra("id_pert", id_pert);
-                intento1.putExtra("nombre_pert", nombrePert);
-                intento1.putExtra("detalle_pert", detallePert);
-                intento1.putExtra("categoria_pert", categoriaPert);
-                intento1.putExtra("ubicacion_pert", ubicacionPert);
-                intento1.putExtra("foto_pert", fotoPert);
+                Datos.pertenenciaGlobal.setIdPertenencia(id_pert);
+                Datos.pertenenciaGlobal.setNombrePertenencia(nombrePert);
+                Datos.nombreAntiguo = Datos.pertenenciaGlobal.getNombrePertenencia();
+                Datos.pertenenciaGlobal.setDetallePertenencia(detallePert);
+                Datos.pertenenciaGlobal.setNombreCategoriaPertenencia(categoriaPert);
+                Datos.pertenenciaGlobal.setNombreUbicacionPertenencia(ubicacionPert);
+                Datos.pertenenciaGlobal.setFotoPertenencia(fotoPert);
+                intento1 = new Intent(this, CrearEditarPertenenciaActivity.class);
+                intento1.putExtra("operacion", "editar");
+                //intento1.putExtra("nombre_pert", nombrePert);
+                //intento1.putExtra("detalle_pert", detallePert);
+                //intento1.putExtra("categoria_pert", categoriaPert);
+                //intento1.putExtra("ubicacion_pert", ubicacionPert);
+                //intento1.putExtra("foto_pert", fotoPert);
                 startActivity(intento1);
                 break;
             case R.id.menu_action_gestion_eliminar_elemento:

@@ -64,7 +64,7 @@ public class FotografiaPpalActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_action_ppal_volver_atras:
-                intento = new Intent(this, CrearPertenenciaActivity.class);
+                intento = new Intent(this, CrearEditarPertenenciaActivity.class);
                 startActivity(intento);
                 break;
             case R.id.menu_action_ppal_gohome:
@@ -217,19 +217,17 @@ public class FotografiaPpalActivity extends AppCompatActivity {
     }
 
     public void continuar () {
-        //Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        //startActivityForResult(i,0);
-        //ocultar();
         final EditText cajaTexto = new EditText(this);
         AlertDialog builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
-                .setTitle("Nombre de la foto")
-                .setMessage("Introduzca un nombre de la foto sin extensión")
+                .setTitle("Nombre de la fotografía")
+                .setMessage("Introduzca un nombre de la fotografía sin extensión")
                 .setView(cajaTexto)
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                        Datos.nombreFoto = cajaTexto.getText().toString() + ".jpg";
-                        File carpeta = new File(getExternalFilesDir(null), Datos.nombreFoto);
+                        Datos.pertenenciaGlobal.setFotoPertenencia(cajaTexto.getText().toString() + ".jpg");
+                        //Datos.nombreFoto = cajaTexto.getText().toString() + ".jpg";
+                        File carpeta = new File(Datos.rutaImagenes, Datos.pertenenciaGlobal.getFotoPertenencia());
                         intentoCamara = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         Uri uriImagenGuardada = Uri.fromFile(carpeta);
                         intentoCamara.putExtra(MediaStore.EXTRA_OUTPUT, uriImagenGuardada);
@@ -246,26 +244,11 @@ public class FotografiaPpalActivity extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             //Creamos un bitmap con la imagen recientemente
             //almacenada en la memoria
-            File imgFile = new File(getExternalFilesDir(null)+"/"+Datos.nombreFoto);
-            if(imgFile.exists()){
+            File imgFile = new File(Datos.rutaImagenes + Datos.pertenenciaGlobal.getFotoPertenencia());
+            if (imgFile.exists()) {
                 Bitmap bMap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 imagen.setImageBitmap(bMap);
             }
-            //Bitmap bMap = BitmapFactory.decodeFile(
-                    //getExternalFilesDir(null)+"/"+Datos.nombreFoto;
-
-            //Añadimos el bitmap al imageView para
-            //mostrarlo por pantalla
-
-
-
-            //intento = new Intent(this, CrearPertenenciaActivity.class);
-            //startActivity(intento);
-            //} else {
-            //  Toast mensaje = Toast.makeText(this, "Antes de tomar la foto debe escribir un nombre " +
-            //        "para la pertenecia", Toast.LENGTH_LONG);
-            //mensaje.show();
         }
     }
-
 }

@@ -176,7 +176,13 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
     }
 
     public void crearNuevaPertenencia(View view) {
-        Intent intento = new Intent(this, CrearPertenenciaActivity.class);
+        Datos.pertenenciaGlobal.setNombrePertenencia("");
+        Datos.pertenenciaGlobal.setDetallePertenencia("");
+        Datos.pertenenciaGlobal.setNombreUbicacionPertenencia("");
+        Datos.pertenenciaGlobal.setNombreUbicacionPertenencia("");
+        Datos.pertenenciaGlobal.setFotoPertenencia("");
+        Intent intento = new Intent(this, CrearEditarPertenenciaActivity.class);
+        intento.putExtra("operacion", "crear");
         startActivity(intento);
     }
 

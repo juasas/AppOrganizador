@@ -443,7 +443,7 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
         registro.put("DETALLE_PERT", pertenencia.getDetallePertenencia());
         registro.put("ID_CATEGORIA_PERT", iDcat);
         registro.put("ID_UBICACION_PERT", iDubic);
-        registro.put("FOTO_PERT", "");
+        registro.put("FOTO_PERT", pertenencia.getFotoPertenencia());
         String whereClause = String.format("%s=?", "NOMBRE_PERT");
         String[] whereArgs = {nombreAntiguo};
         db.update(TABLA_PERTENENCIAS, registro, whereClause, whereArgs);

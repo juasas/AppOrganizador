@@ -8,7 +8,8 @@ public class Datos {
     public static int numeroMaleta = 0;
     public static int numeroUsuarios = 0;
     public static String nombreFoto = "";
-    public static String rutaImagenes = "/sdcard/Android/data/com.example.juasa.apporganizador/files/";
+    public static String nombreAntiguo = "";
+    public static String rutaImagenes = "sdcard/Android/data/com.example.juasa.apporganizador/files/";
     public static String nombrePertenenciaGeneral = "";
     public static Pertenencia pertenenciaGlobal = new Pertenencia();
-}
+    }

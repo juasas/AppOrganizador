@@ -30,7 +30,7 @@
         <activity android:name=".BuscarPedirUbicacionActivity" />
         <activity android:name=".CategoriasPpalActivity" />
         <activity android:name=".CrearCategoriaActivity" />
-        <activity android:name=".CrearPertenenciaActivity" />
+        <activity android:name=".CrearEditarPertenenciaActivity" />
         <activity android:name=".CrearUbicacionActivity" />
         <activity android:name=".EditarPertenenciaActivity" />
         <activity android:name=".EditarUbicacionActivity" />
