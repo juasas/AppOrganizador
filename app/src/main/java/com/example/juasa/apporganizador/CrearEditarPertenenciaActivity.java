@@ -36,6 +36,7 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
     private ArrayAdapter<String> adaptadorSpinnerCategoria, adaptadorSpinnerUbicacion;
     private Spinner spinnerCategoria, spinnerUbicacion;
     private String nombrePert, detallePert, nombreUbicacionPert, nombreCategoriaPert, fotoPert, nombreAntiguoPert, operacion;
+    private String nombreFoto = "";
     private Intent intento, intentoCamara;
     private int idCategoria, idUbicacion;
     private TextView cajaTitulo, cajaTextoFoto;
@@ -409,20 +410,26 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                        Datos.pertenenciaGlobal.setFotoPertenencia(cajaTexto.getText().toString() + ".jpg");
-                        File carpeta = new File(getExternalFilesDir(null), Datos.pertenenciaGlobal.getFotoPertenencia());
-                        intentoCamara = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        Uri uriImagenGuardada = Uri.fromFile(carpeta);
-                        intentoCamara.putExtra(MediaStore.EXTRA_OUTPUT, uriImagenGuardada);
-                        if (operacion.equals("crear"))
-                            startActivityForResult(intentoCamara, CREAR);
-                        else
-                            startActivityForResult(intentoCamara, EDITAR);
+                        nombreFoto = cajaTexto.getText().toString();
+                        if (!nombreFoto.isEmpty()) {
+                            Datos.pertenenciaGlobal.setFotoPertenencia(cajaTexto.getText().toString() + ".jpg");
+                            File carpeta = new File(getExternalFilesDir(null), Datos.pertenenciaGlobal.getFotoPertenencia());
+                            intentoCamara = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            Uri uriImagenGuardada = Uri.fromFile(carpeta);
+                            intentoCamara.putExtra(MediaStore.EXTRA_OUTPUT, uriImagenGuardada);
+                            if (operacion.equals("crear"))
+                                startActivityForResult(intentoCamara, CREAR);
+                            else
+                                startActivityForResult(intentoCamara, EDITAR);
+                        } else {
+                            mensaje = "Debe escrbir un nombre para el archivo de la fotografía";
+                            mostrar(mensaje);
+                        }
                     }
                 })
                 .setNegativeButton("Cancelar", null)
                 .create();
-        builder.show();
+                builder.show();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

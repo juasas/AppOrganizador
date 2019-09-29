@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private Datos datos;
     private Entrada_Salida salida;
     private EditText cajaMail, cajaPass;
+    private TextView textoNuevoUsusario;
     private Intent intento;
 
     @Override
@@ -35,11 +37,26 @@ public class LoginActivity extends AppCompatActivity {
         controlador = new Controlador_base_datos(this);
         cajaMail = (EditText) findViewById(R.id.login_caja_mail);
         cajaPass = (EditText) findViewById(R.id.login_caja_pass);
+        textoNuevoUsusario = (TextView) findViewById(R.id.login_nuevo_usuario);
+        Datos.numeroUsuarios = controlador.numRegistrosTabla(controlador.TABLA_USUARIOS);
     }
 
-    public void crearNuevoUsuario (View view){
-        intento = new Intent(this, NuevoUsuarioActivity.class);
-        startActivity(intento);}
+    public void crearNuevoUsuario (View view) {
+        if (Datos.numeroUsuarios == 1){
+            textoNuevoUsusario.setEnabled(false);
+            AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
+                    .setTitle("AVISO")
+                    .setMessage("No puede CREAR más de un Usuario. Ya existe un Usuario creado. " +
+                                "Para poder CREAR un nuevo Usuario, debe antes borrar el ya " +
+                                "existente (diríjase a Gestión de Ususario/Borrar Usuario)")
+                    .setPositiveButton("Aceptar", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        } else {
+            intento = new Intent(this, NuevoUsuarioActivity.class);
+            startActivity(intento);
+        }
+    }
 
     public void acceder(View view) {
 
@@ -107,22 +124,9 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();}
 
     public void cerrarApp (View view){
-        intento = new Intent(this, NuevoUsuarioActivity.class);
-        startActivity(intento);}
-
-    public String encriptarPass (String password){
-        String passEncriptada = "";
-        try {
-            byte[] passByte = password.getBytes();
-            MessageDigest md = MessageDigest.getInstance("SHA");
-            md.update(passByte);
-            byte[] resumenHash = md.digest();
-            passEncriptada = new String(resumenHash);
-        }catch (NoSuchAlgorithmException e) {
-            Toast mensaje = Toast.makeText(this, "No se puede encriptar password", Toast.LENGTH_LONG);
-            mensaje.show();
-        }
-        return passEncriptada;
+        super.onBackPressed();
+        finishAffinity();
+        System.exit(0);
     }
 }
 

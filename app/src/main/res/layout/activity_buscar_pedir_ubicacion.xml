@@ -6,35 +6,58 @@
     tools:context=".BuscarPedirUbicacionActivity">
 
     <TextView
-        android:id="@+id/pedir_ubic_titulo"
+        android:id="@+id/buscar_pedir_ubic_titulo"
         style="@style/estilo_comun_textos"
-        android:textSize = "40sp"
-        android:text="Buscar por ubicación" />
+        android:layout_alignParentTop = "true"
+        android:textAlignment = "center"
+        android:text="Buscar por ubicación"
+        android:textSize = "40sp"/>
 
-    <TextView
-        android:id="@+id/pedir_ubic_contenedor_sp"
+    <ImageView
+        android:id="@+id/buscar_pedir_ubic_icono_ayuda"
+        style="@style/estilo_ayuda"
+        android:layout_below="@+id/buscar_pedir_ubic_titulo"
+        android:onClick="ayuda"/>
+
+    <RelativeLayout
+        android:id="@+id/buscar_pedir_ubic_conjunto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:padding="5dp"
-        android:text="Seleccione ubicación:"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/pedir_ubic_titulo"/>
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@+id/buscar_pedir_ubic_icono_ayuda" >
+
+        <ImageView
+            android:id="@+id/buscar_pedir_ubic_icono_ubic"
+            style="@style/estilo_iconos"
+            android:src="@mipmap/iconoubicacion" />
+
+        <TextView
+            android:id="@+id/buscar_pedir_ubic_contenedor_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:padding="5dp"
+            android:text="Seleccione una ubicación:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/buscar_pedir_ubic_icono_ubic"/>
+
+    </RelativeLayout>
 
     <Spinner
-        android:id="@+id/pedir_ubic_spinner"
+        android:id="@+id/buscar_pedir_ubic_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/pedir_ubic_contenedor_sp"/>
+        android:layout_below="@+id/buscar_pedir_ubic_conjunto"/>
 
     <Button
-        android:id="@+id/pedir_ubic_boton_buscar"
+        android:id="@+id/buscar_pedir_ubic_boton_buscar"
         style="@style/estilo_boton"
         android:text="Buscar"
         android:onClick="buscar"
-        android:layout_below="@+id/pedir_ubic_spinner"/>
+        android:layout_below="@+id/buscar_pedir_ubic_spinner"/>
 </RelativeLayout>

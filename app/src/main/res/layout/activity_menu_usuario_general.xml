@@ -42,11 +42,19 @@
         android:onClick="entrarCambiarPass"/>
 
     <Button
-        android:id="@+id/menu_usuario_general_boton_entrar_borrar"
+        android:id="@+id/menu_usuario_general_boton_entrar_borrar_usuario"
+        style="@style/estilo_boton"
+        android:text="Borrar Usuario"
+        android:background="@drawable/presionarboton"
+        android:layout_below="@+id/menu_usuario_general_boton_entrar_cambiar_pass"
+        android:onClick="entrarBorrarUsuario"/>
+
+    <Button
+        android:id="@+id/menu_usuario_general_boton_entrar_borrar_tablas"
         style="@style/estilo_boton"
         android:text="Borrar Tablas"
         android:background="@drawable/presionarboton"
-        android:layout_below="@+id/menu_usuario_general_boton_entrar_cambiar_pass"
-        android:onClick="entrarBorrarTablas"/>
+        android:layout_below="@+id/menu_usuario_general_boton_entrar_borrar_usuario"
+        android:onClick="entrarBorrarTablasUsuario"/>
 
 </RelativeLayout>

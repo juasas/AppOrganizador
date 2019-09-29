@@ -8,28 +8,49 @@
     <TextView
         android:id="@+id/buscar_pedir_cat_titulo"
         style="@style/estilo_comun_textos"
-        android:textSize = "40sp"
-        android:text="Buscar por categoría" />
+        android:text="Buscar por categoría"
+        android:layout_alignParentTop = "true"
+        android:textAlignment = "center"
+        android:textSize = "40sp" />
 
-    <TextView
-        android:id="@+id/buscar_pedir_cat_contenedor_sp"
+    <ImageView
+        android:id="@+id/buscar_pedir_cat_icono_ayuda"
+        style="@style/estilo_ayuda"
+        android:layout_below="@+id/buscar_pedir_cat_titulo"
+        android:onClick="ayuda"/>
+
+    <RelativeLayout
+        android:id="@+id/buscar_pedir_cat_conjunto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:padding="5dp"
-        android:text="@string/seleccione_categor_a"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/buscar_pedir_cat_titulo"/>
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="40dp"
+        android:layout_below="@+id/buscar_pedir_cat_icono_ayuda" >
+
+        <ImageView
+            android:id="@+id/buscar_pedir_cat_icono_cat"
+            style="@style/estilo_iconos"
+            android:src="@mipmap/iconocategoria" />
+
+        <TextView
+            android:id="@+id/buscar_pedir_cat_contenedor_sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:padding="5dp"
+            android:text="Seleccione una categoría"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_toEndOf="@+id/buscar_pedir_cat_icono_cat"/>
+    </RelativeLayout>
 
     <Spinner
         android:id="@+id/buscar_pedir_cat_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/buscar_pedir_cat_contenedor_sp"/>
+        android:layout_below="@+id/buscar_pedir_cat_conjunto"/>
 
     <Button
         android:id="@+id/buscar_pedir_cat_boton_buscar"

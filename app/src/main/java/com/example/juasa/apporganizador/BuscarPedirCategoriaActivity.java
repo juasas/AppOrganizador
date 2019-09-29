@@ -1,12 +1,15 @@
 package com.example.juasa.apporganizador;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
@@ -16,6 +19,7 @@ public class BuscarPedirCategoriaActivity extends AppCompatActivity {
     private ArrayAdapter<String> adaptadorSpinnerCat;
     private Spinner spinnerCategoria;
     private String categoriaBuscada;
+    private ImageView iconoAyuda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,7 @@ public class BuscarPedirCategoriaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_buscar_pedir_categoria);
         controlador = new Controlador_base_datos(this);
         spinnerCategoria = findViewById(R.id.buscar_pedir_cat_spinner);
+        iconoAyuda = findViewById(R.id.buscar_pedir_cat_icono_ayuda);
         actualizarSpinner();
     }
 
@@ -59,5 +64,15 @@ public class BuscarPedirCategoriaActivity extends AppCompatActivity {
         intento.putExtra("parametro_buscado", categoriaBuscada);
         startActivity(intento);
     }
+
+    public void ayuda(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
+                .setTitle("AYUDA")
+                .setMessage("Si desea buscar una Pertenencia por Categoría, seleccione una " +
+                            "Categoría de las disponibles en la lista desplegable. " +
+                            "A continuación pulse en el botón BUSCAR")
+                .setPositiveButton("Aceptar", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();}
 }
 

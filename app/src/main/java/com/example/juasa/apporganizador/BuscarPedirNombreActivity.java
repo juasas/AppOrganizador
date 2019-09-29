@@ -1,8 +1,10 @@
 package com.example.juasa.apporganizador;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,5 +54,15 @@ public class BuscarPedirNombreActivity extends AppCompatActivity {
             intento.putExtra("busqueda", "Por nombre");
             intento.putExtra("parametro_buscado", nombreBuscado);
             startActivity(intento);}
+    }
+
+    public void ayuda(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
+                .setTitle("AYUDA")
+                .setMessage("Si desea buscar una Pertenencia por Nombre, escriba el nombre deseado. " +
+                        "A continuación pulse en BUSCAR")
+                .setPositiveButton("Aceptar", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

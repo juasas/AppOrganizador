@@ -61,7 +61,26 @@ public class MenuUsuarioGeneralActivity extends AppCompatActivity {
         startActivity(intento);
     }
 
-    public void entrarBorrarTablas(View view) {
+    public void entrarBorrarUsuario(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
+                .setTitle("Confirmar eliminación")
+                .setMessage("Se va a eliminar al Usuario actual")
+                .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        controlador.borrarTabla(controlador.TABLA_USUARIOS);
+                        Datos.numeroUsuarios = 0;
+                        escribir();
+                        startActivity(new Intent(getBaseContext(), LoginActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
+                        finish();
+                    }
+                })
+                .setNegativeButton("Cancelar", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();}
+
+    public void entrarBorrarTablasUsuario(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("Confirmar eliminación")
                 .setMessage("Se va a eliminar el contenido de sus tablas "+
@@ -72,7 +91,6 @@ public class MenuUsuarioGeneralActivity extends AppCompatActivity {
                         controlador.borrarTabla(controlador.TABLA_UBICACIONES);
                         controlador.borrarTabla(controlador.TABLA_CATEGORIAS);
                         controlador.borrarTabla(controlador.TABLA_PERTENENCIAS);
-                        escribir();
                     }
                 })
                 .setNegativeButton("Cancelar", null);
@@ -83,7 +101,7 @@ public class MenuUsuarioGeneralActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AYUDA")
                 .setMessage("Puede acceder a la sus ESTADÍSTICAS, cambiar su CONTRASEÑA o " +
-                        "RESTABLECER AJUSTES DE FÁBRICA")
+                            "RESTABLECER AJUSTES DE FÁBRICA")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}

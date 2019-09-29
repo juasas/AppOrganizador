@@ -25,7 +25,6 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".BuscarPedirCategoriaActivity" />
-        <activity android:name=".BuscarPedirColorActivity" />
         <activity android:name=".BuscarPedirNombreActivity" />
         <activity android:name=".BuscarPedirUbicacionActivity" />
         <activity android:name=".CategoriasPpalActivity" />

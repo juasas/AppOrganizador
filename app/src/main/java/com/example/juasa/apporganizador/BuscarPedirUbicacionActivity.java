@@ -1,8 +1,10 @@
 package com.example.juasa.apporganizador;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +25,7 @@ public class BuscarPedirUbicacionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_pedir_ubicacion);
         controlador = new Controlador_base_datos(this);
-        spinnerUbicacion = findViewById(R.id.pedir_ubic_spinner);
+        spinnerUbicacion = findViewById(R.id.buscar_pedir_ubic_spinner);
         actualizarSpinner();
     }
 
@@ -61,5 +63,15 @@ public class BuscarPedirUbicacionActivity extends AppCompatActivity {
         intento.putExtra("parametro_buscado", ubicacionBuscada);
         startActivity(intento);
     }
+
+    public void ayuda(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
+                .setTitle("AYUDA")
+                .setMessage("Si desea buscar una Pertenencia por Ubicación, seleccione una " +
+                        "Ubicación de las disponibles en la lista desplegable. " +
+                        "A continuación pulse en el botón BUSCAR")
+                .setPositiveButton("Aceptar", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();}
 }
 

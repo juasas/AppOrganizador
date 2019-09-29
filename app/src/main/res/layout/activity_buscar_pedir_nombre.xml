@@ -8,19 +8,42 @@
     <TextView
         android:id="@+id/buscar_pedir_nombre_titulo"
         style="@style/estilo_comun_textos"
-        android:textSize = "40sp"
-        android:text="Buscar por nombre" />
+        android:text="Buscar por nombre"
+        android:layout_alignParentTop = "true"
+        android:textAlignment = "center"
+        android:textSize = "40sp" />
 
-    <EditText
-        android:id="@+id/buscar_pedir_nombre_caja_nombre"
-        style="@style/estilo_cajas"
-        android:hint="Introduzca nombre de pertenencia"
-        android:layout_below="@+id/buscar_pedir_nombre_titulo"/>
+    <ImageView
+        android:id="@+id/buscar_pedir_nombre_icono_ayuda"
+        style="@style/estilo_ayuda"
+        android:layout_below="@+id/buscar_pedir_nombre_titulo"
+        android:onClick="ayuda"/>
+
+    <RelativeLayout
+        android:id="@+id/buscar_pedir_nombre_conjunto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/buscar_pedir_nombre_icono_ayuda" >
+
+        <ImageView
+            android:id="@+id/buscar_pedir_nombre_icono_nombre"
+            style="@style/estilo_iconos"
+            android:src="@mipmap/iconopertenencia" />
+
+        <EditText
+            android:id="@+id/buscar_pedir_nombre_caja_nombre"
+            style="@style/estilo_cajas"
+            android:hint="Introduzca nombre de la pertenencia"
+            android:layout_toEndOf="@+id/buscar_pedir_nombre_icono_nombre" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/buscar_pedir_nombre_boton_buscar"
         style="@style/estilo_boton"
         android:text="Buscar"
         android:onClick="buscar"
-        android:layout_below="@+id/buscar_pedir_nombre_caja_nombre"/>
+        android:layout_below="@+id/buscar_pedir_nombre_conjunto"/>
 </RelativeLayout>
