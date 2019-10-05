@@ -27,10 +27,11 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
     private String nombrePertenencia, parametroBuscado, busqueda;
     private Pertenencia pertenencia;
     private Intent intento;
-    private TextView pertenenciaCajaTexto;
+    private TextView pertenenciaCajaTexto, titulo;
     private View padre;
     private Bundle extras;
     private FloatingActionButton fab;
+    private ImageView iconoAyuda;
     private Cursor cursorCompleto;
     private String ordenado;
 
@@ -38,22 +39,48 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pertenencias_ppal);
+        inicializar();
+        recibirParametros();
+    }
+
+    public void inicializar(){
         controlador = new Controlador_base_datos(this);
         listaPertenencias = findViewById(R.id.pert_ppal_lista_pertenencias);
+        iconoAyuda = findViewById(R.id.pert_ppal_icono_ayuda);
+        iconoAyuda.setVisibility(View.INVISIBLE);
         fab = findViewById(R.id.pert_ppal_fab);
         fab.hide();
-        recibirParametros();
+        titulo = findViewById(R.id.pert_ppal_titulo);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_action_pert_busqueda, menu);
+        if (controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS) == 0) {
+            getMenuInflater().inflate(R.menu.menu_action_ppal, menu);
+        } else {
+            if (extras != null) {
+                busqueda = extras.getString("busqueda");
+                if (busqueda.equals("General")) {
+                    getMenuInflater().inflate(R.menu.menu_action_pert_busqueda, menu);
+                } else {
+                    getMenuInflater().inflate(R.menu.menu_action_secundario, menu);
+                }
+            }
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menu_action_ppal_volver_atras:
+                intento = new Intent(this, MenuPertenenciasGeneralActivity.class);
+                startActivity(intento);
+                break;
+            case R.id.menu_action_ppal_gohome:
+                intento = new Intent(this, MenuPrincipalActivity.class);
+                startActivity(intento);
+                break;
             case R.id.menu_action_pert_busqueda_volver_atras:
                 intento = new Intent(this, MenuPertenenciasGeneralActivity.class);
                 startActivity(intento);
@@ -63,20 +90,14 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
                 startActivity(intento);
                 break;
             case R.id.menu_action_pert_busqueda_buscar_cat:
-                //Toast mensaje = Toast.makeText(this, "Funcionalidad disponible proximámente.", Toast.LENGTH_LONG);
-                //mensaje.show();
                 intento = new Intent(this, BuscarPedirCategoriaActivity.class);
                 startActivity(intento);
                 break;
             case R.id.menu_action_pert_busqueda_buscar_nombre:
-                //Toast mensaje1 = Toast.makeText(this, "Funcionalidad disponible proximámente.", Toast.LENGTH_LONG);
-                //mensaje1.show();
                 intento = new Intent(this, BuscarPedirNombreActivity.class);
                 startActivity(intento);
                 break;
             case R.id.menu_action_pert_busqueda_buscar_ubic:
-                //Toast mensaje3 = Toast.makeText(this, "Funcionalidad disponible proximámente.", Toast.LENGTH_LONG);
-                //mensaje3.show();
                 intento = new Intent(this, BuscarPedirUbicacionActivity.class);
                 startActivity(intento);
                 break;
@@ -84,16 +105,17 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
                 fab.hide();
                 ordenado = "NOMBRE_PERT";
                 actualizarUI(ordenado);
-                //Toast mensaje2 = Toast.makeText(this, "Funcionalidad disponible proximámente.", Toast.LENGTH_LONG);
-                //mensaje2.show();
-                //intento = new Intent(this, BuscarPedirColorActivity.class);
-                //startActivity(intento);
                 break;
+            case R.id.menu_action_secundario_volver_atras:
+                intento = new Intent(this, PertenenciasPpalActivity.class);
+                intento.putExtra("busqueda", "General");
+                intento.putExtra("parametro_buscado", "");
+                startActivity(intento);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void recibirParametros() {
+    public void recibirParametros(){
         extras = getIntent().getExtras();
         if (extras != null) {
             busqueda = extras.getString("busqueda");
@@ -101,44 +123,64 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
             switch (busqueda) {
                 case "General":
                     fab.show();
+                    iconoAyuda.setVisibility(View.VISIBLE);
                     ordenado=null;
                     actualizarUI(ordenado);
                     break;
                 case "Por categoria":
                     parametroBuscado = extras.getString("parametro_buscado");
+                    titulo.setText("Búsqueda por Categoría");
                     if (controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS) == 0) {
                         listaPertenencias.setAdapter(null);
-                        Toast mensaje = Toast.makeText(this, "No existe ninguna ubicación. Por favor, cree una", Toast.LENGTH_LONG);
+                        Toast mensaje = Toast.makeText(this, "No existe ninguna pertenencia, por favor cree alguna", Toast.LENGTH_LONG);
                         mensaje.show();
                     } else {
-                        pertenenciasCursorAdapter = new PertenenciasCursorAdapter(this, controlador.listadoPertenencias(parametroBuscado, "NOMBRE_CATEGORIA"));
-                        listaPertenencias.setAdapter(pertenenciasCursorAdapter);
+                        Cursor cursor = controlador.listadoPertenencias(parametroBuscado, "NOMBRE_CATEGORIA");
+                        if (cursor.getCount() == 0){
+                            Toast mensaje = Toast.makeText(this, "No existe ninguna pertenencia según la búsqueda por categoría seleccionada", Toast.LENGTH_LONG);
+                            mensaje.show();
+                        } else{
+                                pertenenciasCursorAdapter = new PertenenciasCursorAdapter(this, controlador.listadoPertenencias(parametroBuscado, "NOMBRE_CATEGORIA"));
+                                listaPertenencias.setAdapter(pertenenciasCursorAdapter);
+                                iconoAyuda.setVisibility(View.INVISIBLE);}
                     }
                     break;
                 case "Por nombre":
                     parametroBuscado = extras.getString("parametro_buscado");
+                    titulo.setText("Búsqueda por Nombre");
                     if (controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS) == 0) {
                         listaPertenencias.setAdapter(null);
-                        Toast mensaje = Toast.makeText(this, "No existe ninguna ubicación. Por favor, cree una", Toast.LENGTH_LONG);
+                        Toast mensaje = Toast.makeText(this, "No existe ninguna pertenencia, por favor, cree alguna", Toast.LENGTH_LONG);
                         mensaje.show();
                     } else {
-                        pertenenciasCursorAdapter = new PertenenciasCursorAdapter(this, controlador.listadoPertenencias(parametroBuscado,"NOMBRE_PERT"));
-                        listaPertenencias.setAdapter(pertenenciasCursorAdapter);
+                        Cursor cursor = controlador.listadoPertenencias(parametroBuscado, "NOMBRE_PERT");
+                        if (cursor.getCount() == 0) {
+                            Toast mensaje = Toast.makeText(this, "No existe ninguna pertenencia según la búsqueda por nombre introducido", Toast.LENGTH_LONG);
+                            mensaje.show();
+                        }else {
+                            pertenenciasCursorAdapter = new PertenenciasCursorAdapter(this, controlador.listadoPertenencias(parametroBuscado, "NOMBRE_PERT"));
+                            listaPertenencias.setAdapter(pertenenciasCursorAdapter);
+                            iconoAyuda.setVisibility(View.INVISIBLE); }
                     }
                     break;
                 case "Por ubicación":
                     parametroBuscado = extras.getString("parametro_buscado");
+                    titulo.setText("Búsqueda por Ubicación");
                     if (controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS) == 0) {
                         listaPertenencias.setAdapter(null);
-                        Toast mensaje = Toast.makeText(this, "No existe ninguna ubicación. Por favor, cree una", Toast.LENGTH_LONG);
+                        Toast mensaje = Toast.makeText(this, "No existe ninguna pertenencia, por favor, cree alguna", Toast.LENGTH_LONG);
                         mensaje.show();
                     } else {
+                        Cursor cursor = controlador.listadoPertenencias(parametroBuscado, "NOMBRE_UBICACION");
+                        if (cursor.getCount() == 0) {
+                            Toast mensaje = Toast.makeText(this, "No existe ninguna pertenencia según la búsqueda por ubicación seleccioanda", Toast.LENGTH_LONG);
+                            mensaje.show();
+                        }else {
                         pertenenciasCursorAdapter = new PertenenciasCursorAdapter(this, controlador.listadoPertenencias(parametroBuscado, "NOMBRE_UBICACION"));
                         listaPertenencias.setAdapter(pertenenciasCursorAdapter);
+                        iconoAyuda.setVisibility(View.INVISIBLE); }
                     }
                     break;
-                //case "Alfabetico":
-                  //  break;
             }
         }
     }
@@ -189,9 +231,9 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
     public void ayuda(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AYUDA")
-                .setMessage("Para CREAR una Pertenencia, pulse  el botón azul redondo en parte " +
-                            "inferior derecha de la pantalla. Si SELECCIONA una Pertenencia ya " +
-                            "creada, puede VER sus detalles, EDITARLA o ELIMINARLA.")
+                .setMessage("Para CREAR una Pertenencia, pulse  el botón azul redondo situado en la parte inferior " +
+                            "derecha de la pantalla. Si SELECCIONA una Pertenencia ya creada, puede CONSULTAR sus detalles, " +
+                            "EDITARLA o ELIMINARLA.")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}

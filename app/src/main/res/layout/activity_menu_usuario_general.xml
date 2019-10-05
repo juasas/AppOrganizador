@@ -44,15 +44,15 @@
     <Button
         android:id="@+id/menu_usuario_general_boton_entrar_borrar_usuario"
         style="@style/estilo_boton"
-        android:text="Borrar Usuario"
+        android:text="Borrar sus Datos"
         android:background="@drawable/presionarboton"
-        android:layout_below="@+id/menu_usuario_general_boton_entrar_cambiar_pass"
-        android:onClick="entrarBorrarUsuario"/>
+        android:onClick="entrarBorrarUsuario"
+        android:layout_below="@+id/menu_usuario_general_boton_entrar_cambiar_pass"/>
 
     <Button
         android:id="@+id/menu_usuario_general_boton_entrar_borrar_tablas"
         style="@style/estilo_boton"
-        android:text="Borrar Tablas"
+        android:text="Borrar sus Pertenencias"
         android:background="@drawable/presionarboton"
         android:layout_below="@+id/menu_usuario_general_boton_entrar_borrar_usuario"
         android:onClick="entrarBorrarTablasUsuario"/>

@@ -6,10 +6,16 @@
     android:orientation="horizontal"
     android:padding="10dp">
 
+    <ImageView
+        android:id="@+id/elementos_sp_ubic_icono_ubic"
+        style="@style/estilo_iconos"
+        android:src="@mipmap/iconoubicacion" />
+
     <TextView
-        android:id="@+id/nombre_elemento"
+        android:id="@+id/elementos_sp_ubic_nombre_elemento"
         style="@style/estilo_cajas"
         android:layout_centerVertical="true"
         android:textSize="20sp"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_toEndOf="@+id/elementos_sp_ubic_icono_ubic"/>
 </RelativeLayout>

@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/buscar_pedir_nombre_titulo"
         style="@style/estilo_comun_textos"
-        android:text="Buscar por nombre"
+        android:text="Buscar por Nombre"
         android:layout_alignParentTop = "true"
         android:textAlignment = "center"
         android:textSize = "40sp" />
@@ -36,7 +36,7 @@
         <EditText
             android:id="@+id/buscar_pedir_nombre_caja_nombre"
             style="@style/estilo_cajas"
-            android:hint="Introduzca nombre de la pertenencia"
+            android:hint="Introduzca Nombre de la Pertenencia"
             android:layout_toEndOf="@+id/buscar_pedir_nombre_icono_nombre" />
     </RelativeLayout>
 

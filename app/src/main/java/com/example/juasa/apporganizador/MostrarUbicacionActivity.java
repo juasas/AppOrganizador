@@ -112,8 +112,8 @@ public class MostrarUbicacionActivity extends AppCompatActivity {
     public void ayuda(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AYUDA")
-                .setMessage("Seleccione uno de los iconos de la barra superior de la pantalla. " +
-                            "Puede: REGRESAR al listado de Ubicaciones, IR al MENÚ PRINCIPAL " +
+                .setMessage("SELECCIONE uno de los iconos situados en la barra superior de la pantalla. " +
+                            "Puede: REGRESAR al listado de Ubicaciones, IR al Menú Principal " +
                             "de bienvenida, EDITAR esta Ubicación o ELIMINARLA")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();

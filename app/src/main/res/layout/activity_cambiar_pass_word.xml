@@ -24,7 +24,7 @@
         android:layout_below="@+id/cambiar_pass_icono_ayuda"
         android:textColor="@color/colorPrimaryDark"
         android:textAlignment = "center"
-        android:text="Introduzca la nueva contraseña" />
+        android:text="Introduzca la nueva Contraseña" />
 
     <LinearLayout
         android:id = "@+id/cambiar_pass_grupo_cajas"
@@ -59,7 +59,7 @@
                 android:id="@+id/cambiar_pass_caja_repite_pass"
                 style="@style/estilo_cajas"
                 android:layout_toRightOf="@+id/cambiar_pass_icono_repite_pass"
-                android:hint="Confirmar contraseña"
+                android:hint="Confirmar Contraseña"
                 android:inputType="textPassword" />
         </RelativeLayout>
     </LinearLayout>

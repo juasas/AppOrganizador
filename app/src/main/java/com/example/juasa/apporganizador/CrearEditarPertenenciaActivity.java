@@ -45,9 +45,6 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CAMERA = 0;
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
     private ImageView imagen;
-    private final static String[] PERMISOS = {
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA};
     private Toast toast;
     private String mensaje;
     private View view;
@@ -242,14 +239,14 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
         if (controlador.numRegistrosTabla(Controlador_base_datos.TABLA_CATEGORIAS) == 0)
             spinnerCategoria.setAdapter(null);
         else {
-            adaptadorSpinnerCategoria = new ArrayAdapter(this, R.layout.elementos_spinner, R.id.nombre_elemento, controlador.obtenerCategorias());
+            adaptadorSpinnerCategoria = new ArrayAdapter(this, R.layout.elementos_spinner_cat, R.id.elementos_sp_cat_nombre_elemento, controlador.obtenerCategorias());
             spinnerCategoria.setAdapter(adaptadorSpinnerCategoria);
         }
 
         if (controlador.numRegistrosTabla(controlador.TABLA_UBICACIONES) == 0)
             spinnerUbicacion.setAdapter(null);
         else {
-            adaptadorSpinnerUbicacion = new ArrayAdapter(this, R.layout.elementos_spinner, R.id.nombre_elemento, controlador.obtenerUbicaciones());
+            adaptadorSpinnerUbicacion = new ArrayAdapter(this, R.layout.elementos_spinner_ubic, R.id.elementos_sp_ubic_nombre_elemento, controlador.obtenerUbicaciones());
             spinnerUbicacion.setAdapter(adaptadorSpinnerUbicacion);
         }
     }

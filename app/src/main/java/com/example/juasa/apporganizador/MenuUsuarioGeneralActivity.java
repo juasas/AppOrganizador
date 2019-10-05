@@ -64,11 +64,15 @@ public class MenuUsuarioGeneralActivity extends AppCompatActivity {
     public void entrarBorrarUsuario(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("Confirmar eliminación")
-                .setMessage("Se va a eliminar al Usuario actual")
+                .setMessage("Se va a eliminar todos los datos del Usuario actual (Usuario, " +
+                        "Ubicaciones, Categorías y Pertenencias). Esta acción no podrá deshacerse")
                 .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         controlador.borrarTabla(controlador.TABLA_USUARIOS);
+                        controlador.borrarTabla(controlador.TABLA_UBICACIONES);
+                        controlador.borrarTabla(controlador.TABLA_CATEGORIAS);
+                        controlador.borrarTabla(controlador.TABLA_PERTENENCIAS);
                         Datos.numeroUsuarios = 0;
                         escribir();
                         startActivity(new Intent(getBaseContext(), LoginActivity.class)
@@ -83,8 +87,8 @@ public class MenuUsuarioGeneralActivity extends AppCompatActivity {
     public void entrarBorrarTablasUsuario(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("Confirmar eliminación")
-                .setMessage("Se va a eliminar el contenido de sus tablas "+
-                            "Ubicaciones, Categorias y Pertenencias")
+                .setMessage("Se va a eliminar todas sus Pertenencias (Ubicaciones, Categorias y " +
+                            "Pertenencias. Esta acción no podrá deshacerse")
                 .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
@@ -100,8 +104,10 @@ public class MenuUsuarioGeneralActivity extends AppCompatActivity {
     public void ayuda(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AYUDA")
-                .setMessage("Puede acceder a la sus ESTADÍSTICAS, cambiar su CONTRASEÑA o " +
-                            "RESTABLECER AJUSTES DE FÁBRICA")
+                .setMessage("Puede ACCEDER a sus Estadísticas, CAMBIAR su Contraseña de acceso, " +
+                            "BORRAR todos sus datos de Usuario (datos de Usuario, Ubicaciones, " +
+                            "Categorías y Pertenencias) o " +
+                            "BORRAR todas sus Pertenecias (Ubicaciones, Categorías y Pertenencias")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}

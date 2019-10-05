@@ -1,7 +1,6 @@
 package com.example.juasa.apporganizador;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
@@ -168,10 +166,10 @@ public class EditarPertenenciaActivity extends AppCompatActivity {
     }
 
     public void actualizarUI_spinners() {
-        adaptadorSpinnerCategoria = new ArrayAdapter(this, R.layout.elementos_spinner, R.id.nombre_elemento, controlador.obtenerCategorias());
+        adaptadorSpinnerCategoria = new ArrayAdapter(this, R.layout.elementos_spinner_ubic, R.id.nombre_elemento, controlador.obtenerCategorias());
         spinnerCategoria.setAdapter(adaptadorSpinnerCategoria);
 
-        adaptadorspinnerUbicacion = new ArrayAdapter(this, R.layout.elementos_spinner, R.id.nombre_elemento, controlador.obtenerUbicaciones());
+        adaptadorspinnerUbicacion = new ArrayAdapter(this, R.layout.elementos_spinner_ubic, R.id.nombre_elemento, controlador.obtenerUbicaciones());
         spinnerUbicacion.setAdapter(adaptadorspinnerUbicacion);
     }
 

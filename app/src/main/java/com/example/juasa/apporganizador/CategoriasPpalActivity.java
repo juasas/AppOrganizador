@@ -90,10 +90,9 @@ public class CategoriasPpalActivity extends AppCompatActivity {
     public void ayuda(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AYUDA")
-                .setMessage("CREE una CATEGORÍA si aún no hay ninguna creada ( " +
-                        "pulsando el botón azul redondo, situado debajo a la izquierda en la " +
-                        "pantalla). Si ya hay CATEGORÍAS creadas, seleccione una de ellas " +
-                        "para VER sus detalles, EDITARLA o ELIMINARLA")
+                .setMessage("Para CREAR una Categoría, pulse el botón azul redondo situado en la parte inferior " +
+                        "derecha de la pantalla. Si SELECCIONA una Categoría ya creada, puede CONSULTAR sus detalles, " +
+                        "EDITARLA o ELIMINARLA")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}

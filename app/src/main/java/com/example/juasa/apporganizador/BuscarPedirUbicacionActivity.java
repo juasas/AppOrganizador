@@ -52,7 +52,7 @@ public class BuscarPedirUbicacionActivity extends AppCompatActivity {
         if (controlador.numRegistrosTabla(controlador.TABLA_UBICACIONES) == 0)
             spinnerUbicacion.setAdapter(null);
         else{
-            adaptadorSpinnerUbic = new ArrayAdapter(this, R.layout.elementos_spinner, R.id.nombre_elemento, controlador.obtenerUbicaciones());
+            adaptadorSpinnerUbic = new ArrayAdapter(this, R.layout.elementos_spinner_ubic, R.id.elementos_sp_ubic_nombre_elemento, controlador.obtenerUbicaciones());
             spinnerUbicacion.setAdapter(adaptadorSpinnerUbic);}
     }
 

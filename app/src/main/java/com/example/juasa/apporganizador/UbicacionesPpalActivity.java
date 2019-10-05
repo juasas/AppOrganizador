@@ -87,9 +87,9 @@ public class UbicacionesPpalActivity extends AppCompatActivity {
     public void ayuda(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AYUDA")
-                .setMessage("Para CREAR una Ubicación, pulse  el botón azul redondo en parte " +
-                            "inferior derecha de la pantalla. Si SELECCIONA una Ubicación ya " +
-                            "creada, puede VER sus detalles, EDITARLA o ELIMINARLA.")
+                .setMessage("Para CREAR una Ubicación, pulse  el botón azul redondo situado en la parte inferior " +
+                        "derecha de la pantalla. Si SELECCIONA una Ubicación ya creada, puede CONSULTAR sus detalles, " +
+                        "EDITARLA o ELIMINARLA.")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}

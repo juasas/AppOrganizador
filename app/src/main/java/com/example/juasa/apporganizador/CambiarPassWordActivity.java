@@ -85,9 +85,10 @@ public class CambiarPassWordActivity extends AppCompatActivity {
     public void ayuda(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AYUDA")
-                .setMessage("Aquí puede cambiar su contraseña de usuario para acceder a la " +
-                            "Aplicación. Para ello, introduzca la nueva contraseña, confirmándola " +
-                            "después y pulse sobre el botón de ACEPTAR")
+                .setMessage("Puede CAMBIAR su Contraseña de Usuario para acceder a la " +
+                            "Aplicación. Para ello, INTRODUZCA la Nueva Contraseña, CONFIRMÁNDOLA " +
+                            "después y PULSE sobre el botón de Aceptar. Puede CANCELAR el proceso, " +
+                            "si PULSA el botón VOLVER")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}

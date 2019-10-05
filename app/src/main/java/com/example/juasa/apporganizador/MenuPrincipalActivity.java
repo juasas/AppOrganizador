@@ -75,8 +75,8 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     public void ayuda(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AYUDA")
-                .setMessage("Puede acceder a la GESTIÓN DE PERTENENCIAS, a la GESTIÓN de USUARIO o " +
-                            "CERRAR SESIÓN")
+                .setMessage("Puede ACCEDER a la Gestión de sus Ubicaciones, Categorías y/o Pertenencias, ACCEDER a la Gestión de " +
+                        "sus Opciones de Usuario o CERRAR Sesión")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}

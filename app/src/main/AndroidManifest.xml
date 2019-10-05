@@ -47,7 +47,7 @@
         <activity android:name=".FotografiaPpalActivity" />
         <activity android:name=".MenuUsuarioGeneralActivity" />
         <activity android:name=".MostrarEstadisticaActivity" />
-        <activity android:name=".CambiarPassWordActivity"></activity>
+        <activity android:name=".CambiarPassWordActivity"/>
     </application>
 
 </manifest>

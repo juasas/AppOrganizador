@@ -53,7 +53,7 @@ public class BuscarPedirCategoriaActivity extends AppCompatActivity {
         if (controlador.numRegistrosTabla(Controlador_base_datos.TABLA_CATEGORIAS) == 0)
             spinnerCategoria.setAdapter(null);
         else{
-            adaptadorSpinnerCat = new ArrayAdapter(this, R.layout.elementos_spinner, R.id.nombre_elemento, controlador.obtenerCategorias());
+            adaptadorSpinnerCat = new ArrayAdapter(this, R.layout.elementos_spinner_cat, R.id.elementos_sp_cat_nombre_elemento, controlador.obtenerCategorias());
             spinnerCategoria.setAdapter(adaptadorSpinnerCat);}
     }
 

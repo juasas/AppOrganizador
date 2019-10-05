@@ -10,7 +10,7 @@
         style="@style/estilo_comun_textos"
         android:layout_alignParentTop = "true"
         android:textAlignment = "center"
-        android:text="Buscar por ubicación"
+        android:text="Buscar por Ubicación"
         android:textSize = "40sp"/>
 
     <ImageView
@@ -34,23 +34,16 @@
 
         <TextView
             android:id="@+id/buscar_pedir_ubic_contenedor_sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/estilo_etiquetas"
             android:layout_marginBottom="8dp"
-            android:padding="5dp"
-            android:text="Seleccione una ubicación:"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:text="Seleccione una Ubicación"
             android:layout_centerInParent="true"
             android:layout_toEndOf="@+id/buscar_pedir_ubic_icono_ubic"/>
-
     </RelativeLayout>
 
     <Spinner
         android:id="@+id/buscar_pedir_ubic_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/wrap_wrap"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/buscar_pedir_ubic_conjunto"/>
 
