@@ -23,14 +23,12 @@ public class UbicacionesPpalActivity extends AppCompatActivity {
     private String nombreUbicacion;
     private Ubicacion ubicacion;
     private Intent intento;
-    private int idUbicacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ubicaciones_ppal);
-        controlador = new Controlador_base_datos(this);
-        listaUbicaciones = findViewById(R.id.ubic_ppal_lista_ubicaciones);
+        inicializar();
         actualizarUI();
     }
 
@@ -55,10 +53,15 @@ public class UbicacionesPpalActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void inicializar(){
+        controlador = new Controlador_base_datos(this);
+        listaUbicaciones = findViewById(R.id.ubic_ppal_lista_ubicaciones);
+    }
+
     public void actualizarUI() {
         if (controlador.numRegistrosTabla(controlador.TABLA_UBICACIONES) == 0) {
             listaUbicaciones.setAdapter(null);
-            Toast mensaje = Toast.makeText(this, "No existe ninguna Ubicación. Por favor, cree una", Toast.LENGTH_LONG);
+            Toast mensaje = Toast.makeText(this, "No existe ninguna Ubicación. Por favor, cree alguna", Toast.LENGTH_LONG);
             mensaje.show();
         } else {
             adaptador = new ArrayAdapter(this, R.layout.item_lista_ubic, R.id.item_lista_ubic_nombre_elemento, controlador.obtenerUbicaciones());
@@ -67,7 +70,6 @@ public class UbicacionesPpalActivity extends AppCompatActivity {
     }
 
     public void mostrarElemento(View view) {
-        //Se obtiene el padre de la ubicación mostrada
         View padre = (View) view.getParent();
         TextView ubicacionCajaTexto = (TextView) padre.findViewById(R.id.item_lista_ubic_nombre_elemento);
         nombreUbicacion = ubicacionCajaTexto.getText().toString();

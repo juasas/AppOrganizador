@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
@@ -22,8 +23,12 @@ public class BuscarPedirNombreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_pedir_nombre);
+        inicializar();
+    }
+
+    public void inicializar(){
         controlador = new Controlador_base_datos(this);
-        cajaNombreBuscado = findViewById(R.id.buscar_pedir_nombre_caja_nombre);
+        cajaNombreBuscado = (EditText) findViewById(R.id.buscar_pedir_nombre_caja_nombre);
     }
 
     @Override
@@ -60,9 +65,15 @@ public class BuscarPedirNombreActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AYUDA")
                 .setMessage("Si desea buscar una Pertenencia por Nombre, escriba el nombre deseado. " +
-                        "A continuación pulse en BUSCAR")
+                        "A continuación pulse en BUSCAR. Si desea VOLVER a la pantalla de " +
+                        "Pertenencias o CANCELAR la búsqueda, pulse el botón situado en la parte " +
+                        "superior derecha de la pantalla")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void resetear (View view){
+        cajaNombreBuscado.setText("");
     }
 }

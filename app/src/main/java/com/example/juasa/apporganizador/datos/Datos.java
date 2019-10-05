@@ -1,6 +1,11 @@
 package com.example.juasa.apporganizador.datos;
 
+import android.os.Environment;
+import android.util.Log;
+
 import com.example.juasa.apporganizador.Pertenencia;
+
+import java.io.File;
 
 public class Datos {
     public static String usuario = "";
@@ -10,6 +15,5 @@ public class Datos {
     public static String nombreFoto = "";
     public static String nombreAntiguo = "";
     public static String rutaImagenes = "sdcard/Android/data/com.example.juasa.apporganizador/files/";
-    public static String nombrePertenenciaGeneral = "";
     public static Pertenencia pertenenciaGlobal = new Pertenencia();
     }

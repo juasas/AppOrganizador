@@ -14,9 +14,7 @@ import com.example.juasa.apporganizador.datos.Datos;
 
 public class CambiarPassWordActivity extends AppCompatActivity {
 
-    private Controlador_base_datos controlador;
-    private Datos datos;
-    private Entrada_Salida salida;
+    private Controlador_base_datos controlador;;
     private EditText cajaPass, cajaRepitePass;
     private Intent intento;
 
@@ -36,7 +34,7 @@ public class CambiarPassWordActivity extends AppCompatActivity {
 
     public void aceptar(View view) {
 
-        String pass, repitePass;
+        String pass, repitePass, mensaje;
 
         pass = cajaPass.getText().toString();
         repitePass = cajaRepitePass.getText().toString();
@@ -44,27 +42,27 @@ public class CambiarPassWordActivity extends AppCompatActivity {
         //Se comprueba si los campos de nuevo usuario están vacios
 
         if (pass.isEmpty() && (repitePass.isEmpty())) {
-            Toast mensaje = Toast.makeText(this, "Los campos PASSWORD y REPITE PASSWORD están vacios", Toast.LENGTH_LONG);
-            mensaje.show();
+            mensaje = "Los campos PASSWORD y REPITE PASSWORD están vacios";
+            mostrar(mensaje);
         } else {
             if (pass.isEmpty()) {
-                Toast mensaje = Toast.makeText(this, "El campo PASSWORD está vacio", Toast.LENGTH_LONG);
-                mensaje.show();
+                mensaje = "El campo PASSWORD está vacio";
+                mostrar(mensaje);
             } else {
                 if (repitePass.isEmpty()) {
-                    Toast mensaje = Toast.makeText(this, "El campo REPITE PASSWORD está vacio", Toast.LENGTH_LONG);
-                    mensaje.show();
+                    mensaje = "El campo REPITE PASSWORD está vacio";
+                    mostrar(mensaje);
                 } else {
                     if (pass.equals(repitePass)) {
                         String passEncriptada = Encriptacion.encriptarPass(pass);
                         controlador.actualizarPassword(passEncriptada);
-                        Toast mensaje = Toast.makeText(this, "Contraseña cambiada con éxito", Toast.LENGTH_LONG);
-                        mensaje.show();
+                        mensaje = "Contraseña cambiada con éxito";
+                        mostrar(mensaje);
                         intento = new Intent(this, MenuUsuarioGeneralActivity.class);
                         startActivity(intento);
                     } else {
-                        Toast mensaje = Toast.makeText(this, "No coinciden las contraseñas introducidas", Toast.LENGTH_LONG);
-                        mensaje.show();
+                        mensaje = "No coinciden las contraseñas introducidas";
+                        mostrar(mensaje);
                         resetear(view);
                     }
                 }
@@ -92,5 +90,10 @@ public class CambiarPassWordActivity extends AppCompatActivity {
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}
+
+    public void mostrar (String mensaje){
+        Toast toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
+        toast.show();
+    }
 }
 

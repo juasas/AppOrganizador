@@ -24,8 +24,7 @@ public class BuscarPedirUbicacionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_pedir_ubicacion);
-        controlador = new Controlador_base_datos(this);
-        spinnerUbicacion = findViewById(R.id.buscar_pedir_ubic_spinner);
+        inicializar();
         actualizarSpinner();
     }
 
@@ -46,6 +45,10 @@ public class BuscarPedirUbicacionActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void inicializar(){
+        controlador = new Controlador_base_datos(this);
+        spinnerUbicacion = (Spinner) findViewById(R.id.buscar_pedir_ubic_spinner);
     }
 
     public void actualizarSpinner() {
@@ -69,7 +72,9 @@ public class BuscarPedirUbicacionActivity extends AppCompatActivity {
                 .setTitle("AYUDA")
                 .setMessage("Si desea buscar una Pertenencia por Ubicación, seleccione una " +
                         "Ubicación de las disponibles en la lista desplegable. " +
-                        "A continuación pulse en el botón BUSCAR")
+                        "A continuación pulse en el botón BUSCAR. Si desea VOLVER a la pantalla " +
+                        "de Pertenencias o CANCELAR la búsqueda, pulse el botón situado en la parte " +
+                        "superior derecha de la pantalla")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}

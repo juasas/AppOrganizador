@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -89,8 +90,8 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
         cajaTitulo = (TextView) findViewById(R.id.crear_pert_titulo);
         cajaNombre = (EditText) findViewById(R.id.crear_pert_caja_nombre);
         cajaDetalle = (EditText) findViewById(R.id.crear_pert_caja_detalle);
-        spinnerCategoria = findViewById(R.id.crear_pert_sp_categoria);
-        spinnerUbicacion = findViewById(R.id.crear_pert_sp_ubic);
+        spinnerCategoria = (Spinner) findViewById(R.id.crear_pert_sp_categoria);
+        spinnerUbicacion = (Spinner) findViewById(R.id.crear_pert_sp_ubic);
         cajaTextoFoto = (TextView) findViewById(R.id.crear_pert_caja_textoFoto);
     }
 
@@ -110,7 +111,6 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
     }
 
     public void cargarDatos() {
-        //id_pert = Datos.pertenenciaGlobal.getIdPertenencia();
         nombrePert = Datos.pertenenciaGlobal.getNombrePertenencia();
         nombreAntiguoPert = Datos.nombreAntiguo;
         detallePert = Datos.pertenenciaGlobal.getDetallePertenencia();
@@ -134,14 +134,6 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
     public void mostrar(String mensaje) {
         toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
         toast.show();
-    }
-
-    public void actualizarTextoFoto() {
-        if ((Datos.pertenenciaGlobal.getFotoPertenencia() == null) || (Datos.pertenenciaGlobal.getFotoPertenencia().equals(""))) {
-            cajaTextoFoto.setText("Esta pertenencia no tiene fotografía");
-        } else {
-            cajaTextoFoto.setText(Datos.pertenenciaGlobal.getFotoPertenencia());
-        }
     }
 
     public void guardarDatos() {
@@ -402,7 +394,7 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
         final EditText cajaTexto = new EditText(this);
         AlertDialog builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("Nombre de la fotografía")
-                .setMessage("Introduzca un nombre de la fotografía sin extensión")
+                .setMessage("Introduzca un nombre de la fotografía (sin extensión)")
                 .setView(cajaTexto)
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override

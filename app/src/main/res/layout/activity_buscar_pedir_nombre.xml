@@ -40,10 +40,23 @@
             android:layout_toEndOf="@+id/buscar_pedir_nombre_icono_nombre" />
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/buscar_pedir_nombre_boton_buscar"
-        style="@style/estilo_boton"
-        android:text="Buscar"
-        android:onClick="buscar"
-        android:layout_below="@+id/buscar_pedir_nombre_conjunto"/>
+    <LinearLayout
+        android:id = "@+id/buscar_pedir_nombre_grupo_botones"
+        style = "@style/estilo_linear_botones_cajas"
+        android:layout_below = "@+id/buscar_pedir_nombre_conjunto">
+
+        <Button
+            android:id="@+id/buscar_pedir_nombre_boton_buscar"
+            style="@style/estilo_botones"
+            android:layout_marginLeft="20dp"
+            android:text="Buscar"
+            android:onClick="buscar"/>
+
+        <Button
+            android:id="@+id/buscar_pedir_nombre_boton_borrar"
+            style="@style/estilo_botones"
+            android:layout_marginRight="20dp"
+            android:text="Borrar Campo"
+            android:onClick="resetear"/>
+    </LinearLayout>
 </RelativeLayout>

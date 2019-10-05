@@ -57,18 +57,19 @@ public class CrearCategoriaActivity extends AppCompatActivity {
         //Se comprueba si el campo obligatorio de nueva categoria está vacío
 
         if (nombreCategoria.isEmpty()) {
-            Toast mensaje = Toast.makeText(this, "El campo obligatorio NOMBRE no puede estar vacío", Toast.LENGTH_LONG);
-            mensaje.show();
+            String mensaje = "El campo obligatorio NOMBRE no puede estar vacío";
+            mostrar (mensaje);
         } else {{
             if (!controlador.existe(controlador.TABLA_CATEGORIAS, "NOMBRE_CATEGORIA", nombreCategoria)) {
                 controlador.anadirCategoria(nombreCategoria, detalleCategoria);
-                Toast mensaje = Toast.makeText(this, "Categoría almacenada correctamente", Toast.LENGTH_LONG);
-                mensaje.show();
+                String mensaje = "Categoría almacenada correctamente";
+                mostrar (mensaje);
                 intento = new Intent(this, CategoriasPpalActivity.class);
                 startActivity(intento);
             } else {
-                Toast mensaje = Toast.makeText(this, "No se puede usar ese nombre. La categoría ya existe", Toast.LENGTH_LONG);
-                mensaje.show();}
+                String mensaje = "No se puede usar ese nombre. La Categoría ya existe";
+                mostrar (mensaje);
+                }
         }}
     }
 
@@ -91,4 +92,9 @@ public class CrearCategoriaActivity extends AppCompatActivity {
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}
+
+    public void mostrar (String mensaje){
+        Toast toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
+        toast.show();
+    }
 }

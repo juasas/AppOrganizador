@@ -132,17 +132,18 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
                     titulo.setText("Búsqueda por Categoría");
                     if (controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS) == 0) {
                         listaPertenencias.setAdapter(null);
-                        Toast mensaje = Toast.makeText(this, "No existe ninguna pertenencia, por favor cree alguna", Toast.LENGTH_LONG);
-                        mensaje.show();
+                        String mensaje = "No existe ninguna pertenencia, por favor, cree alguna";
+                        mostrar(mensaje);
                     } else {
                         Cursor cursor = controlador.listadoPertenencias(parametroBuscado, "NOMBRE_CATEGORIA");
                         if (cursor.getCount() == 0){
-                            Toast mensaje = Toast.makeText(this, "No existe ninguna pertenencia según la búsqueda por categoría seleccionada", Toast.LENGTH_LONG);
-                            mensaje.show();
+                            String mensaje = "No existe ninguna pertenencia según la búsqueda por categoría seleccionada";
+                            mostrar(mensaje);
                         } else{
                                 pertenenciasCursorAdapter = new PertenenciasCursorAdapter(this, controlador.listadoPertenencias(parametroBuscado, "NOMBRE_CATEGORIA"));
                                 listaPertenencias.setAdapter(pertenenciasCursorAdapter);
-                                iconoAyuda.setVisibility(View.INVISIBLE);}
+                                iconoAyuda.setVisibility(View.INVISIBLE);
+                        }
                     }
                     break;
                 case "Por nombre":
@@ -150,13 +151,13 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
                     titulo.setText("Búsqueda por Nombre");
                     if (controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS) == 0) {
                         listaPertenencias.setAdapter(null);
-                        Toast mensaje = Toast.makeText(this, "No existe ninguna pertenencia, por favor, cree alguna", Toast.LENGTH_LONG);
-                        mensaje.show();
+                        String mensaje = "No existe ninguna pertenencia, por favor, cree alguna";
+                        mostrar(mensaje);
                     } else {
                         Cursor cursor = controlador.listadoPertenencias(parametroBuscado, "NOMBRE_PERT");
                         if (cursor.getCount() == 0) {
-                            Toast mensaje = Toast.makeText(this, "No existe ninguna pertenencia según la búsqueda por nombre introducido", Toast.LENGTH_LONG);
-                            mensaje.show();
+                            String mensaje = "No existe ninguna pertenencia según la búsqueda por nombre introducido";
+                            mostrar(mensaje);
                         }else {
                             pertenenciasCursorAdapter = new PertenenciasCursorAdapter(this, controlador.listadoPertenencias(parametroBuscado, "NOMBRE_PERT"));
                             listaPertenencias.setAdapter(pertenenciasCursorAdapter);
@@ -168,13 +169,13 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
                     titulo.setText("Búsqueda por Ubicación");
                     if (controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS) == 0) {
                         listaPertenencias.setAdapter(null);
-                        Toast mensaje = Toast.makeText(this, "No existe ninguna pertenencia, por favor, cree alguna", Toast.LENGTH_LONG);
-                        mensaje.show();
+                        String mensaje = "No existe ninguna pertenencia, por favor, cree alguna";
+                        mostrar(mensaje);
                     } else {
                         Cursor cursor = controlador.listadoPertenencias(parametroBuscado, "NOMBRE_UBICACION");
                         if (cursor.getCount() == 0) {
-                            Toast mensaje = Toast.makeText(this, "No existe ninguna pertenencia según la búsqueda por ubicación seleccioanda", Toast.LENGTH_LONG);
-                            mensaje.show();
+                            String mensaje = "No existe ninguna pertenencia según la búsqueda por ubicación seleccioanda";
+                            mostrar(mensaje);
                         }else {
                         pertenenciasCursorAdapter = new PertenenciasCursorAdapter(this, controlador.listadoPertenencias(parametroBuscado, "NOMBRE_UBICACION"));
                         listaPertenencias.setAdapter(pertenenciasCursorAdapter);
@@ -189,8 +190,8 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
         if (controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS) == 0) {
             listaPertenencias.setAdapter(null);
             Datos.numeroMaleta=0;
-            Toast mensaje = Toast.makeText(this, "No existe ninguna pertenencia. Por favor, cree una", Toast.LENGTH_LONG);
-            mensaje.show();
+            String mensaje = "No existe ninguna pertenencia. Por favor, cree alguna";
+            mostrar(mensaje);
         } else {
             //Este cursor contiene todos las pertenencias
             cursorCompleto = controlador.obtenerPertenencias(tipoOrden);
@@ -233,8 +234,16 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
                 .setTitle("AYUDA")
                 .setMessage("Para CREAR una Pertenencia, pulse  el botón azul redondo situado en la parte inferior " +
                             "derecha de la pantalla. Si SELECCIONA una Pertenencia ya creada, puede CONSULTAR sus detalles, " +
-                            "EDITARLA o ELIMINARLA.")
+                            "EDITARLA o ELIMINARLA. También puede VOLVER al Menú de Pertenencias, " +
+                            "REGRESAR al Menú principal de bienvenida o REALIZAR una búsqueda entre sus " +
+                            "Pertenencias")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
-        dialog.show();}
+        dialog.show();
+    }
+
+    public void mostrar (String mensaje){
+        Toast toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
+        toast.show();
+    }
 }

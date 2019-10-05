@@ -19,15 +19,12 @@ public class BuscarPedirCategoriaActivity extends AppCompatActivity {
     private ArrayAdapter<String> adaptadorSpinnerCat;
     private Spinner spinnerCategoria;
     private String categoriaBuscada;
-    private ImageView iconoAyuda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_pedir_categoria);
-        controlador = new Controlador_base_datos(this);
-        spinnerCategoria = findViewById(R.id.buscar_pedir_cat_spinner);
-        iconoAyuda = findViewById(R.id.buscar_pedir_cat_icono_ayuda);
+        inicializar();
         actualizarSpinner();
     }
 
@@ -47,6 +44,11 @@ public class BuscarPedirCategoriaActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void inicializar(){
+        controlador = new Controlador_base_datos(this);
+        spinnerCategoria = (Spinner) findViewById(R.id.buscar_pedir_cat_spinner);
     }
 
     public void actualizarSpinner() {
@@ -70,7 +72,9 @@ public class BuscarPedirCategoriaActivity extends AppCompatActivity {
                 .setTitle("AYUDA")
                 .setMessage("Si desea buscar una Pertenencia por Categoría, seleccione una " +
                             "Categoría de las disponibles en la lista desplegable. " +
-                            "A continuación pulse en el botón BUSCAR")
+                            "A continuación pulse en el botón BUSCAR. Si desea VOLVER a la pantalla " +
+                            "de Pertenencias o CANCELAR la búsqueda, pulse el botón situado en la parte "+
+                            "superior derecha de la pantalla")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}

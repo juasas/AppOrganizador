@@ -23,14 +23,12 @@ public class CategoriasPpalActivity extends AppCompatActivity {
     private String nombreCategoria;
     private Categoria categoria;
     private Intent intento;
-    private int idCategoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categorias_ppal);
-        controlador = new Controlador_base_datos(this);
-        listaCategorias = findViewById(R.id.categorias_ppal_lista_categorias);
+        inicializar();
         actualizarUI();
     }
 
@@ -55,20 +53,21 @@ public class CategoriasPpalActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void inicializar(){
+        controlador = new Controlador_base_datos(this);
+        listaCategorias = findViewById(R.id.categorias_ppal_lista_categorias);
+    }
+
     public void actualizarUI() {
         if (controlador.numRegistrosTabla(controlador.TABLA_CATEGORIAS) == 0) {
             listaCategorias.setAdapter(null);
-            Toast mensaje = Toast.makeText(this, "No existe ninguna categoría de pertenencia. Por favor, cree una", Toast.LENGTH_LONG);
+            Toast mensaje = Toast.makeText(this, "No existe ninguna Categoría. Por favor, cree alguna", Toast.LENGTH_LONG);
             mensaje.show();
         } else {
             adaptador = new ArrayAdapter(this, R.layout.elementos_lista_cat, R.id.elemento_lista_cat_nombre_elemento, controlador.obtenerCategorias());
             listaCategorias.setAdapter(adaptador);
         }
     }
-
-    //View padre = (View) view.getParent();
-    //TextView tareaTextView = (TextView) padre.findViewById(R.id.titulotarea);
-    //String tarea = tareaTextView.getText().toString();
 
     public void mostrarElemento(View view) {
         View padre = (View) view.getParent();
