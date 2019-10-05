@@ -126,12 +126,12 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
         spinnerUbicacion.setSelection(obtenerPosicionItem(spinnerUbicacion, nombreUbicacionPert));
 
         if ((fotoPert == null) || (fotoPert.equals("")))
-            cajaTextoFoto.setText("Esta pertenencia no tiene fotografía");
+            cajaTextoFoto.setText("Esta Pertenencia no tiene fotografía");
         else
             cajaTextoFoto.setText(fotoPert);
     }
 
-    public void mostrar(String mensaje) {
+    public void mostrarMensaje(String mensaje) {
         toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
         toast.show();
     }
@@ -163,21 +163,21 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
         idUbicacion = controlador.obtenerIdUbicacion(nombreUbicacionPert);
 
         if (nombrePert.isEmpty()) {
-            Toast mensaje = Toast.makeText(this, "El campo obligatorio NOMBRE no puede estar vacío", Toast.LENGTH_LONG);
-            mensaje.show();
+            mensaje = "El campo obligatorio NOMBRE no puede estar vacío";
+            mostrarMensaje(mensaje);
         } else {
             {
                 if (!controlador.existe(controlador.TABLA_PERTENENCIAS, "NOMBRE_PERT", nombrePert)) {
                     controlador.anadirPertenencia(nombrePert, detallePert, idCategoria, idUbicacion, fotoPert);
-                    Toast mensaje = Toast.makeText(this, "Pertenencia almacenada correctamente", Toast.LENGTH_LONG);
-                    mensaje.show();
+                    mensaje = "Pertenencia almacenada correctamente";
+                    mostrarMensaje(mensaje);
                     intento = new Intent(this, PertenenciasPpalActivity.class);
                     intento.putExtra("busqueda", "General");
                     intento.putExtra("parametro_buscado", "");
                     startActivity(intento);
                 } else {
-                    Toast mensaje = Toast.makeText(this, "No se puede usar ese nombre. La pertenencia ya existe", Toast.LENGTH_LONG);
-                    mensaje.show();
+                    mensaje = "No se puede usar ese nombre. La Pertenencia ya existe";
+                    mostrarMensaje(mensaje);
                 }
             }
         }
@@ -194,30 +194,27 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
         String ubicacionSp = spinnerUbicacion.getSelectedItem().toString().toUpperCase();
         idUbicacion = controlador.obtenerIdUbicacion(ubicacionSp);
 
-        //pertenencia.setIdPertenencia(id_pert);
         pertenencia.setNombrePertenencia(cajaNombre.getText().toString().toUpperCase());
         pertenencia.setDetallePertenencia(cajaDetalle.getText().toString());
         pertenencia.setFotoPertenencia(cajaTextoFoto.getText().toString());
 
-        //int idCat = controlador.obtenerIdCategoria(pertenencia.getCategoriaPertenencia());
-        //ubic = controlador.obtenerUbicacion(pertenencia.getUbicacionPertenencia());
         if (pertenencia.getNombrePertenencia().isEmpty()) {
-            Toast mensaje = Toast.makeText(this, "El campo obligatorio NOMBRE no puede estar vacío", Toast.LENGTH_LONG);
-            mensaje.show();
+            mensaje = "El campo obligatorio NOMBRE no puede estar vacío";
+            mostrarMensaje(mensaje);
         } else {
             int numApariciones = controlador.numRegistrosIguales(Controlador_base_datos.TABLA_PERTENENCIAS,
                     "NOMBRE_PERT", pertenencia.getNombrePertenencia());
             if ((numApariciones == 0) || ((numApariciones != 0) && (pertenencia.getNombrePertenencia().equals(nombreAntiguoPert)))) {
                 controlador.actualizarPertenencia(pertenencia, idCategoria, idUbicacion, nombreAntiguoPert);
-                Toast mensaje = Toast.makeText(this, "Pertenencia editada y almacenada correctamente", Toast.LENGTH_LONG);
-                mensaje.show();
+                mensaje = "Pertenencia editada y almacenada correctamente";
+                mostrarMensaje(mensaje);
                 Intent intento = new Intent(this, PertenenciasPpalActivity.class);
                 intento.putExtra("busqueda", "General");
                 intento.putExtra("parametro_buscado", "");
                 startActivity(intento);
             } else {
-                Toast mensaje = Toast.makeText(this, "Nombre de la pertenencia no válido, Pertenencia ya existe", Toast.LENGTH_LONG);
-                mensaje.show();
+                mensaje = "Nombre de la pertenencia no válido, Pertenencia ya existe";
+                mostrarMensaje(mensaje);
             }
         }
     }
@@ -270,9 +267,39 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    public void mostrarAviso(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
+                .setTitle("AVISO")
+                .setMessage("Los permisos para acceder al ALMACENAMIENTO INTERNO y a la CÁMARA de " +
+                            "su dispositivo son necesarios para obtener una fotografía y usarla. " +
+                            "Si no los ha concedido previamente, debe otorgarlos")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        comprobarPermisoEscritura();
+                    }
+                })
+                .setNegativeButton("Cancelar", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     public void entrarMenuFoto(View view) {
-        guardarDatos();
-        comprobarPermisoEscritura();
+        if (estaDisponibleAlmacenamientoExterno()){
+            guardarDatos();
+            mostrarAviso();
+        } else {
+            mostrarMensaje("El ALMACENAMIENTO EXTERNO no está disònible");
+        }
+    }
+
+    // Verifica si el almacenamiento externo está disponible para lectura y escritura
+    public boolean estaDisponibleAlmacenamientoExterno() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
     }
 
     public void comprobarPermisoEscritura() {
@@ -280,113 +307,58 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
-                // Permission is not granted
-                // Should we show an explanation?
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    // Show an explanation to the user *asynchronously* -- don't block
-                    // this thread waiting for the user's response! After the user
-                    // sees the explanation, try again to request the permission.
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
-                } else {
-                    // No explanation needed; request the permission
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
-
-                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                    // app-defined int constant. The callback method gets the
-                    // result of the request.
-                }
+                //El permiso no se ha concedido aún
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
             } else {
-                // Permission has already been granted
-                mensaje = "Ya se posee el permiso de escritura";
-                mostrar(mensaje);
-                comprobarPermisoCamara();
-            }
-
+                comprobarPermisoCamara(); }
         } else {
-            mensaje = "Versión API que no requiere este permiso de escritura";
-            mostrar(mensaje);
-            comprobarPermisoCamara();
-        }//no hace falta solicitar permisos
-    }
+            comprobarPermisoCamara();}
+        }
 
     public void comprobarPermisoCamara() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {// Marshmallow+
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.CAMERA)
                     != PackageManager.PERMISSION_GRANTED) {
-                // Permission is not granted
-                // Should we show an explanation?
-                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                        Manifest.permission.CAMERA)) {
-                    // Show an explanation to the user *asynchronously* -- don't block
-                    // this thread waiting for the user's response! After the user
-                    // sees the explanation, try again to request the permission.
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.CAMERA},
-                            PERMISSION_REQUEST_CAMERA);
-                } else {
-                    // No explanation needed; request the permission
-                    ActivityCompat.requestPermissions(this,
-                            new String[]{Manifest.permission.CAMERA},
-                            PERMISSION_REQUEST_CAMERA);
-
-                    // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                    // app-defined int constant. The callback method gets the
-                    // result of the request.
-                }
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CAMERA},
+                        PERMISSION_REQUEST_CAMERA);
             } else {
-                // Permission has already been granted
-                mensaje = "Ya se posee el permiso de CÁMARA";
-                mostrar(mensaje);
-                continuar();
-            }
+                continuar();}
         } else {
-            mensaje = "Versión API que no requiere este permiso de CÁMARA";
-            mostrar(mensaje);
-            continuar();
-        }//no hace falta solicitar permisos}
+            continuar();}
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
+            case PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE: {
+                // Si la petición es cancelada, el array resultante estará vacío.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // El permiso ha sido concedido.
+                    comprobarPermisoCamara();
+                } else {
+                    mensaje = "No ha concedido Permiso para acceder al ALMACENAMIENTO EXTERNO. Debe concederlo";
+                    mostrarMensaje(mensaje);
+                    // Permiso denegado.
+                }
+            }
+            break;
             case PERMISSION_REQUEST_CAMERA: {
                 // Si la petición es cancelada, el array resultante estará vacío.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // El permiso ha sido concedido.
-                    mensaje = "No ha concedido Permiso para acceder a la CÁMARA. Debe concederlo";
-                    mostrar(mensaje);
                     continuar();
                 } else {
                     // Permiso denegado, deshabilita la funcionalidad que depende de este permiso.
-                    mensaje = "Permiso concedido";
-                    mostrar(mensaje);
-
-                }
-            }
-            break;
-            // otros bloques de 'case' para controlar otros permisos de la aplicación
-            case PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE: {
-                // Si la petición es cancelada, el array resultante estará vacío.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mensaje = "Permiso concedido";
-                    mostrar(mensaje);
-                    // El permiso ha sido concedido.
-                    comprobarPermisoCamara();
-                } else {
-                    mensaje = "Permiso denegado";
-                    mostrar(mensaje);
-                    // Permiso denegado, deshabilita la funcionalidad que depende de este permiso.
+                    mensaje = "No ha concedido Permiso para acceder a la CÁMARA. Debe concederlo";
+                    mostrarMensaje(mensaje);
                 }
             }
             break;
         }
-
         return;
     }
 
@@ -412,7 +384,7 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
                                 startActivityForResult(intentoCamara, EDITAR);
                         } else {
                             mensaje = "Debe escrbir un nombre para el archivo de la fotografía";
-                            mostrar(mensaje);
+                            mostrarMensaje(mensaje);
                         }
                     }
                 })

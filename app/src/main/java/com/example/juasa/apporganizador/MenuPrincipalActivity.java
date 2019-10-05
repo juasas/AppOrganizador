@@ -15,10 +15,8 @@ import com.example.juasa.apporganizador.datos.Datos;
 
 public class MenuPrincipalActivity extends AppCompatActivity {
     private Controlador_base_datos controlador;
-    private Datos datos;
     private TextView cajaTitulo;
     private Intent intento;
-    private Button botonEntrarPertenencias, botonEntrarMaleta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +35,7 @@ public class MenuPrincipalActivity extends AppCompatActivity {
 
             //Saludo al usuario
 
-        cajaTitulo.setText("Bienvenido, " + datos.usuario);
+        cajaTitulo.setText("Bienvenido, " + Datos.usuario);
     }
 
     public void inicializar (){
@@ -56,9 +54,9 @@ public class MenuPrincipalActivity extends AppCompatActivity {
     }
 
     public void cerrarSesion(View view) {
-        if (datos.numeroMaleta == 0)
-            controlador.actualizarUsuarioMaleta(datos.mail, "F");
-        else controlador.actualizarUsuarioMaleta(datos.mail, "T");
+        if (Datos.numeroMaleta == 0)
+            controlador.actualizarUsuarioMaleta(Datos.identificador, "F");
+        else controlador.actualizarUsuarioMaleta(Datos.identificador, "T");
             //Escribir en BD si ya existe una maleta
 
         //Intent intent = new Intent(Intent.ACTION_MAIN);

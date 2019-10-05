@@ -26,7 +26,7 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
     private int id_pert;
     private String categoriaPert, ubicacionPert, nombrePert, detallePert, fotoPert, cadena;
     private View view;
-    private Intent intento, intento1, intento2;
+    private Intent intento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +74,9 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
                 Datos.pertenenciaGlobal.setNombreCategoriaPertenencia(categoriaPert);
                 Datos.pertenenciaGlobal.setNombreUbicacionPertenencia(ubicacionPert);
                 Datos.pertenenciaGlobal.setFotoPertenencia(fotoPert);
-                intento1 = new Intent(this, CrearEditarPertenenciaActivity.class);
-                intento1.putExtra("operacion", "editar");
-                //intento1.putExtra("nombre_pert", nombrePert);
-                //intento1.putExtra("detalle_pert", detallePert);
-                //intento1.putExtra("categoria_pert", categoriaPert);
-                //intento1.putExtra("ubicacion_pert", ubicacionPert);
-                //intento1.putExtra("foto_pert", fotoPert);
-                startActivity(intento1);
+                intento = new Intent(this, CrearEditarPertenenciaActivity.class);
+                intento.putExtra("operacion", "editar");
+                startActivity(intento);
                 break;
             case R.id.menu_action_gestion_eliminar_elemento:
                 if (controlador.comprobarSiMaleta(nombrePert)){
@@ -92,7 +87,7 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
                                     controlador.borrarPertenencia(nombrePert);
-                                    escribir();
+                                    mostrar();
                                     volver();
                                 }
                             })
@@ -106,7 +101,7 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
                                 controlador.borrarPertenencia(nombrePert);
-                                escribir();
+                                mostrar();
                                 volver();
                             }
                         })
@@ -126,7 +121,7 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
 
         if ((fotoPert == null) || (fotoPert.equals(""))){
             cajaFoto.setImageResource(R.mipmap.iconopertenencia);
-            cajaTextoFoto.setText("Esta pertenencia no tiene fotografía");
+            cajaTextoFoto.setText("Esta Pertenencia no tiene fotografía");
         } else {
             String rutaImagen = Datos.rutaImagenes + fotoPert;
             cajaFoto.setImageBitmap(BitmapFactory.decodeFile(rutaImagen));
@@ -143,7 +138,7 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
         cajaTextoFoto =(TextView) findViewById(R.id.mostrar_pert_caja_textoFoto);
         }
 
-    public void escribir () {
+    public void mostrar () {
         Toast mensaje = Toast.makeText(this, "Pertenencia eliminada correctamente", Toast.LENGTH_LONG);
         mensaje.show();
     }

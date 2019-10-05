@@ -19,9 +19,7 @@ import java.security.NoSuchAlgorithmException;
 public class LoginActivity extends AppCompatActivity {
 
     private Controlador_base_datos controlador;
-    private Datos datos;
-    private Entrada_Salida salida;
-    private EditText cajaMail, cajaPass;
+    private EditText cajaId, cajaPass;
     private TextView textoNuevoUsusario;
     private Intent intento;
 
@@ -35,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void inicializar() {
         controlador = new Controlador_base_datos(this);
-        cajaMail = (EditText) findViewById(R.id.login_caja_mail);
+        cajaId = (EditText) findViewById(R.id.login_caja_identificador);
         cajaPass = (EditText) findViewById(R.id.login_caja_pass);
         textoNuevoUsusario = (TextView) findViewById(R.id.login_nuevo_usuario);
         Datos.numeroUsuarios = controlador.numRegistrosTabla(controlador.TABLA_USUARIOS);
@@ -48,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
                     .setTitle("AVISO")
                     .setMessage("No puede CREAR más de un Usuario. Ya existe un Usuario creado. " +
                                 "Para poder CREAR un nuevo Usuario, debe antes borrar el ya " +
-                                "existente (diríjase a Gestión de Ususario/Borrar Usuario)")
+                                "existente (diríjase a Gestión de Ususario/Borrar sus Datos)")
                     .setPositiveButton("Aceptar", null);
             AlertDialog dialog = builder.create();
             dialog.show();
@@ -60,19 +58,19 @@ public class LoginActivity extends AppCompatActivity {
 
     public void acceder(View view) {
 
-        String mail, pass;
+        String identificador, pass;
 
         Usuario usuarioBuscado;
-        mail = cajaMail.getText().toString();
+        identificador = cajaId.getText().toString();
         pass = cajaPass.getText().toString();
 
         //Se comprueba si los campos de nuevo usuario están vacios
 
-        if (mail.isEmpty() && (pass.isEmpty())) {
+        if (identificador.isEmpty() && (pass.isEmpty())) {
             Toast mensaje = Toast.makeText(this, "Los campos MAIL y PASSWORD están vacios", Toast.LENGTH_LONG);
             mensaje.show();
         } else {
-            if (mail.isEmpty()) {
+            if (identificador.isEmpty()) {
                 Toast mensaje = Toast.makeText(this, "El campo MAIL está vacio", Toast.LENGTH_LONG);
                 mensaje.show();
                 } else {
@@ -80,17 +78,17 @@ public class LoginActivity extends AppCompatActivity {
                         Toast mensaje = Toast.makeText(this, "El campo PASSWORD está vacio", Toast.LENGTH_LONG);
                         mensaje.show();
                     } else {
-                        if (controlador.existe(controlador.TABLA_USUARIOS, "MAIL", mail)) {
-                            usuarioBuscado = controlador.obtenerUsuario(mail);
+                        if (controlador.existe(controlador.TABLA_USUARIOS, "IDENTIFICADOR", identificador)) {
+                            usuarioBuscado = controlador.obtenerUsuario(identificador);
 
                             //Se guarda en la variable global el nombre de usuario
 
-                            datos.usuario = usuarioBuscado.getNombre();
-                            datos.mail = mail;
+                            Datos.usuario = usuarioBuscado.getNombre();
+                            Datos.identificador = identificador;
                             String passEncriptada= Encriptacion.encriptarPass(pass);
                             if (usuarioBuscado.getPassword().equals(passEncriptada)) {
                                 if (controlador.existe(controlador.TABLA_USUARIOS, "MALETA", "T"))
-                                    datos.numeroMaleta = 1;
+                                    Datos.numeroMaleta = 1;
                                 intento = new Intent(this, MenuPrincipalActivity.class);
                                 startActivity(intento);
                                 finish();
@@ -111,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void borrarCajas(View view){
-        cajaMail.setText("");
+        cajaId.setText("");
         cajaPass.setText(""); }
 
     public void ayuda(View view) {

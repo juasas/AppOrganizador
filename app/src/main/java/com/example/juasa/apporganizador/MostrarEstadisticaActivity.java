@@ -25,7 +25,7 @@ public class MostrarEstadisticaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mostrar_estadistica);
         controlador = new Controlador_base_datos(this);
         inicializar();
-        llenarPertenencia();
+        llenarEstadisticas();
     }
 
     @Override
@@ -56,12 +56,11 @@ public class MostrarEstadisticaActivity extends AppCompatActivity {
         cajaTotalPert = (TextView) findViewById(R.id.mostrar_estad_caja_total_pert);
     }
 
-    public void llenarPertenencia(){
+    public void llenarEstadisticas(){
         String fecha = controlador.obtenerFecha();
         int totalUbic = controlador.estadisticas(controlador.TABLA_UBICACIONES);
         int totalCat = controlador.estadisticas(controlador.TABLA_CATEGORIAS);
         int totalPert = controlador.estadisticas(controlador.TABLA_PERTENENCIAS);
-        //cajaFecha.setText(nombrePert);
         cajaFecha.setText(fecha);
         cajaTotalUbic.setText(String.valueOf(totalUbic));
         cajaTotalCat.setText(String.valueOf(totalCat));
@@ -72,7 +71,7 @@ public class MostrarEstadisticaActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AYUDA")
                 .setMessage("SELECCIONE uno de los iconos situados en la barra superior de la pantalla. " +
-                        "Puede: REGRESAR al Menú de Usuario o IR al Menú Principal de bienvenida")
+                        "Puede: REGRESAR al Menú de Gestión de Usuario o IR al Menú Principal de bienvenida")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}

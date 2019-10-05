@@ -9,7 +9,7 @@ import java.io.File;
 
 public class Datos {
     public static String usuario = "";
-    public static String mail = "";
+    public static String identificador = "";
     public static int numeroMaleta = 0;
     public static int numeroUsuarios = 0;
     public static String nombreFoto = "";

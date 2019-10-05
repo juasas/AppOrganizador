@@ -60,7 +60,7 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLA_USUARIOS + " (MAIL VARCHAR PRIMARY KEY, NOMBRE_USUARIO TEXT NOT NULL, PASSWORD TEXT, FECHA_ALTA DATA, MALETA TEXT)");
+        db.execSQL("CREATE TABLE " + TABLA_USUARIOS + " (IDENTIFICADOR VARCHAR PRIMARY KEY, NOMBRE_USUARIO TEXT NOT NULL, PASSWORD TEXT, FECHA_ALTA DATA, MALETA TEXT)");
         db.execSQL("CREATE TABLE " + TABLA_UBICACIONES + " (ID_UBICACION INTEGER PRIMARY KEY AUTOINCREMENT, NOMBRE_UBICACION TEXT NOT NULL, DESCRIPCION_UBICACION TEXT)");
         db.execSQL("CREATE TABLE " + TABLA_CATEGORIAS + " (ID_CATEGORIA INTEGER PRIMARY KEY AUTOINCREMENT, NOMBRE_CATEGORIA TEXT NOT NULL, DESCRIPCION_CATEGORIA TEXT)");
         db.execSQL("CREATE TABLE " + TABLA_PERTENENCIAS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, ID_PERT INTEGER, NOMBRE_PERT TEXT NOT NULL, DETALLE_PERT TEXT, " +
@@ -116,11 +116,11 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
         return existe;
     }
 
-    public void anadirUsuario(String mail, String nombre, String pass) {
+    public void anadirUsuario(String identificador, String nombre, String pass) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String date = sdf.format(new Date());
         ContentValues registro = new ContentValues();
-        registro.put("MAIL", mail);
+        registro.put("IDENTIFICADOR", identificador);
         registro.put("NOMBRE_USUARIO", nombre);
         registro.put("PASSWORD", pass);
         registro.put("FECHA_ALTA", date);
@@ -175,7 +175,7 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
         db.close();
     }
 
-    public Usuario obtenerUsuario(String mail) {
+    public Usuario obtenerUsuario(String identificador) {
 
         //Abrir la bd
 
@@ -183,13 +183,13 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
 
         //Consulta
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_USUARIOS + " WHERE MAIL =\"" + mail + "\"", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_USUARIOS + " WHERE IDENTIFICADOR =\"" + identificador + "\"", null);
 
         Usuario usuario = new Usuario();
 
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
-            usuario.setMail(cursor.getString(0));
+            usuario.setIdentificador(cursor.getString(0));
             usuario.setNombre(cursor.getString(1));
             usuario.setPassword(cursor.getString(2));
         } else
@@ -470,7 +470,7 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
         return cursor.getCount();
     }
 
-    public void actualizarUsuarioMaleta(String mail, String valor) {
+    public void actualizarUsuarioMaleta(String identificador, String valor) {
         //Abrir la bd
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -478,7 +478,7 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
         ContentValues registro = new ContentValues();
 
         //registro.put("MALETA_PERT", "T");
-        db.execSQL("UPDATE " + TABLA_USUARIOS + " SET MALETA = '" + valor + "'" + " WHERE MAIL = '" + mail + "'");
+        db.execSQL("UPDATE " + TABLA_USUARIOS + " SET MALETA = '" + valor + "'" + " WHERE IDENTIFICADOR = '" + identificador + "'");
         //db.update(TABLA_PERTENENCIAS, registro,"NOMBRE_PERT = ?", new String[] {nombrePertenencia});
         db.close();
     }

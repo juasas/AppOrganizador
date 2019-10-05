@@ -132,12 +132,12 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
                     titulo.setText("Búsqueda por Categoría");
                     if (controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS) == 0) {
                         listaPertenencias.setAdapter(null);
-                        String mensaje = "No existe ninguna pertenencia, por favor, cree alguna";
+                        String mensaje = "No existe ninguna Pertenencia, por favor, cree alguna";
                         mostrar(mensaje);
                     } else {
                         Cursor cursor = controlador.listadoPertenencias(parametroBuscado, "NOMBRE_CATEGORIA");
                         if (cursor.getCount() == 0){
-                            String mensaje = "No existe ninguna pertenencia según la búsqueda por categoría seleccionada";
+                            String mensaje = "No existe ninguna Pertenencia según la búsqueda por Categoría seleccionada";
                             mostrar(mensaje);
                         } else{
                                 pertenenciasCursorAdapter = new PertenenciasCursorAdapter(this, controlador.listadoPertenencias(parametroBuscado, "NOMBRE_CATEGORIA"));
@@ -151,12 +151,12 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
                     titulo.setText("Búsqueda por Nombre");
                     if (controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS) == 0) {
                         listaPertenencias.setAdapter(null);
-                        String mensaje = "No existe ninguna pertenencia, por favor, cree alguna";
+                        String mensaje = "No existe ninguna Pertenencia, por favor, cree alguna";
                         mostrar(mensaje);
                     } else {
                         Cursor cursor = controlador.listadoPertenencias(parametroBuscado, "NOMBRE_PERT");
                         if (cursor.getCount() == 0) {
-                            String mensaje = "No existe ninguna pertenencia según la búsqueda por nombre introducido";
+                            String mensaje = "No existe ninguna Pertenencia según la búsqueda por Nombre introducido";
                             mostrar(mensaje);
                         }else {
                             pertenenciasCursorAdapter = new PertenenciasCursorAdapter(this, controlador.listadoPertenencias(parametroBuscado, "NOMBRE_PERT"));
@@ -169,12 +169,12 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
                     titulo.setText("Búsqueda por Ubicación");
                     if (controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS) == 0) {
                         listaPertenencias.setAdapter(null);
-                        String mensaje = "No existe ninguna pertenencia, por favor, cree alguna";
+                        String mensaje = "No existe ninguna Pertenencia, por favor, cree alguna";
                         mostrar(mensaje);
                     } else {
                         Cursor cursor = controlador.listadoPertenencias(parametroBuscado, "NOMBRE_UBICACION");
                         if (cursor.getCount() == 0) {
-                            String mensaje = "No existe ninguna pertenencia según la búsqueda por ubicación seleccioanda";
+                            String mensaje = "No existe ninguna Pertenencia según la búsqueda por Ubicación seleccionada";
                             mostrar(mensaje);
                         }else {
                         pertenenciasCursorAdapter = new PertenenciasCursorAdapter(this, controlador.listadoPertenencias(parametroBuscado, "NOMBRE_UBICACION"));
@@ -190,7 +190,7 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
         if (controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS) == 0) {
             listaPertenencias.setAdapter(null);
             Datos.numeroMaleta=0;
-            String mensaje = "No existe ninguna pertenencia. Por favor, cree alguna";
+            String mensaje = "No existe ninguna Pertenencia. Por favor, cree alguna";
             mostrar(mensaje);
         } else {
             //Este cursor contiene todos las pertenencias
@@ -234,8 +234,8 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
                 .setTitle("AYUDA")
                 .setMessage("Para CREAR una Pertenencia, pulse  el botón azul redondo situado en la parte inferior " +
                             "derecha de la pantalla. Si SELECCIONA una Pertenencia ya creada, puede CONSULTAR sus detalles, " +
-                            "EDITARLA o ELIMINARLA. También puede VOLVER al Menú de Pertenencias, " +
-                            "REGRESAR al Menú principal de bienvenida o REALIZAR una búsqueda entre sus " +
+                            "EDITARLA o ELIMINARLA. También puede REGRESAR al Menú de Gestión de Pertenencias, " +
+                            "IR al Menú Principal de bienvenida o/y REALIZAR una búsqueda entre sus " +
                             "Pertenencias")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();

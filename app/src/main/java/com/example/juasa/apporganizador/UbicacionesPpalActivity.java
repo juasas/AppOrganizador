@@ -91,7 +91,8 @@ public class UbicacionesPpalActivity extends AppCompatActivity {
                 .setTitle("AYUDA")
                 .setMessage("Para CREAR una Ubicación, pulse  el botón azul redondo situado en la parte inferior " +
                         "derecha de la pantalla. Si SELECCIONA una Ubicación ya creada, puede CONSULTAR sus detalles, " +
-                        "EDITARLA o ELIMINARLA.")
+                        "EDITARLA o ELIMINARLA. También puede REGRESAR al Menú de Gestión de Pertenencias,  y/o " +
+                        "IR al Menú Principal de bienvenida")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}

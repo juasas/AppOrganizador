@@ -88,7 +88,8 @@ public class CrearCategoriaActivity extends AppCompatActivity {
                 .setTitle("AYUDA")
                 .setMessage("Introduzca los valores que quiera dar a esta Categoría y " +
                         "pulse  el botón azul redondo en parte inferior derecha de la pantalla " +
-                        "para aceptar")
+                        "para aceptar. También puede REGRESAR al listado de Categorías o IR al" +
+                        "Menú Principal de bienvenida")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}

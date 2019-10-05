@@ -82,7 +82,7 @@ public class MostrarCategoriaActivity extends AppCompatActivity {
                 }else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                             .setTitle("¡ATENCIÓN!")
-                            .setMessage("No se permite borrar una categoría que tiene pertenencias ")
+                            .setMessage("No se permite borrar una Categoría que contiene Pertenencias")
                             .setPositiveButton("Aceptar", null);
                     AlertDialog dialog = builder.create();
                     dialog.show();}

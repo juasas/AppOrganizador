@@ -2,23 +2,23 @@ package com.example.juasa.apporganizador;
 
 public class Usuario {
 
-    private String mail, nombre, password;
+    private String identificador, nombre, password;
 
     public Usuario (){
     }
 
-    public Usuario (String mailUsu, String nombreUsu, String passUsu){
-        this.mail = mailUsu;
-        this.nombre = nombreUsu;
-        this.password = passUsu;
+    public Usuario (String identificadorUsuario, String nombreUsuario, String passUsuario){
+        this.identificador = identificadorUsuario;
+        this.nombre = nombreUsuario;
+        this.password = passUsuario;
     }
 
-    public String getMail() {
-        return mail;
+    public String getIdentificador() {
+        return identificador;
     }
 
-    public void setMail(String mailUsu) {
-        this.mail = mailUsu;
+    public void setIdentificador(String identificadorUsu) {
+        this.identificador = identificadorUsu;
     }
 
     public String getNombre() {
