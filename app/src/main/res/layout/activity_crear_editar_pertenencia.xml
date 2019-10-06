@@ -49,9 +49,7 @@
 
             <Spinner
                 android:id="@+id/crear_pert_sp_categoria"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"/>
+                style="@style/estilo_spinner"/>
 
             <TextView
                 style="@style/estilo_etiquetas"
@@ -59,9 +57,7 @@
 
             <Spinner
                 android:id="@+id/crear_pert_sp_ubic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true" />
+                style="@style/estilo_spinner" />
 
             <TextView
                 style="@style/estilo_etiquetas"

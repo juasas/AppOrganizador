@@ -1,11 +1,6 @@
 package com.example.juasa.apporganizador.datos;
 
-import android.os.Environment;
-import android.util.Log;
-
 import com.example.juasa.apporganizador.Pertenencia;
-
-import java.io.File;
 
 public class Datos {
     public static String usuario = "";

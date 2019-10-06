@@ -57,13 +57,6 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         if (Datos.numeroMaleta == 0)
             controlador.actualizarUsuarioMaleta(Datos.identificador, "F");
         else controlador.actualizarUsuarioMaleta(Datos.identificador, "T");
-            //Escribir en BD si ya existe una maleta
-
-        //Intent intent = new Intent(Intent.ACTION_MAIN);
-        //intent.addCategory(Intent.CATEGORY_HOME);
-
-        //System.exit(0);
-        //finish();
 
         startActivity(new Intent(getBaseContext(), LoginActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));

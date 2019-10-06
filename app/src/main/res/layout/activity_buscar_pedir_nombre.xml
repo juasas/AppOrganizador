@@ -21,11 +21,7 @@
 
     <RelativeLayout
         android:id="@+id/buscar_pedir_nombre_conjunto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp"
+        style="@style/estilo_relative_buscar_nombre"
         android:layout_below="@+id/buscar_pedir_nombre_icono_ayuda" >
 
         <ImageView

@@ -21,10 +21,7 @@
 
     <RelativeLayout
         android:id="@+id/buscar_pedir_ubic_conjunto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="40dp"
+        style="@style/estilo_relative_buscar"
         android:layout_below="@+id/buscar_pedir_ubic_icono_ayuda" >
 
         <ImageView
@@ -43,7 +40,7 @@
 
     <Spinner
         android:id="@+id/buscar_pedir_ubic_spinner"
-        style="@style/wrap_wrap"
+        style="@style/estilo_spinner"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/buscar_pedir_ubic_conjunto"/>
 
