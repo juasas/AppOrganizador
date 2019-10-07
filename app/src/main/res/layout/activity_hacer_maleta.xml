@@ -16,7 +16,8 @@
     <ImageView
         android:id="@+id/hacer_maleta_icono_ayuda"
         style="@style/estilo_ayuda"
-        android:layout_below="@+id/hacer_maleta_titulo" />
+        android:layout_below="@+id/hacer_maleta_titulo"
+        android:onClick="ayuda"/>
 
     <FrameLayout
         android:id="@+id/hacer_maleta_frame"

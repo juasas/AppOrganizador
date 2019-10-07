@@ -69,7 +69,7 @@ public class MaletaPpalActivity extends AppCompatActivity {
         //AlertDialog dialog = builder.create();
         //dialog.show();
         if (datos.numeroMaleta == 1) {
-            escribirCuadrodialoogo("Ya tiene una maleta creada");
+            escribirCuadrodialogo("Ya tiene una maleta creada");
         } else {
             intento = new Intent(this, HacerMaletaActivity.class);
             intento.putExtra("tipo", "Hacer maleta");
@@ -79,7 +79,7 @@ public class MaletaPpalActivity extends AppCompatActivity {
 
     public void deshacerMaleta (View view){
         if (datos.numeroMaleta == 0){
-            escribirCuadrodialoogo("No tiene la Maleta hecha. Por favor hágala");
+            escribirCuadrodialogo("No tiene la Maleta hecha. Por favor hágala");
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                     .setTitle("Confirmar deshacer Maleta")
@@ -100,17 +100,10 @@ public class MaletaPpalActivity extends AppCompatActivity {
     }
 
     public void verMaleta (View view){
-        //AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
-          //      .setTitle("AVISO")
-            //    .setMessage("Gracias por su interés, maleta vacía, funcionalidad disponible próximamente.")
-              //  .setPositiveButton("Aceptar", null);
-        //AlertDialog dialog = builder.create();
-        //dialog.show();
         if (datos.numeroMaleta == 0) {
-            escribirCuadrodialoogo("No tiene la Maleta hecha. Por favor hágala primero");
+            escribirCuadrodialogo("No tiene la Maleta hecha. Por favor hágala primero");
         } else {
-            intento = new Intent(this, HacerMaletaActivity.class);
-            intento.putExtra("tipo", "Mostrar maleta");
+            intento = new Intent(this, VerMaletaActivity.class);
             startActivity(intento);}
     }
 
@@ -119,7 +112,7 @@ public class MaletaPpalActivity extends AppCompatActivity {
         mensaje.show();
     }
 
-    public void escribirCuadrodialoogo(String mensaje) {
+    public void escribirCuadrodialogo(String mensaje) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AVISO")
                 .setMessage(mensaje)

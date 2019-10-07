@@ -233,10 +233,10 @@ public class PertenenciasPpalActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AYUDA")
                 .setMessage("Para CREAR una Pertenencia, pulse  el botón azul redondo situado en la parte inferior " +
-                            "derecha de la pantalla. Si SELECCIONA una Pertenencia ya creada, puede CONSULTAR sus detalles, " +
-                            "EDITARLA o ELIMINARLA. También puede REGRESAR al Menú de Gestión de Pertenencias, " +
-                            "IR al Menú Principal de bienvenida o/y REALIZAR una búsqueda entre sus " +
-                            "Pertenencias")
+                        "derecha de la pantalla. Si SELECCIONA una Pertenencia ya creada, puede CONSULTAR sus detalles, " +
+                        "EDITARLA o ELIMINARLA. También puede REGRESAR al Menú de Gestión de Pertenencias, " +
+                        "IR al Menú Principal de bienvenida o/y REALIZAR una búsqueda entre sus " +
+                        "Pertenencias")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();
