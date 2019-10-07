@@ -160,4 +160,16 @@
         <item name = "android:layout_marginLeft">10dp</item>
         <item name = "android:layout_marginRight">10dp</item>
     </style>
+
+    <style name = "estilo_imagen_mostrar_pert">
+        <item name = "android:padding">10dp</item>
+        <item name = "android:layout_centerHorizontal">true</item>
+        <item name = "android:layout_width">400dp</item>
+        <item name = "android:layout_height">200dp</item>
+    </style>
+
+    <style name = "estilo_imagen_mostrar" parent = "estilo_imagen_mostrar_pert">
+        <item name = "android:layout_marginLeft">200dp</item>
+        <item name = "android:scaleType">fitCenter</item>
+    </style>
 </resources>

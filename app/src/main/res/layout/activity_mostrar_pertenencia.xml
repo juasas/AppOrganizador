@@ -22,11 +22,8 @@
 
         <ImageView
             android:id="@+id/mostrar_pert_imagen"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/mostrar_pert_icono_ayuda"
-            android:padding="10dp"/>
+            style="@style/estilo_imagen_mostrar_pert"
+            android:layout_below="@+id/mostrar_pert_icono_ayuda" />
 
         <LinearLayout
             android:id="@+id/mostrar_pert_grupo_cajas"

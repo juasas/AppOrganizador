@@ -92,12 +92,10 @@ public class MostrarCategoriaActivity extends AppCompatActivity {
     }
 
     public void llenarCategoria(View view){
-        cajaid = (TextView) findViewById(R.id.mostrar_categoria_cajaid);
         cajaNombreCat = (TextView) findViewById(R.id.mostrar_cat_caja_nombre);
         cajaDetalleCat = (TextView) findViewById(R.id.mostrar_cat_caja_detalle);
         cajaNombreCat.setText(nombreCategoria);
         cajaDetalleCat.setText(detalleCategoria);
-        cajaid.setText(String.valueOf(idCategoria));
     }
 
     public void escribir () {

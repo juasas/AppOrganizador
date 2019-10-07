@@ -13,19 +13,15 @@
         android:textAlignment = "center"
         android:text="Listado de pertenencias para maleta" />
 
-    <TextView
-        android:id="@+id/hacer_maleta_subtitulo"
-        style="@style/estilo_comun_textos"
-        android:layout_below="@+id/hacer_maleta_titulo"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="Se muestran todas sus pertenencias. Seleccione las que desee incluir en su maleta"
-        android:padding="20dp"
-        android:layout_marginTop="20dp"/>
+    <ImageView
+        android:id="@+id/hacer_maleta_icono_ayuda"
+        style="@style/estilo_ayuda"
+        android:layout_below="@+id/hacer_maleta_titulo" />
 
     <FrameLayout
         android:id="@+id/hacer_maleta_frame"
         style="@style/match_match"
-        android:layout_below="@+id/hacer_maleta_subtitulo">
+        android:layout_below="@+id/hacer_maleta_icono_ayuda">
 
         <ListView
             android:id="@+id/hacer_maleta_lista_pertenencias"

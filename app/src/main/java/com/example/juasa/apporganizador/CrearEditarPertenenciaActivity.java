@@ -20,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +31,6 @@ import java.io.File;
 
 public class CrearEditarPertenenciaActivity extends AppCompatActivity {
     private Controlador_base_datos controlador;
-    private Entrada_Salida salida;
     private EditText cajaNombre, cajaDetalle;
     private ArrayAdapter<String> adaptadorSpinnerCategoria, adaptadorSpinnerUbicacion;
     private Spinner spinnerCategoria, spinnerUbicacion;
@@ -45,12 +43,12 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
     private static int EDITAR = 2;
     private static final int PERMISSION_REQUEST_CAMERA = 0;
     private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
-    private ImageView imagen;
     private Toast toast;
     private String mensaje;
     private View view;
     private Bundle extras;
     private Pertenencia pertenencia;
+    private static final String TEXTO_FOTO = "Esta Pertenencia no tiene fotografía";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +85,12 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
 
     public void inicializar() {
         controlador = new Controlador_base_datos(this);
-        cajaTitulo = (TextView) findViewById(R.id.crear_pert_titulo);
-        cajaNombre = (EditText) findViewById(R.id.crear_pert_caja_nombre);
-        cajaDetalle = (EditText) findViewById(R.id.crear_pert_caja_detalle);
-        spinnerCategoria = (Spinner) findViewById(R.id.crear_pert_sp_categoria);
-        spinnerUbicacion = (Spinner) findViewById(R.id.crear_pert_sp_ubic);
-        cajaTextoFoto = (TextView) findViewById(R.id.crear_pert_caja_textoFoto);
+        cajaTitulo = (TextView) findViewById(R.id.crear_editar_pert_titulo);
+        cajaNombre = (EditText) findViewById(R.id.crear_editar_pert_caja_nombre);
+        cajaDetalle = (EditText) findViewById(R.id.crear_editar_pert_caja_detalle);
+        spinnerCategoria = (Spinner) findViewById(R.id.crear_editar_pert_sp_categoria);
+        spinnerUbicacion = (Spinner) findViewById(R.id.crear_editar_pert_sp_ubic);
+        cajaTextoFoto = (TextView) findViewById(R.id.crear_editar_pert_caja_textoFoto);
     }
 
     public void verOperación() {
@@ -158,7 +156,10 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
         detallePert = cajaDetalle.getText().toString();
         nombreUbicacionPert = spinnerUbicacion.getSelectedItem().toString();
         nombreCategoriaPert = spinnerCategoria.getSelectedItem().toString();
-        fotoPert = Datos.pertenenciaGlobal.getFotoPertenencia();
+        if (fotoPert.equals(TEXTO_FOTO))
+            fotoPert = "";
+        else
+            fotoPert = Datos.pertenenciaGlobal.getFotoPertenencia();
         idCategoria = controlador.obtenerIdCategoria(nombreCategoriaPert);
         idUbicacion = controlador.obtenerIdUbicacion(nombreUbicacionPert);
 
@@ -196,7 +197,13 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
 
         pertenencia.setNombrePertenencia(cajaNombre.getText().toString().toUpperCase());
         pertenencia.setDetallePertenencia(cajaDetalle.getText().toString());
-        pertenencia.setFotoPertenencia(cajaTextoFoto.getText().toString());
+
+        fotoPert = cajaTextoFoto.getText().toString();
+
+        if (cajaTextoFoto.getText().toString().equals(TEXTO_FOTO))
+            pertenencia.setFotoPertenencia("");
+        else
+            pertenencia.setFotoPertenencia(cajaTextoFoto.getText().toString());
 
         if (pertenencia.getNombrePertenencia().isEmpty()) {
             mensaje = "El campo obligatorio NOMBRE no puede estar vacío";

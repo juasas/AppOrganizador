@@ -9,38 +9,39 @@
         style="@style/match_match">
 
         <TextView
-            android:id="@+id/crear_pert_titulo"
+            android:id="@+id/crear_editar_pert_titulo"
             style="@style/estilo_comun_textos"
             android:text="Nueva Pertenencia"
             android:textSize="40sp" />
 
         <ImageView
-            android:id="@+id/crear_pert_icono_ayuda"
+            android:id="@+id/crear_editar_pert_icono_ayuda"
             style="@style/estilo_ayuda"
-            android:layout_below="@+id/crear_pert_titulo" />
+            android:layout_below="@+id/crear_editar_pert_titulo" />
 
         <LinearLayout
-            android:id = "@+id/crear_pert_grupo_cajas"
+            android:id = "@+id/crear_editar_pert_grupo_cajas"
             style="@style/estilo_linear_cajas"
-            android:layout_below="@+id/crear_pert_icono_ayuda">
+            android:layout_below="@+id/crear_editar_pert_icono_ayuda">
 
             <TextView
                 style="@style/estilo_etiquetas"
                 android:text="(Obligatorio) Nombre de la Pertenencia, máx 50 caracteres:" />
 
             <EditText
-                android:id="@+id/crear_pert_caja_nombre"
+                android:id="@+id/crear_editar_pert_caja_nombre"
                 style="@style/estilo_cajas"
-                android:hint="Introduzca nombre" />
+                android:hint="Introduzca nuevo nombre"
+                android:maxLength="50"/>
 
             <TextView
                 style="@style/estilo_etiquetas"
                 android:text="(Opcional) Detalle de la Pertenencia, máx. 150 caracteres:" />
 
             <EditText
-                android:id="@+id/crear_pert_caja_detalle"
+                android:id="@+id/crear_editar_pert_caja_detalle"
                 style="@style/estilo_cajas"
-                android:hint="Introduzca detalle"
+                android:hint="Introduzca nuevo detalle"
                 android:maxLength="150"/>
 
             <TextView
@@ -48,7 +49,7 @@
                 android:text="Seleccione una Categoría para la Pertenencia:" />
 
             <Spinner
-                android:id="@+id/crear_pert_sp_categoria"
+                android:id="@+id/crear_editar_pert_sp_categoria"
                 style="@style/estilo_spinner"/>
 
             <TextView
@@ -56,7 +57,7 @@
                 android:text="Seleccione una Ubicación para la Pertenencia:" />
 
             <Spinner
-                android:id="@+id/crear_pert_sp_ubic"
+                android:id="@+id/crear_editar_pert_sp_ubic"
                 style="@style/estilo_spinner" />
 
             <TextView
@@ -64,34 +65,32 @@
                 android:text="Archivo de Foto:" />
 
             <TextView
-                android:id="@+id/crear_pert_caja_textoFoto"
+                android:id="@+id/crear_editar_pert_caja_textoFoto"
                 style="@style/estilo_etiquetas_contenido"
                 android:layout_marginBottom="40dp"/>
         </LinearLayout>
 
         <Button
-            android:id="@+id/crear_pert_boton_limpiar"
+            android:id="@+id/crear_editar_pert_boton_limpiar"
             style="@style/estilo_boton"
-            android:layout_below="@+id/crear_pert_grupo_cajas"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/crear_editar_pert_grupo_cajas"
             android:text="Borrar campos"
             android:onClick="resetear"/>
 
         <Button
-            android:id="@+id/crear_pert_boton_foto"
+            android:id="@+id/crear_editar_pert_boton_foto"
             style="@style/estilo_boton"
-            android:layout_below="@+id/crear_pert_boton_limpiar"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/crear_editar_pert_boton_limpiar"
             android:text="Obtener fotografía"
             android:onClick="entrarMenuFoto"/>
 
         <FrameLayout
-            android:id="@+id/crear_pert_frame"
+            android:id="@+id/crear_editar_pert_frame"
             style="@style/match_match"
-            android:layout_below="@+id/crear_pert_boton_foto">
+            android:layout_below="@+id/crear_editar_pert_boton_foto">
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/crear_pert_fab"
+                android:id="@+id/crear_editar_pert_fab"
                 style="@style/estilo_fab"
                 android:onClick="queHacer"
                 android:src="@mipmap/iconook"

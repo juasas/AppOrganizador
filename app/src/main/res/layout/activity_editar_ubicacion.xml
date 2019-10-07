@@ -49,7 +49,6 @@
             android:id="@+id/editar_ubic_boton_limpiar"
             style="@style/estilo_boton"
             android:layout_below="@+id/editar_ubic_grupo_cajas"
-            android:layout_marginTop="20dp"
             android:text="Borrar Campos"
             android:onClick="resetear"/>
 

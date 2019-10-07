@@ -8,7 +8,6 @@
     <RelativeLayout
         style="@style/match_match">
 
-
         <TextView
             android:id="@+id/crear_ubic_titulo"
             style="@style/estilo_comun_textos"
@@ -50,7 +49,6 @@
             android:id="@+id/crear_ubic_boton_limpiar"
             style="@style/estilo_boton"
             android:layout_below="@+id/crear_ubic_grupo_cajas"
-            android:layout_marginTop="20dp"
             android:text="Borrar Campos"
             android:onClick="resetear"/>
 

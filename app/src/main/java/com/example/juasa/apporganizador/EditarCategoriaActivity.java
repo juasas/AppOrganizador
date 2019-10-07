@@ -16,12 +16,12 @@ import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
 public class EditarCategoriaActivity extends AppCompatActivity {
     private Controlador_base_datos controlador;
     private EditText cajaNombre, cajaDetalle;
-    private Bundle extras;
-    private static String nombreAntiguo;
-    private String nombreCategoria, detalleCategoria;
     private View view;
+    private Bundle extras;
+    private String nombreCategoria, detalleCategoria, nombreAntiguo, mensaje;
     private Categoria categoria;
     private Intent intento;
+    private Toast toast;
 
     public void inicializar (){
         cajaNombre = (EditText) findViewById(R.id.editar_cat_caja_nombre);
@@ -35,7 +35,7 @@ public class EditarCategoriaActivity extends AppCompatActivity {
         controlador = new Controlador_base_datos(this);
         recibirParametros();
         inicializar();
-        llenarCategoria(view);
+        llenarCategoria();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class EditarCategoriaActivity extends AppCompatActivity {
         }
     }
 
-    public void llenarCategoria(View view){
+    public void llenarCategoria(){
         cajaNombre.setText(nombreCategoria);
         cajaDetalle.setText(detalleCategoria);
     }
@@ -76,19 +76,19 @@ public class EditarCategoriaActivity extends AppCompatActivity {
         categoria.setDescripcionCategoria(cajaDetalle.getText().toString());
 
         if (categoria.getNombreCategoria().isEmpty()) {
-            Toast mensaje = Toast.makeText(this, "El campo obligatorio NOMBRE no puede estar vacío", Toast.LENGTH_LONG);
-            mensaje.show();
+            mensaje = "El campo obligatorio NOMBRE no puede estar vacío";
+            mostrarMensaje(mensaje);
         } else {
             int numApariciones = controlador.numRegistrosIguales(Controlador_base_datos.TABLA_CATEGORIAS,"NOMBRE_CATEGORIA", categoria.getNombreCategoria());
             if ((numApariciones == 0) || ((numApariciones != 0) && (categoria.getNombreCategoria().equals(nombreAntiguo)))) {
                 controlador.actualizarCategoria(categoria, nombreAntiguo);
-                Toast mensaje = Toast.makeText(this, "Categoria editada y almacenada correctamente", Toast.LENGTH_LONG);
-                mensaje.show();
+                mensaje = "Categoria editada y almacenada correctamente";
+                mostrarMensaje(mensaje);
                 intento = new Intent(this, CategoriasPpalActivity.class);
                 startActivity(intento);
             } else {
-                Toast mensaje = Toast.makeText(this, "Nombre de la categoria no válido, Categoria ya existe", Toast.LENGTH_LONG);
-                mensaje.show();}
+                mensaje = "Nombre de la categoria no válido, Categoria ya existe";
+                mostrarMensaje(mensaje);}
         }
     }
 
@@ -107,6 +107,11 @@ public class EditarCategoriaActivity extends AppCompatActivity {
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}
+
+    public void mostrarMensaje(String mensaje) {
+        toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
+        toast.show();
+    }
 }
 
 

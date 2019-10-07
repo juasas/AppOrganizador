@@ -16,7 +16,7 @@ import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
 
 public class MostrarUbicacionActivity extends AppCompatActivity {
     private Controlador_base_datos controlador;
-    private TextView cajaid, cajaNombre, cajaDescripcion;
+    private TextView cajaNombre, cajaDescripcion;
     private Bundle extras;
     private String nombreUbicacion, descripcionUbicacion;
     private View view;
@@ -91,12 +91,10 @@ public class MostrarUbicacionActivity extends AppCompatActivity {
     }
 
     public void llenarUbicacion(View view){
-        cajaid = (TextView) findViewById(R.id.mostrar_ubicacion_cajaid);
         cajaNombre = (TextView) findViewById(R.id.mostrar_ubic_caja_nombre);
         cajaDescripcion = (TextView) findViewById(R.id.mostrar_ubic_caja_detalle);
         cajaNombre.setText(nombreUbicacion);
         cajaDescripcion.setText(descripcionUbicacion);
-        cajaid.setText(String.valueOf(idUbicacion));
     }
 
     public void escribir () {

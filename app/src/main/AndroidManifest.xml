@@ -23,7 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
         <activity android:name=".BuscarPedirCategoriaActivity" />
         <activity android:name=".BuscarPedirNombreActivity" />
         <activity android:name=".BuscarPedirUbicacionActivity" />

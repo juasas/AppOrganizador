@@ -16,12 +16,12 @@ import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
 public class EditarUbicacionActivity extends AppCompatActivity {
     private Controlador_base_datos controlador;
     private EditText cajaNombre, cajaDetalle;
-    private Bundle extras;
-    private static String nombreAntiguo;
-    private String nombreUbicacion, detalleUbicacion;
     private View view;
+    private Bundle extras;
+    private String nombreUbicacion, detalleUbicacion, nombreAntiguo, mensaje;
     private Ubicacion ubicacion;
     private Intent intento;
+    private Toast toast;
 
     public void inicializar (){
         cajaNombre = (EditText) findViewById(R.id.editar_ubic_caja_nombre);
@@ -35,7 +35,7 @@ public class EditarUbicacionActivity extends AppCompatActivity {
         controlador = new Controlador_base_datos(this);
         recibirParametros();
         inicializar();
-        llenarUbicacion(view);
+        llenarUbicacion();
     }
 
     @Override
@@ -64,7 +64,7 @@ public class EditarUbicacionActivity extends AppCompatActivity {
         }
     }
 
-    public void llenarUbicacion(View view){
+    public void llenarUbicacion(){
         cajaNombre.setText(nombreUbicacion);
         cajaDetalle.setText(detalleUbicacion);
     }
@@ -76,19 +76,19 @@ public class EditarUbicacionActivity extends AppCompatActivity {
         ubicacion.setDescripcionUbicacion(cajaDetalle.getText().toString());
 
         if (ubicacion.getNombreUbicacion().isEmpty()) {
-            Toast mensaje = Toast.makeText(this, "El campo obligatorio NOMBRE no puede estar vacío", Toast.LENGTH_LONG);
-            mensaje.show();
+            mensaje = "El campo obligatorio NOMBRE no puede estar vacío";
+            mostrarMensaje(mensaje);
         } else {
             int numApariciones = controlador.numRegistrosIguales(Controlador_base_datos.TABLA_UBICACIONES,"NOMBRE_UBICACION", ubicacion.getNombreUbicacion());
             if ((numApariciones == 0) || ((numApariciones != 0) && (ubicacion.getNombreUbicacion().equals(nombreAntiguo)))) {
                 controlador.actualizarUbicacion(ubicacion, nombreAntiguo);
-                Toast mensaje = Toast.makeText(this, "Ubicación editada y almacenada correctamente", Toast.LENGTH_LONG);
-                mensaje.show();
+                mensaje = "Ubicación editada y almacenada correctamente";
+                mostrarMensaje(mensaje);
                 intento = new Intent(this, UbicacionesPpalActivity.class);
                 startActivity(intento);
             } else {
-                Toast mensaje = Toast.makeText(this, "Nombre de la Ubicación no válido, Ubicación ya existe", Toast.LENGTH_LONG);
-                mensaje.show();}
+                mensaje = "Nombre de la Ubicación no válido, Ubicación ya existe";
+                mostrarMensaje(mensaje);}
         }
     }
 
@@ -107,6 +107,11 @@ public class EditarUbicacionActivity extends AppCompatActivity {
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();}
+
+    public void mostrarMensaje(String mensaje) {
+        toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
+        toast.show();
+    }
 }
 
 

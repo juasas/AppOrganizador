@@ -49,7 +49,6 @@
             android:id="@+id/editar_cat_boton_limpiar"
             style="@style/estilo_boton"
             android:layout_below="@+id/editar_cat_grupo_cajas"
-            android:layout_marginTop="20dp"
             android:text="@string/borrarcampos1"
             android:onClick="resetear"/>
 

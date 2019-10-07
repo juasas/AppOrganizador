@@ -17,14 +17,13 @@ public class CrearCategoriaActivity extends AppCompatActivity {
 
     private Controlador_base_datos controlador;
     private EditText cajaNombreCat, cajaDetalleCat;
-    private String nombreCategoria, detalleCategoria;
+    private String nombreCategoria, detalleCategoria, mensaje;
     private Intent intento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_categoria);
-        controlador= new Controlador_base_datos(this);
         inicializar();
     }
     @Override
@@ -47,6 +46,7 @@ public class CrearCategoriaActivity extends AppCompatActivity {
     public void inicializar() {
         cajaNombreCat = (EditText) findViewById(R.id.crear_cat_caja_nombre);
         cajaDetalleCat = (EditText) findViewById(R.id.crear_cat_caja_detalle);
+        controlador = new Controlador_base_datos(this);
     }
 
     public void crearNuevaCategoria(View view) {
@@ -57,18 +57,18 @@ public class CrearCategoriaActivity extends AppCompatActivity {
         //Se comprueba si el campo obligatorio de nueva categoria está vacío
 
         if (nombreCategoria.isEmpty()) {
-            String mensaje = "El campo obligatorio NOMBRE no puede estar vacío";
-            mostrar (mensaje);
+            mensaje = "El campo obligatorio NOMBRE no puede estar vacío";
+            mostrarMensaje(mensaje);
         } else {{
             if (!controlador.existe(controlador.TABLA_CATEGORIAS, "NOMBRE_CATEGORIA", nombreCategoria)) {
                 controlador.anadirCategoria(nombreCategoria, detalleCategoria);
-                String mensaje = "Categoría almacenada correctamente";
-                mostrar (mensaje);
+                mensaje = "Categoría almacenada correctamente";
+                mostrarMensaje(mensaje);
                 intento = new Intent(this, CategoriasPpalActivity.class);
                 startActivity(intento);
             } else {
-                String mensaje = "No se puede usar ese nombre. La Categoría ya existe";
-                mostrar (mensaje);
+                mensaje = "No se puede usar ese nombre. La Categoría ya existe";
+                mostrarMensaje(mensaje);
                 }
         }}
     }
@@ -76,11 +76,6 @@ public class CrearCategoriaActivity extends AppCompatActivity {
     public void resetear (View view){
         cajaNombreCat.setText("");
         cajaDetalleCat.setText("");
-    }
-
-    public void volver (View view){
-        intento = new Intent(this, MenuPertenenciasGeneralActivity.class);
-        startActivity(intento);
     }
 
     public void ayuda(View view) {
@@ -94,7 +89,7 @@ public class CrearCategoriaActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();}
 
-    public void mostrar (String mensaje){
+    public void mostrarMensaje (String mensaje){
         Toast toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
         toast.show();
     }

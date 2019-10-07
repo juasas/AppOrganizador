@@ -16,24 +16,25 @@ import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
 public class CrearUbicacionActivity extends AppCompatActivity {
     private Controlador_base_datos controlador;
     private EditText cajaNombreUbic, cajaDetalleUbic;
-    private String nombreUbicacion, detalleUbicacion;
+    private String nombreUbicacion, detalleUbicacion, mensaje;
     private Intent intento;
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_ubicacion);
-        controlador = new Controlador_base_datos(this);
         inicializar();
     }
+
     @Override
-    public boolean onCreateOptionsMenu (Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_action_secundario, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected (MenuItem item ) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_action_secundario_volver_atras:
                 intento = new Intent(this, UbicacionesPpalActivity.class);
@@ -46,6 +47,7 @@ public class CrearUbicacionActivity extends AppCompatActivity {
     public void inicializar() {
         cajaNombreUbic = (EditText) findViewById(R.id.crear_ubic_caja_nombre);
         cajaDetalleUbic = (EditText) findViewById(R.id.crear_ubic_caja_detalle);
+        controlador = new Controlador_base_datos(this);
     }
 
     public void crearNuevaUbicacion(View view) {
@@ -56,29 +58,27 @@ public class CrearUbicacionActivity extends AppCompatActivity {
         //Se comprueba si los campos de nueva ubicación están vacios
 
         if (nombreUbicacion.isEmpty()) {
-            Toast mensaje = Toast.makeText(this, "El campo obligatorio NOMBRE no puede estar vacío", Toast.LENGTH_LONG);
-            mensaje.show();
-        } else {{
-            if (!controlador.existe(Controlador_base_datos.TABLA_UBICACIONES,"NOMBRE_UBICACION",nombreUbicacion)) {
-                controlador.anadirUbicacion(nombreUbicacion, detalleUbicacion);
-                Toast mensaje = Toast.makeText(this, "Ubicación almacenada correctamente", Toast.LENGTH_LONG);
-                mensaje.show();
-                intento = new Intent(this, UbicacionesPpalActivity.class);
-                startActivity(intento);
-            } else {
-                Toast mensaje = Toast.makeText(this, "No se puede usar ese nombre. La ubicación ya existe", Toast.LENGTH_LONG);
-                mensaje.show();}
-        }}
+            mensaje = "El campo obligatorio NOMBRE no puede estar vacío";
+            mostrarMensaje(mensaje);
+        } else {
+            {
+                if (!controlador.existe(Controlador_base_datos.TABLA_UBICACIONES, "NOMBRE_UBICACION", nombreUbicacion)) {
+                    controlador.anadirUbicacion(nombreUbicacion, detalleUbicacion);
+                    mensaje = "Ubicación almacenada correctamente";
+                    mostrarMensaje(mensaje);
+                    intento = new Intent(this, UbicacionesPpalActivity.class);
+                    startActivity(intento);
+                } else {
+                    mensaje = "No se puede usar ese nombre. La Ubicación ya existe";
+                    mostrarMensaje(mensaje);
+                }
+            }
+        }
     }
 
-    public void resetear (View view){
+    public void resetear(View view) {
         cajaNombreUbic.setText("");
         cajaDetalleUbic.setText("");
-    }
-
-    public void volver (View view){
-        intento = new Intent(this, UbicacionesPpalActivity.class);
-        startActivity(intento);
     }
 
     public void ayuda(View view) {
@@ -89,5 +89,11 @@ public class CrearUbicacionActivity extends AppCompatActivity {
                         "para aceptar")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
-        dialog.show();}
+        dialog.show();
+    }
+
+    public void mostrarMensaje(String mensaje) {
+        toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
+        toast.show();
+    }
 }

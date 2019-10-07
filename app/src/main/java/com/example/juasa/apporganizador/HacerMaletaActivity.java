@@ -26,7 +26,6 @@ public class HacerMaletaActivity extends AppCompatActivity {
     private String nombrePertenencia, tipo;
     private Intent intento;
     private TextView pertenenciaCajaTexto;
-    private TextView cajaSubtitulo1;
     private FloatingActionButton fab;
     private View padre;
     private Bundle extras;
@@ -36,7 +35,6 @@ public class HacerMaletaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hacer_maleta);
         controlador = new Controlador_base_datos(this);
-        cajaSubtitulo1 = findViewById(R.id.hacer_maleta_subtitulo);
         fab = findViewById(R.id.hacer_maleta_fab);
         listaPertenencias = findViewById(R.id.hacer_maleta_lista_pertenencias);
         listaPertenencias.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);

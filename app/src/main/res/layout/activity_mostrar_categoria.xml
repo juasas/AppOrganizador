@@ -22,13 +22,8 @@
 
         <ImageView
             android:id="@+id/mostrar_cat_imagen"
-            android:layout_width="400dp"
-            android:layout_height="200dp"
+            style="@style/estilo_imagen_mostrar"
             android:src="@mipmap/imagenprinicpal"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="200dp"
-            android:scaleType="fitCenter"
-            android:padding="10dp"
             android:layout_below="@+id/mostrar_cat_icono_ayuda"/>
 
         <LinearLayout
@@ -51,11 +46,6 @@
             <TextView
                 android:id="@+id/mostrar_cat_caja_detalle"
                 style="@style/estilo_etiquetas_contenido" />
-
-            <TextView
-                android:id="@+id/mostrar_categoria_cajaid"
-                style="@style/estilo_etiquetas"
-                android:textColor="#FFFFFF" />
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>
