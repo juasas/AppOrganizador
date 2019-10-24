@@ -25,11 +25,12 @@ public class HacerMaletaActivity extends AppCompatActivity {
     private Controlador_base_datos controlador;
     private MaletaCursorAdapter maletaCursorAdapter;
     private ListView listaPertenenciasMaleta;
-    private String nombrePertenencia;
+    private String nombrePertenencia, mensaje;
     private Intent intento;
     private TextView pertenenciaCajaTexto;
     private View padre;
     private FloatingActionButton fab;
+    private int cuantosSeleccionados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,7 @@ public class HacerMaletaActivity extends AppCompatActivity {
 
     public void confirmarHacerMaleta(View view) {
         int cuantos = listaPertenenciasMaleta.getAdapter().getCount();
-
+        cuantosSeleccionados=0;
         for (int i = 0; i < cuantos; i++) {
 
             ViewGroup row = (ViewGroup) listaPertenenciasMaleta.getChildAt(i);
@@ -91,12 +92,17 @@ public class HacerMaletaActivity extends AppCompatActivity {
                 pertenenciaCajaTexto = (TextView) padre.findViewById(R.id.elementos_lista_maleta_nombre_elemento);
                 nombrePertenencia = pertenenciaCajaTexto.getText().toString();
                 controlador.actualizarCampoHacerMaleta(nombrePertenencia);
+                cuantosSeleccionados++;
             }
         }
 
-        Datos.numeroMaleta = 1;
-        Intent intento = new Intent(this, MaletaPpalActivity.class);
-        startActivity(intento);
+        if (cuantosSeleccionados != 0) {
+            Datos.numeroMaleta = 1;
+            Intent intento = new Intent(this, MaletaPpalActivity.class);
+            startActivity(intento);
+        } else {
+            mensaje="No ha seleccionado ninguna Pertenencia para llenar la maleta";
+            escribirMensaje(mensaje);}
     }
 
     public void ayuda(View view) {
@@ -109,5 +115,10 @@ public class HacerMaletaActivity extends AppCompatActivity {
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void escribirMensaje (String mensaje) {
+        Toast toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
+        toast.show();
     }
 }

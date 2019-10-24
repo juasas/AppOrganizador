@@ -17,9 +17,8 @@ import com.example.juasa.apporganizador.datos.Datos;
 
 public class MenuUsuarioGeneralActivity extends AppCompatActivity {
     private Controlador_base_datos controlador;
-    private Datos datos;
-    private TextView cajaTitulo;
     private Intent intento;
+    private String mensaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,6 @@ public class MenuUsuarioGeneralActivity extends AppCompatActivity {
 
     public void inicializar (){
         controlador = new Controlador_base_datos(this);
-        cajaTitulo = (TextView) findViewById(R.id.menu_ppal_titulo);
     }
 
     public void entrarEstadisticas(View view) {
@@ -62,10 +60,12 @@ public class MenuUsuarioGeneralActivity extends AppCompatActivity {
     }
 
     public void entrarBorrarUsuario(View view) {
+        mensaje = "Todos los datos de usuario eliminados correctamente";
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("Confirmar eliminación")
                 .setMessage("Se va a eliminar todos los datos del Usuario actual (Usuario, " +
-                        "Ubicaciones, Categorías y Pertenencias). Esta acción no podrá deshacerse")
+                        "Ubicaciones, Categorías, Pertenencias y Maleta). Esta acción no podrá " +
+                        "deshacerse")
                 .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
@@ -74,7 +74,7 @@ public class MenuUsuarioGeneralActivity extends AppCompatActivity {
                         controlador.borrarTabla(controlador.TABLA_CATEGORIAS);
                         controlador.borrarTabla(controlador.TABLA_PERTENENCIAS);
                         Datos.numeroUsuarios = 0;
-                        escribir();
+                        mostrarMensaje(mensaje);
                         startActivity(new Intent(getBaseContext(), LoginActivity.class)
                                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
                         finish();
@@ -82,24 +82,29 @@ public class MenuUsuarioGeneralActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Cancelar", null);
         AlertDialog dialog = builder.create();
-        dialog.show();}
+        dialog.show();
+    }
 
     public void entrarBorrarTablasUsuario(View view) {
+        mensaje = "Todos las pertenencias de usuario eliminadas correctamente";
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("Confirmar eliminación")
-                .setMessage("Se va a eliminar todas sus Pertenencias (Ubicaciones, Categorias y " +
-                            "Pertenencias. Esta acción no podrá deshacerse")
+                .setMessage("Se va a eliminar todas sus Pertenencias (Ubicaciones, Categorias, " +
+                            "Pertenencias y Maleta. Esta acción no podrá deshacerse")
                 .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         controlador.borrarTabla(controlador.TABLA_UBICACIONES);
                         controlador.borrarTabla(controlador.TABLA_CATEGORIAS);
                         controlador.borrarTabla(controlador.TABLA_PERTENENCIAS);
+                        Datos.numeroUsuarios = 0;
+                        mostrarMensaje(mensaje);
                     }
                 })
                 .setNegativeButton("Cancelar", null);
         AlertDialog dialog = builder.create();
-        dialog.show();}
+        dialog.show();
+    }
 
     public void ayuda(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
@@ -112,8 +117,8 @@ public class MenuUsuarioGeneralActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();}
 
-    public void escribir () {
-        Toast mensaje = Toast.makeText(this, "Contenido de las tablas eliminado correctamente", Toast.LENGTH_LONG);
-        mensaje.show();
+    public void mostrarMensaje (String mensaje) {
+        Toast toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
+        toast.show();
         }
 }

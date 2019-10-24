@@ -55,7 +55,7 @@ public class CategoriasPpalActivity extends AppCompatActivity {
 
     public void inicializar(){
         controlador = new Controlador_base_datos(this);
-        listaCategorias = findViewById(R.id.categorias_ppal_lista_categorias);
+        listaCategorias = (ListView) findViewById(R.id.categorias_ppal_lista_categorias);
     }
 
     public void actualizarUI() {

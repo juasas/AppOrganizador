@@ -18,12 +18,13 @@ public class EditarCategoriaActivity extends AppCompatActivity {
     private EditText cajaNombre, cajaDetalle;
     private View view;
     private Bundle extras;
-    private String nombreCategoria, detalleCategoria, nombreAntiguo, mensaje;
+    private String nombreCategoria, detalleCategoria, nombreAntiguo;
     private Categoria categoria;
     private Intent intento;
     private Toast toast;
 
     public void inicializar (){
+        controlador = new Controlador_base_datos(this);
         cajaNombre = (EditText) findViewById(R.id.editar_cat_caja_nombre);
         cajaDetalle = (EditText) findViewById(R.id.editar_cat_caja_detalle);
     }
@@ -32,7 +33,6 @@ public class EditarCategoriaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_categoria);
-        controlador = new Controlador_base_datos(this);
         recibirParametros();
         inicializar();
         llenarCategoria();
@@ -70,7 +70,7 @@ public class EditarCategoriaActivity extends AppCompatActivity {
     }
 
     public void guardar(View view){
-        inicializar();
+        String mensaje;
         categoria = new Categoria();
         categoria.setNombreCategoria(cajaNombre.getText().toString().toUpperCase());
         categoria.setDescripcionCategoria(cajaDetalle.getText().toString());
@@ -93,7 +93,6 @@ public class EditarCategoriaActivity extends AppCompatActivity {
     }
 
     public void resetear (View view){
-        inicializar();
         cajaNombre.setText("");
         cajaDetalle.setText("");
     }

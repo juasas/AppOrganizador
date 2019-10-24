@@ -24,23 +24,12 @@ public class MenuPrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu_principal);
         getSupportActionBar().hide();
         inicializar();
-
-        //if (controlador.numRegistrosTabla(controlador.TABLA_UBICACIONES) == 0){
-          //  botonEntrarMaleta.setEnabled(false);
-            //botonEntrarPertenencias.setEnabled(false);}
-
-        //if (controlador.numRegistrosTabla(controlador.TABLA_CATEGORIAS) == 0){
-          //  botonEntrarMaleta.setEnabled(false);
-            //botonEntrarPertenencias.setEnabled(false);}
-
-            //Saludo al usuario
-
-        cajaTitulo.setText("Bienvenido, " + Datos.usuario);
     }
 
     public void inicializar (){
         controlador = new Controlador_base_datos(this);
         cajaTitulo = (TextView) findViewById(R.id.menu_ppal_titulo);
+        cajaTitulo.setText("Bienvenido, " + Datos.usuario);
     }
 
     public void entrarPertenenciasPpal(View view) {

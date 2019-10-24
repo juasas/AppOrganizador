@@ -24,7 +24,7 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
     private TextView cajaCat, cajaUbic, cajaNombre, cajaDetalle, cajaTextoFoto;
     private Bundle extras;
     private int id_pert;
-    private String categoriaPert, ubicacionPert, nombrePert, detallePert, fotoPert, cadena;
+    private String categoriaPert, ubicacionPert, nombrePert, detallePert, fotoPert;
     private View view;
     private Intent intento;
 
@@ -32,7 +32,6 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostrar_pertenencia);
-        controlador = new Controlador_base_datos(this);
         recibirParametros();
         inicializar();
         llenarPertenencia();
@@ -58,6 +57,7 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item ){
+        String titulo, mensaje;
         switch (item.getItemId()) {
             case R.id.menu_action_gestion_volver_atras:
                 volver();
@@ -136,11 +136,12 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
         cajaUbic = (TextView) findViewById(R.id.mostrar_pert_caja_ubic);
         cajaFoto = (ImageView) findViewById(R.id.mostrar_pert_imagen);
         cajaTextoFoto =(TextView) findViewById(R.id.mostrar_pert_caja_textoFoto);
+        controlador = new Controlador_base_datos(this);
         }
 
     public void mostrar () {
-        Toast mensaje = Toast.makeText(this, "Pertenencia eliminada correctamente", Toast.LENGTH_LONG);
-        mensaje.show();
+        Toast toast = Toast.makeText(this, "Pertenencia eliminada correctamente", Toast.LENGTH_LONG);
+        toast.show();
     }
 
     public void volver(){
@@ -158,6 +159,6 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
                         "de bienvenida, EDITAR esta Pertenencia o ELIMINARLA")
                 .setPositiveButton("Aceptar", null);
         AlertDialog dialog = builder.create();
-        dialog.show();}
+        dialog.show();
+    }
 }
-

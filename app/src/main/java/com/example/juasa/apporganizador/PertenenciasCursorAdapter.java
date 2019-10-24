@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.example.juasa.apporganizador.datos.Datos;
 
-import java.io.File;
-
 public class PertenenciasCursorAdapter extends CursorAdapter {
 
     private ImageView cajaIcono;
@@ -27,7 +25,7 @@ public class PertenenciasCursorAdapter extends CursorAdapter {
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        return inflater.inflate(R.layout.elementos_lista_tipos, viewGroup, false);
+        return inflater.inflate(R.layout.elementos_lista_pertenencias, viewGroup, false);
     }
 
     @Override

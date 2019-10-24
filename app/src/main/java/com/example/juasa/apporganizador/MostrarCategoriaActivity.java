@@ -16,10 +16,9 @@ import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
 
 public class MostrarCategoriaActivity extends AppCompatActivity {
     private Controlador_base_datos controlador;
-    private TextView cajaid, cajaNombreCat, cajaDetalleCat;
+    private TextView cajaNombreCat, cajaDetalleCat;
     private Bundle extras;
     private String nombreCategoria, detalleCategoria;
-    private View view;
     private Intent intento;
     private int idCategoria;
 
@@ -27,17 +26,9 @@ public class MostrarCategoriaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostrar_categoria);
-        controlador = new Controlador_base_datos(this);
+        inicializar();
         recibirParametros();
-        llenarCategoria(view);
-    }
-
-    public void recibirParametros() {
-        extras = getIntent().getExtras();
-        if (extras != null) {
-            idCategoria = extras.getInt("id_categoria");
-            nombreCategoria = extras.getString("nombre_categoria");
-            detalleCategoria = extras.getString("detalle_categoria");}
+        llenarCategoria();
     }
 
     @Override
@@ -67,7 +58,8 @@ public class MostrarCategoriaActivity extends AppCompatActivity {
                 if (controlador.numAparicionesCategoriaTablaPert(idCategoria) == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                     .setTitle("Confirmar eliminación")
-                    .setMessage("¿Qué desea hacer?")
+                    .setMessage("¿Qué desea hacer?. Si selecciona Eliminar, esta acción no puede " +
+                                "deshacerse")
                     .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
@@ -91,9 +83,21 @@ public class MostrarCategoriaActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void llenarCategoria(View view){
+    public void inicializar (){
+        controlador = new Controlador_base_datos(this);
         cajaNombreCat = (TextView) findViewById(R.id.mostrar_cat_caja_nombre);
         cajaDetalleCat = (TextView) findViewById(R.id.mostrar_cat_caja_detalle);
+    }
+
+    public void recibirParametros() {
+        extras = getIntent().getExtras();
+        if (extras != null) {
+            idCategoria = extras.getInt("id_categoria");
+            nombreCategoria = extras.getString("nombre_categoria");
+            detalleCategoria = extras.getString("detalle_categoria");}
+    }
+
+    public void llenarCategoria(){
         cajaNombreCat.setText(nombreCategoria);
         cajaDetalleCat.setText(detalleCategoria);
     }

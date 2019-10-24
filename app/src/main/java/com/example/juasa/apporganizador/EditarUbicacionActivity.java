@@ -18,12 +18,13 @@ public class EditarUbicacionActivity extends AppCompatActivity {
     private EditText cajaNombre, cajaDetalle;
     private View view;
     private Bundle extras;
-    private String nombreUbicacion, detalleUbicacion, nombreAntiguo, mensaje;
+    private String nombreUbicacion, detalleUbicacion, nombreAntiguo;
     private Ubicacion ubicacion;
     private Intent intento;
     private Toast toast;
 
     public void inicializar (){
+        controlador = new Controlador_base_datos(this);
         cajaNombre = (EditText) findViewById(R.id.editar_ubic_caja_nombre);
         cajaDetalle = (EditText) findViewById(R.id.editar_ubic_caja_detalle);
     }
@@ -32,7 +33,6 @@ public class EditarUbicacionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_ubicacion);
-        controlador = new Controlador_base_datos(this);
         recibirParametros();
         inicializar();
         llenarUbicacion();
@@ -70,7 +70,7 @@ public class EditarUbicacionActivity extends AppCompatActivity {
     }
 
     public void guardar(View view){
-        inicializar();
+        String mensaje;
         ubicacion = new Ubicacion();
         ubicacion.setNombreUbicacion(cajaNombre.getText().toString().toUpperCase());
         ubicacion.setDescripcionUbicacion(cajaDetalle.getText().toString());
@@ -93,7 +93,6 @@ public class EditarUbicacionActivity extends AppCompatActivity {
     }
 
     public void resetear (View view){
-        inicializar();
         cajaNombre.setText("");
         cajaDetalle.setText("");
     }

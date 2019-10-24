@@ -9,6 +9,7 @@ import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,10 +17,9 @@ import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
 
 public class MostrarUbicacionActivity extends AppCompatActivity {
     private Controlador_base_datos controlador;
-    private TextView cajaNombre, cajaDescripcion;
+    private TextView cajaNombreUbic, cajaDetalleUbic;
     private Bundle extras;
-    private String nombreUbicacion, descripcionUbicacion;
-    private View view;
+    private String nombreUbicacion, detalleUbicacion;
     private Intent intento;
     private int idUbicacion;
 
@@ -27,18 +27,11 @@ public class MostrarUbicacionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostrar_ubicacion);
-        controlador = new Controlador_base_datos(this);
+        inicializar();
         recibirParametros();
-        llenarUbicacion(view);
+        llenarUbicacion();
     }
 
-    public void recibirParametros() {
-        extras = getIntent().getExtras();
-        if (extras != null) {
-            idUbicacion=extras.getInt("id_ubicacion");
-            nombreUbicacion = extras.getString("nombre_ubicacion");
-            descripcionUbicacion = extras.getString("detalle_ubicacion");}
-    }
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
         getMenuInflater().inflate(R.menu.menu_action_gestion, menu);
@@ -59,14 +52,15 @@ public class MostrarUbicacionActivity extends AppCompatActivity {
             case R.id.menu_action_gestion_editar_elemento:
                 intento = new Intent(this, EditarUbicacionActivity.class);
                 intento.putExtra("nombre_ubicacion", nombreUbicacion);
-                intento.putExtra("detalle_ubicacion", descripcionUbicacion);
+                intento.putExtra("detalle_ubicacion", detalleUbicacion);
                 startActivity(intento);
                 break;
             case R.id.menu_action_gestion_eliminar_elemento:
                 if (controlador.numAparicionesUbicacionTablaPert(idUbicacion)== 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                             .setTitle("Confirmar eliminación")
-                            .setMessage("¿Qué desea hacer?")
+                            .setMessage(("¿Qué desea hacer?. Si selecciona Eliminar, esta acción no puede " +
+                                    "deshacerse"))
                             .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
@@ -90,11 +84,22 @@ public class MostrarUbicacionActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void llenarUbicacion(View view){
-        cajaNombre = (TextView) findViewById(R.id.mostrar_ubic_caja_nombre);
-        cajaDescripcion = (TextView) findViewById(R.id.mostrar_ubic_caja_detalle);
-        cajaNombre.setText(nombreUbicacion);
-        cajaDescripcion.setText(descripcionUbicacion);
+    public void inicializar (){
+        controlador = new Controlador_base_datos(this);
+        cajaNombreUbic = (TextView) findViewById(R.id.mostrar_ubic_caja_nombre);
+        cajaDetalleUbic = (TextView) findViewById(R.id.mostrar_ubic_caja_detalle);
+    }
+
+    public void recibirParametros() {
+        extras = getIntent().getExtras();
+        if (extras != null) {
+            idUbicacion=extras.getInt("id_ubicacion");
+            nombreUbicacion = extras.getString("nombre_ubicacion");
+            detalleUbicacion = extras.getString("detalle_ubicacion");}
+    }
+    public void llenarUbicacion(){
+        cajaNombreUbic.setText(nombreUbicacion);
+        cajaDetalleUbic.setText(detalleUbicacion);
     }
 
     public void escribir () {

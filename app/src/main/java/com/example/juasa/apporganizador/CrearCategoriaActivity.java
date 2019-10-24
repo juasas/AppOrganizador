@@ -19,6 +19,7 @@ public class CrearCategoriaActivity extends AppCompatActivity {
     private EditText cajaNombreCat, cajaDetalleCat;
     private String nombreCategoria, detalleCategoria, mensaje;
     private Intent intento;
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,7 @@ public class CrearCategoriaActivity extends AppCompatActivity {
         dialog.show();}
 
     public void mostrarMensaje (String mensaje){
-        Toast toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
+        toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
         toast.show();
     }
 }

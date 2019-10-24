@@ -16,14 +16,12 @@ import java.security.NoSuchAlgorithmException;
 public class NuevoUsuarioActivity extends AppCompatActivity {
     private Controlador_base_datos controlador;
     private EditText cajaId, cajaNombre, cajaPass, cajaPass2;
-    private Toast toast;
     private String mensaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_usuario);
-        controlador = new Controlador_base_datos(this);
         getSupportActionBar().hide();
         inicializar();
     }
@@ -33,6 +31,7 @@ public class NuevoUsuarioActivity extends AppCompatActivity {
         cajaNombre = (EditText) findViewById(R.id.nuevo_usuario_caja_nombre);
         cajaPass = (EditText) findViewById(R.id.nuevo_usuario_caja_pass);
         cajaPass2 = (EditText) findViewById(R.id.nuevo_usuario_caja_repite_pass);
+        controlador = new Controlador_base_datos(this);
     }
 
     public void aceptar(View view) {
@@ -59,14 +58,14 @@ public class NuevoUsuarioActivity extends AppCompatActivity {
                     mostrarMensaje(mensaje);
                 } else {
                     if (pass.isEmpty()) {
-                        mensaje = "El campo PASSWORD está vacio";
+                        mensaje = "El campo CONTRASEÑA está vacio";
                         mostrarMensaje(mensaje);
                     } else {
                         if (pass2.isEmpty()) {
-                            mensaje = "El campo CONFIRMAR PASSWORD está vacio";
+                            mensaje = "El campo CONFIRMAR CONTRASEÑA está vacio";
                             mostrarMensaje(mensaje);
                         } else {
-                            if (!pass.equalsIgnoreCase(pass2)) {
+                            if (!pass.equals(pass2)) {
                                 mensaje = "Las contraseñas no coinciden";
                                 mostrarMensaje(mensaje);
                             } else {
@@ -104,7 +103,7 @@ public class NuevoUsuarioActivity extends AppCompatActivity {
     }
 
     public void mostrarMensaje(String mensaje) {
-        toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
         toast.show();
     }
 }

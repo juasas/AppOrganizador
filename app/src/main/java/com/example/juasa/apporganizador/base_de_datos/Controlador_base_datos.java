@@ -65,8 +65,8 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLA_CATEGORIAS + " (ID_CATEGORIA INTEGER PRIMARY KEY AUTOINCREMENT, NOMBRE_CATEGORIA TEXT NOT NULL, DESCRIPCION_CATEGORIA TEXT)");
         db.execSQL("CREATE TABLE " + TABLA_PERTENENCIAS + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, ID_PERT INTEGER, NOMBRE_PERT TEXT NOT NULL, DETALLE_PERT TEXT, " +
                 "ID_CATEGORIA_PERT INTEGER NOT NULL, ID_UBICACION_PERT INTEGER NOT NULL, FOTO_PERT TEXT, MALETA_PERT TEXT, " +
-                "FOREIGN KEY (ID_CATEGORIA_PERT) REFERENCES " + TABLA_CATEGORIAS + "(ID_CATEGORIA) ON DELETE CASCADE ON UPDATE CASCADE," +
-                "FOREIGN KEY (ID_UBICACION_PERT) REFERENCES " + TABLA_UBICACIONES + "(ID_UBICACION) ON DELETE CASCADE ON UPDATE CASCADE)");
+                "FOREIGN KEY (ID_CATEGORIA_PERT) REFERENCES " + TABLA_CATEGORIAS + "(ID_CATEGORIA) ON UPDATE CASCADE ON DELETE CASCADE," +
+                "FOREIGN KEY (ID_UBICACION_PERT) REFERENCES " + TABLA_UBICACIONES + "(ID_UBICACION) ON UPDATE CASCADE ON DELETE CASCADE)");
     }
 
     @Override
@@ -84,18 +84,6 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
             }
         }
     }
-
-    public Cursor obtenerCabecerasPedidos() {
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
-
-        builder.setTables(CABECERA_JOIN_UBIC_CAT_PERT);
-
-        return builder.query(db, CabeceraColumnasJoin, null, null, null, null, null);
-    }
-
-    //Devuelve si existe un valor en la tabla de la base de datos
 
     public Boolean existe(String nombreTabla, String campo, String valor) {
 
@@ -183,7 +171,7 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
 
         //Consulta
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_USUARIOS + " WHERE IDENTIFICADOR =\"" + identificador + "\"", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLA_USUARIOS + " WHERE IDENTIFICADOR ='" + identificador + "'", null);
 
         Usuario usuario = new Usuario();
 
@@ -297,33 +285,6 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return nombresCategorias;
-    }
-
-    public String[] obtenerIDTodasPertenencias() {
-        //Abrir
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor;
-        int numReg;
-        String[] pertenencias;
-        //Consulta
-
-        cursor = db.rawQuery("SELECT * FROM " + TABLA_PERTENENCIAS, null);
-
-        numReg = cursor.getCount();
-        if (numReg == 0) {
-            db.close();
-            pertenencias = null;
-        } else {
-            pertenencias = new String[numReg];
-            cursor.moveToFirst();
-            for (int i = 0; i < numReg; i++) {
-                pertenencias[i] = cursor.getString(0);
-                cursor.moveToNext();
-            }
-        }
-        cursor.close();
-        db.close();
-        return pertenencias;
     }
 
     public Pertenencia obtenerPertenenciaPorNombre(String nombrePertenencia) {
@@ -586,11 +547,11 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
         return estaTrue;
     }
 
-    public int estadisticas(String tabla) {
+    public int estadisticas(String nombreTabla) {
         String query;
         int num;
         SQLiteDatabase db = this.getReadableDatabase();
-        query = "SELECT * FROM " + tabla;
+        query = "SELECT * FROM " + nombreTabla;
         Cursor cursor = db.rawQuery(query, null);
         return cursor.getCount();
     }
@@ -607,9 +568,9 @@ public class Controlador_base_datos extends SQLiteOpenHelper {
         return campoFecha;
     }
 
-    public void borrarTabla(String tabla){
+    public void borrarTabla(String nombreTabla){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(tabla, null, null);
+        db.delete(nombreTabla, null, null);
     }
 }
 

@@ -2,120 +2,74 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="10dp"
-    tools:context=".HacerMaletaActivity">
+    style="@style/estilo_relative_elementos">
 
     <ImageView
         android:id="@+id/elementos_lista_maleta_icono_elemento"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_centerVertical="true"/>
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_centerVertical="true" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/elementos_lista_maleta_icono_elemento"
-        android:orientation="vertical"
-        android:layout_centerVertical="true">
+        style="@style/estilo_linear_elementos"
+        android:layout_toRightOf="@id/elementos_lista_maleta_icono_elemento">
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            style="@style/match_wrap">
 
             <TextView
                 android:id="@+id/elementos_lista_maleta_etiq_nombre_elemento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
+                style="@style/estilo_caja_listas"
                 android:textSize="16sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Nombre:"
-                android:textStyle="bold" />
+                android:text="Nombre:"/>
 
             <TextView
                 android:id="@+id/elementos_lista_maleta_nombre_elemento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
+                style="@style/estilo_caja_listas"
+                android:layout_marginLeft="2dp"
                 android:textSize="16sp"
-                android:textColor="@color/colorPrimary"
-                android:layout_toRightOf="@+id/elementos_lista_maleta_etiq_nombre_elemento"
-                android:textStyle="bold" />
+                android:layout_toRightOf="@+id/elementos_lista_maleta_etiq_nombre_elemento" />
         </RelativeLayout>
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            style="@style/match_wrap">
 
             <TextView
                 android:id="@+id/elementos_lista_maleta_etiq_cat_elemento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="false"
-                android:layout_alignParentLeft="false"
-                android:layout_alignParentTop="false"
-                android:layout_alignParentEnd="false"
-                android:layout_alignParentRight="false"
-                android:layout_alignParentBottom="false"
-                android:layout_centerInParent="false"
-                android:layout_centerHorizontal="false"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:singleLine="false"
+                style="@style/estilo_caja_listas"
                 android:text="Categoría:"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/elemtos_lista_maleta_cat_elemento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="35dp"
+                style="@style/estilo_caja_listas"
+                android:layout_marginLeft="2dp"
                 android:textSize="16sp"
-                android:textColor="@color/colorPrimary"
-                android:layout_toRightOf="@+id/elementos_lista_maleta_etiq_cat_elemento"
-                android:textStyle="bold" />
+                android:layout_toRightOf="@+id/elementos_lista_maleta_etiq_cat_elemento" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            style="@style/match_wrap">
 
             <TextView
                 android:id="@+id/elementos_lista_maleta_etiq_ubic_elemento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
+                style="@style/estilo_caja_listas"
                 android:textSize="16sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="Ubicación:"
-                android:textStyle="bold" />
+                android:text="Ubicación:" />
 
             <TextView
                 android:id="@+id/elementos_lista_maleta_ubic_elemento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
+                style="@style/estilo_caja_listas"
+                android:layout_marginLeft="2dp"
                 android:textSize="16sp"
-                android:textColor="@color/colorPrimary"
-                android:layout_toRightOf="@+id/elementos_lista_maleta_etiq_ubic_elemento"
-                android:textStyle="bold" />
+                android:layout_toRightOf="@+id/elementos_lista_maleta_etiq_ubic_elemento" />
         </RelativeLayout>
 
         <CheckBox
             android:id="@+id/elementos_lista_maleta_check_elemento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Seleccionar"
-            android:textSize="16sp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold" />
+            style="@style/estilo_checkBox"
+            app:buttonTint="@color/colorPrimary"
+            android:text="Seleccionar" />
     </LinearLayout>
 </RelativeLayout>

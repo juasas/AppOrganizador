@@ -2,6 +2,7 @@ package com.example.juasa.apporganizador;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,16 +20,13 @@ public class MaletaPpalActivity extends AppCompatActivity {
     private Intent intento;
     private Controlador_base_datos controlador;
     private Datos datos;
-    private Button botonHacerMaleta, botonDeshacerMaleta;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maleta_ppal);
         controlador = new Controlador_base_datos(this);
-        botonHacerMaleta = (Button) findViewById(R.id.maleta_ppal_boton_entrar_hacer_maleta);
-        botonDeshacerMaleta = (Button) findViewById(R.id.maleta_ppal_boton_deshacer_maleta);
-        //actualizarBotonesMaleta();
     }
 
     @Override
@@ -52,27 +50,11 @@ public class MaletaPpalActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void actualizarBotonesMaleta(){
-        if (datos.numeroMaleta == 0) {
-            botonHacerMaleta.setEnabled(true);
-            botonDeshacerMaleta.setEnabled(false);
-        } else {//ya hay una maleta hecha
-            botonHacerMaleta.setEnabled(false);
-            botonDeshacerMaleta.setEnabled(true);}
-    }
-
     public void entrarHacerMaleta (View view) {
-        //AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
-        //      .setTitle("AVISO")
-        //    .setMessage("Gracias por su interés, funcionalidad disponible próximamente.")
-        //  .setPositiveButton("Aceptar", null);
-        //AlertDialog dialog = builder.create();
-        //dialog.show();
         if (datos.numeroMaleta == 1) {
             escribirCuadrodialogo("Ya tiene una maleta creada");
         } else {
             intento = new Intent(this, HacerMaletaActivity.class);
-            intento.putExtra("tipo", "Hacer maleta");
             startActivity(intento);
         }
     }
@@ -95,16 +77,23 @@ public class MaletaPpalActivity extends AppCompatActivity {
                     .setNegativeButton("Cancelar", null);
             AlertDialog dialog = builder.create();
             dialog.show();}
-
-        //actualizarBotonesMaleta();
     }
 
     public void verMaleta (View view){
         if (datos.numeroMaleta == 0) {
             escribirCuadrodialogo("No tiene la Maleta hecha. Por favor hágala primero");
         } else {
-            intento = new Intent(this, VerMaletaActivity.class);
-            startActivity(intento);}
+            Cursor cursor = controlador.obtenerPertenenciasPorMaleta();
+            if (cursor.getCount() == 0) {
+                escribirCuadrodialogo("Se han borrado todas las Pertenencias de la Maleta "+
+                        "pero no se ha deshecho la Maleta. Para poder seguir usando esta funcionalidad " +
+                        "se tiene que proceder a deshacer. Pulse ACEPTAR para continuar");
+                Datos.numeroMaleta = 0;
+            } else {
+                intento = new Intent(this, VerMaletaActivity.class);
+                startActivity(intento);
+            }
+        }
     }
 
     public void escribirToast () {

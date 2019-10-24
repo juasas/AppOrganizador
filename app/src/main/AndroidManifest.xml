@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".VerMaletaActivity"></activity>
+        <activity android:name=".MostrarPertenenciaMaletaActivity"></activity>
+        <activity android:name=".VerMaletaActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +27,6 @@
         <activity android:name=".CrearCategoriaActivity" />
         <activity android:name=".CrearEditarPertenenciaActivity" />
         <activity android:name=".CrearUbicacionActivity" />
-        <activity android:name=".EditarPertenenciaActivity" />
         <activity android:name=".EditarUbicacionActivity" />
         <activity android:name=".MenuPertenenciasGeneralActivity" />
         <activity android:name=".MenuPrincipalActivity" />
@@ -39,13 +39,12 @@
         <activity android:name=".PertenenciasPpalActivity" />
         <activity android:name=".MaletaPpalActivity" />
         <activity android:name=".HacerMaletaActivity" />
-        <activity android:name=".FotografiaPpalActivity" />
         <activity android:name=".MenuUsuarioGeneralActivity" />
         <activity android:name=".MostrarEstadisticaActivity" />
         <activity android:name=".CambiarPassWordActivity" />
     </application>
-    <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
-
     <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
 
 </manifest>

@@ -36,7 +36,7 @@
     <Button
         android:id="@+id/menu_usuario_general_boton_entrar_cambiar_pass"
         style="@style/estilo_boton"
-        android:text="Cambiar Password"
+        android:text="Cambiar Contraseña"
         android:background="@drawable/presionarboton"
         android:layout_below="@+id/menu_usuario_general_boton_entrar_estadisticas"
         android:onClick="entrarCambiarPass"/>

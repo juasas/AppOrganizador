@@ -20,8 +20,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private Controlador_base_datos controlador;
     private EditText cajaId, cajaPass;
-    private TextView textoNuevoUsusario;
     private Intent intento;
+    private String mensaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +35,11 @@ public class LoginActivity extends AppCompatActivity {
         controlador = new Controlador_base_datos(this);
         cajaId = (EditText) findViewById(R.id.login_caja_identificador);
         cajaPass = (EditText) findViewById(R.id.login_caja_pass);
-        textoNuevoUsusario = (TextView) findViewById(R.id.login_nuevo_usuario);
         Datos.numeroUsuarios = controlador.numRegistrosTabla(controlador.TABLA_USUARIOS);
     }
 
     public void crearNuevoUsuario (View view) {
         if (Datos.numeroUsuarios == 1){
-            textoNuevoUsusario.setEnabled(false);
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                     .setTitle("AVISO")
                     .setMessage("No puede CREAR más de un Usuario. Ya existe un Usuario creado. " +
@@ -67,24 +65,21 @@ public class LoginActivity extends AppCompatActivity {
         //Se comprueba si los campos de nuevo usuario están vacios
 
         if (identificador.isEmpty() && (pass.isEmpty())) {
-            Toast mensaje = Toast.makeText(this, "Los campos MAIL y PASSWORD están vacios", Toast.LENGTH_LONG);
-            mensaje.show();
+            mensaje = "Los campos IDENTIFICADOR y CONTRASEÑA están vacios";
+            mostrarMensaje(mensaje);
         } else {
             if (identificador.isEmpty()) {
-                Toast mensaje = Toast.makeText(this, "El campo MAIL está vacio", Toast.LENGTH_LONG);
-                mensaje.show();
+                mensaje = "El campo IDENTIFICADOR está vacio";
+                mostrarMensaje(mensaje);
                 } else {
                     if (pass.isEmpty()) {
-                        Toast mensaje = Toast.makeText(this, "El campo PASSWORD está vacio", Toast.LENGTH_LONG);
-                        mensaje.show();
+                        mensaje = "El campo CONTRASEÑA está vacio";
+                        mostrarMensaje(mensaje);
                     } else {
-                        if (controlador.existe(controlador.TABLA_USUARIOS, "IDENTIFICADOR", identificador)) {
-                            usuarioBuscado = controlador.obtenerUsuario(identificador);
-
-                            //Se guarda en la variable global el nombre de usuario
-
+                        usuarioBuscado = controlador.obtenerUsuario(identificador);
+                        if (usuarioBuscado != null) {
                             Datos.usuario = usuarioBuscado.getNombre();
-                            Datos.identificador = identificador;
+                            Datos.identificador=usuarioBuscado.getIdentificador();
                             String passEncriptada= Encriptacion.encriptarPass(pass);
                             if (usuarioBuscado.getPassword().equals(passEncriptada)) {
                                 if (controlador.existe(controlador.TABLA_USUARIOS, "MALETA", "T"))
@@ -93,14 +88,16 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(intento);
                                 finish();
                             } else {// No coinciden las credenciales
-                                Toast mensaje = Toast.makeText(this, "Las credenciales introducidas no son válidas", Toast.LENGTH_LONG);
-                                mensaje.show();
+                                mensaje = "Las credenciales introducidas no son válidas";
+                                mostrarMensaje(mensaje);
                                 borrarCajas(view);
                             }
 
                         } else {
-                            Toast mensaje = Toast.makeText(this, "No existe el usuario en la Base de Datos", Toast.LENGTH_LONG);
-                            mensaje.show();
+                            mensaje = "No existe un usuario con el identificador introducido "+
+                                      "en la Base de Datos. Introduzca un identificador correcto "+
+                                      " o cree un nuevo usuario";
+                            mostrarMensaje(mensaje);
                             borrarCajas(view);
                         }
                     }
@@ -122,9 +119,17 @@ public class LoginActivity extends AppCompatActivity {
         dialog.show();}
 
     public void cerrarApp (View view){
+        if (Datos.numeroMaleta == 0)
+            controlador.actualizarUsuarioMaleta(Datos.identificador, "F");
+        else controlador.actualizarUsuarioMaleta(Datos.identificador, "T");
         super.onBackPressed();
         finishAffinity();
         System.exit(0);
+    }
+
+    public void mostrarMensaje(String mensaje){
+        Toast toast = Toast.makeText(this, mensaje, Toast.LENGTH_LONG);
+        toast.show();
     }
 }
 

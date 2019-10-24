@@ -64,14 +64,14 @@ public class UbicacionesPpalActivity extends AppCompatActivity {
             Toast mensaje = Toast.makeText(this, "No existe ninguna Ubicación. Por favor, cree alguna", Toast.LENGTH_LONG);
             mensaje.show();
         } else {
-            adaptador = new ArrayAdapter(this, R.layout.item_lista_ubic, R.id.item_lista_ubic_nombre_elemento, controlador.obtenerUbicaciones());
+            adaptador = new ArrayAdapter(this, R.layout.elementos_lista_ubic, R.id.elementos_lista_ubic_nombre_elemento, controlador.obtenerUbicaciones());
             listaUbicaciones.setAdapter(adaptador);
         }
     }
 
     public void mostrarElemento(View view) {
         View padre = (View) view.getParent();
-        TextView ubicacionCajaTexto = (TextView) padre.findViewById(R.id.item_lista_ubic_nombre_elemento);
+        TextView ubicacionCajaTexto = (TextView) padre.findViewById(R.id.elementos_lista_ubic_nombre_elemento);
         nombreUbicacion = ubicacionCajaTexto.getText().toString();
         ubicacion = controlador.obtenerUbicacion(nombreUbicacion);
         intento = new Intent(this, MostrarUbicacionActivity.class);

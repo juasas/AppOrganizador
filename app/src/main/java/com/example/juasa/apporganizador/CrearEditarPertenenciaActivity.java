@@ -34,15 +34,16 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
     private EditText cajaNombre, cajaDetalle;
     private ArrayAdapter<String> adaptadorSpinnerCategoria, adaptadorSpinnerUbicacion;
     private Spinner spinnerCategoria, spinnerUbicacion;
-    private String nombrePert, detallePert, nombreUbicacionPert, nombreCategoriaPert, fotoPert, nombreAntiguoPert, operacion;
+    private String nombrePert, detallePert, nombreUbicacionPert, nombreCategoriaPert, fotoPert,
+                   nombreAntiguoPert, operacion;
     private String nombreFoto = "";
     private Intent intento, intentoCamara;
     private int idCategoria, idUbicacion;
     private TextView cajaTitulo, cajaTextoFoto;
     private static int CREAR = 1;
     private static int EDITAR = 2;
-    private static final int PERMISSION_REQUEST_CAMERA = 0;
-    private static final int PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
+    private static final int PERMISO_ESCRITURA= 0;
+    private static final int PERMISO_CAMARA = 1;
     private Toast toast;
     private String mensaje;
     private View view;
@@ -61,7 +62,6 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
         actualizarUI_spinners();
         llenarPertenencia();
         verOperación();
-        //actualizarUI_spinners();
     }
 
     @Override
@@ -185,7 +185,6 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
     }
 
     public void guardarPertenencia() {
-        inicializar();
         pertenencia = new Pertenencia();
         //Se guardan los valores de los spinner y se transforman en enteros
 
@@ -247,14 +246,14 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
         }
     }
 
-    public int obtenerPosicionItem(Spinner spinner, String categoriaBuscada) {
+    public int obtenerPosicionItem(Spinner spinner, String itemBuscado) {
         //Creamos la variable posicion y lo inicializamos en 0
         int posicion = 0;
         //Recorre el spinner en busca del ítem que coincida con el parametro categoriaBuscada
         //que lo pasaremos posteriormente
         for (int i = 0; i < spinner.getCount(); i++) {
             //Almacena la posición del ítem que coincida con la búsqueda
-            if (spinner.getItemAtPosition(i).toString().equals(categoriaBuscada)) {
+            if (spinner.getItemAtPosition(i).toString().equals(itemBuscado)) {
                 posicion = i;
             }
         }
@@ -279,7 +278,8 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
                 .setTitle("AVISO")
                 .setMessage("Los permisos para acceder al ALMACENAMIENTO INTERNO y a la CÁMARA de " +
                             "su dispositivo son necesarios para obtener una fotografía y usarla. " +
-                            "Si no los ha concedido previamente, debe otorgarlos")
+                            "Si no ha concedido previamente ambos permisos, debe otorgarlos cuando " +
+                        "así se le indique")
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
@@ -296,7 +296,7 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
             guardarDatos();
             mostrarAviso();
         } else {
-            mostrarMensaje("El ALMACENAMIENTO EXTERNO no está disònible");
+            mostrarMensaje("El ALMACENAMIENTO EXTERNO no está disponible");
         }
     }
 
@@ -317,31 +317,27 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
                 //El permiso no se ha concedido aún
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
+                        PERMISO_ESCRITURA);
             } else {
                 comprobarPermisoCamara(); }
         } else {
-            comprobarPermisoCamara();}
-        }
+            continuar();}
+    }
 
     public void comprobarPermisoCamara() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {// Marshmallow+
-            if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.CAMERA)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.CAMERA},
-                        PERMISSION_REQUEST_CAMERA);
-            } else {
-                continuar();}
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, PERMISO_CAMARA);
         } else {
-            continuar();}
+                continuar();}
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE: {
+            case PERMISO_ESCRITURA: {
                 // Si la petición es cancelada, el array resultante estará vacío.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // El permiso ha sido concedido.
@@ -351,9 +347,9 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
                     mostrarMensaje(mensaje);
                     // Permiso denegado.
                 }
+                break;
             }
-            break;
-            case PERMISSION_REQUEST_CAMERA: {
+            case PERMISO_CAMARA: {
                 // Si la petición es cancelada, el array resultante estará vacío.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // El permiso ha sido concedido.
@@ -363,8 +359,8 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
                     mensaje = "No ha concedido Permiso para acceder a la CÁMARA. Debe concederlo";
                     mostrarMensaje(mensaje);
                 }
+                break;
             }
-            break;
         }
         return;
     }
@@ -399,7 +395,7 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
                 .create();
                 builder.show();
     }
-
+@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //Comprobamos que la foto se ha realizado
         if (requestCode == 1 && resultCode == RESULT_OK) {

@@ -42,15 +42,15 @@ public class CambiarPassWordActivity extends AppCompatActivity {
         //Se comprueba si los campos de nuevo usuario están vacios
 
         if (pass.isEmpty() && (repitePass.isEmpty())) {
-            mensaje = "Los campos PASSWORD y REPITE PASSWORD están vacios";
+            mensaje = "Los campos CONTRASEÑA y CONFIRMAR-CONTRASEÑA están vacios";
             mostrar(mensaje);
         } else {
             if (pass.isEmpty()) {
-                mensaje = "El campo PASSWORD está vacio";
+                mensaje = "El campo CONTRASEÑA está vacio";
                 mostrar(mensaje);
             } else {
                 if (repitePass.isEmpty()) {
-                    mensaje = "El campo REPITE PASSWORD está vacio";
+                    mensaje = "El campo CONFIRMAR-CONTRASEÑA está vacio";
                     mostrar(mensaje);
                 } else {
                     if (pass.equals(repitePass)) {

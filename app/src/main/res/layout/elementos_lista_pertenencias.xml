@@ -2,42 +2,69 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="10dp">
+    style="@style/estilo_relative_elementos">
 
     <ImageView
-        android:id="@+id/icono_elemento"
-        android:layout_marginLeft="10dp"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_centerVertical="true"
-        android:scaleType="fitXY"
-        app:srcCompat="@mipmap/images" />
+        android:id="@+id/elementos_lista_icono_elemento"
+        style="@style/estilo_icono_elementos"
+        android:onClick="mostrarElemento"/>
 
-    <TextView
-        android:id="@+id/identificador_elemento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:textSize="25sp"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"
-        android:onClick="mostrarElemento"
-        android:layout_toRightOf="@+id/icono_elemento"/>
+    <LinearLayout
+        style="@style/estilo_linear_elementos"
+        android:layout_toRightOf="@id/elementos_lista_icono_elemento"
+        android:onClick="mostrarElemento">
 
-    <TextView
-        android:id="@+id/nombre_elemento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        android:textSize="25sp"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"
-        android:onClick="mostrarElemento"
-        android:layout_toRightOf="@+id/identificador_elemento"/>
+        <RelativeLayout
+            style="@style/match_wrap">
 
+            <TextView
+                android:id="@+id/elementos_lista_etiq_nombre_elemento"
+                style="@style/estilo_caja_listas"
+                android:text="Nombre:"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/elementos_lista_nombre_elemento"
+                style="@style/estilo_caja_listas"
+                android:layout_marginLeft="17dp"
+                android:textSize="16sp"
+                android:layout_toRightOf="@+id/elementos_lista_etiq_nombre_elemento" />
+        </RelativeLayout>
+        <RelativeLayout
+            style="@style/match_wrap">
+
+            <TextView
+                android:id="@+id/elementos_lista_etiq_cat_elemento"
+                style="@style/estilo_caja_listas"
+                android:text="Categoría:"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/elemtos_lista_cat_elemento"
+                style="@style/estilo_caja_listas"
+                android:layout_marginLeft="7dp"
+                android:textSize="16sp"
+                android:layout_toRightOf="@+id/elementos_lista_etiq_cat_elemento"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/match_wrap">
+
+            <TextView
+                android:id="@+id/elementos_lista_etiq_ubic_elemento"
+                style="@style/estilo_caja_listas"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Ubicación:" />
+
+            <TextView
+                android:id="@+id/elementos_lista_ubic_elemento"
+                style="@style/estilo_caja_listas"
+                android:layout_marginLeft="5dp"
+                android:textSize="16sp"
+                android:layout_toRightOf="@+id/elementos_lista_etiq_ubic_elemento"/>
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>
