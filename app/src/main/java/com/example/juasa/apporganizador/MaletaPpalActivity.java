@@ -19,8 +19,6 @@ import com.example.juasa.apporganizador.datos.Datos;
 public class MaletaPpalActivity extends AppCompatActivity {
     private Intent intento;
     private Controlador_base_datos controlador;
-    private Datos datos;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +49,7 @@ public class MaletaPpalActivity extends AppCompatActivity {
     }
 
     public void entrarHacerMaleta (View view) {
-        if (datos.numeroMaleta == 1) {
+        if (Datos.numeroMaleta == 1) {
             escribirCuadrodialogo("Ya tiene una maleta creada");
         } else {
             intento = new Intent(this, HacerMaletaActivity.class);
@@ -60,17 +58,17 @@ public class MaletaPpalActivity extends AppCompatActivity {
     }
 
     public void deshacerMaleta (View view){
-        if (datos.numeroMaleta == 0){
+        if (Datos.numeroMaleta == 0){
             escribirCuadrodialogo("No tiene la Maleta hecha. Por favor hágala");
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                     .setTitle("Confirmar deshacer Maleta")
-                    .setMessage("¿Qué desea hacer?")
+                    .setMessage("¿Qué desea hacer?. Si selecciona Eliminar, esta acción no puede deshacerse")
                     .setPositiveButton("Deshacer", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
                             controlador.actualizarCampoDeshacerMaleta();
-                            datos.numeroMaleta = 0;
+                            Datos.numeroMaleta = 0;
                             escribirToast();
                         }
                     })
@@ -80,7 +78,7 @@ public class MaletaPpalActivity extends AppCompatActivity {
     }
 
     public void verMaleta (View view){
-        if (datos.numeroMaleta == 0) {
+        if (Datos.numeroMaleta == 0) {
             escribirCuadrodialogo("No tiene la Maleta hecha. Por favor hágala primero");
         } else {
             Cursor cursor = controlador.obtenerPertenenciasPorMaleta();

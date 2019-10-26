@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/estilo_relative_elementos">
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+style="@style/estilo_relative_elementos">
 
-    <ImageView
-        android:id="@+id/elementos_sp_ubic_icono_ubic"
-        style="@style/estilo_iconos"
-        android:src="@mipmap/iconoubicacion" />
+<ImageView
+    android:id="@+id/elementos_sp_ubic_icono_ubic"
+    style="@style/estilo_iconos"
+    android:src="@mipmap/iconoubicacion" />
 
-    <TextView
-        android:id="@+id/elementos_sp_ubic_nombre_elemento"
-        style="@style/estilo_cajas"
-        android:layout_centerVertical="true"
-        android:textSize="20sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_toEndOf="@+id/elementos_sp_ubic_icono_ubic"/>
+<TextView
+    android:id="@+id/elementos_sp_ubic_nombre_elemento"
+    style="@style/estilo_cajas"
+    android:layout_centerVertical="true"
+    android:textSize="20sp"
+    android:textColor="@color/colorPrimaryDark"
+    android:layout_toEndOf="@+id/elementos_sp_ubic_icono_ubic"/>
 </RelativeLayout>

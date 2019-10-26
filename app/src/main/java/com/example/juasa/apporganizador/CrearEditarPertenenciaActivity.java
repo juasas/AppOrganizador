@@ -276,7 +276,7 @@ public class CrearEditarPertenenciaActivity extends AppCompatActivity {
     public void mostrarAviso(){
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                 .setTitle("AVISO")
-                .setMessage("Los permisos para acceder al ALMACENAMIENTO INTERNO y a la CÁMARA de " +
+                .setMessage("Los permisos para acceder a la lectura/escritura en el ALMACENAMIENTO EXTERNO y a la CÁMARA de " +
                             "su dispositivo son necesarios para obtener una fotografía y usarla. " +
                             "Si no ha concedido previamente ambos permisos, debe otorgarlos cuando " +
                         "así se le indique")

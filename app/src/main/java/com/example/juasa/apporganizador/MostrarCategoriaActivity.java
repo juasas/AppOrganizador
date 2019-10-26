@@ -58,8 +58,7 @@ public class MostrarCategoriaActivity extends AppCompatActivity {
                 if (controlador.numAparicionesCategoriaTablaPert(idCategoria) == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                     .setTitle("Confirmar eliminación")
-                    .setMessage("¿Qué desea hacer?. Si selecciona Eliminar, esta acción no puede " +
-                                "deshacerse")
+                    .setMessage("¿Qué desea hacer?. Si selecciona Eliminar, esta acción no puede deshacerse")
                     .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {

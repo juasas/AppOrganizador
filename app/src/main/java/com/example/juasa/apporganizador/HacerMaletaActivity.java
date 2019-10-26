@@ -28,9 +28,6 @@ public class HacerMaletaActivity extends AppCompatActivity {
     private String nombrePertenencia, mensaje;
     private Intent intento;
     private TextView pertenenciaCajaTexto;
-    private View padre;
-    private FloatingActionButton fab;
-    private int cuantosSeleccionados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +60,6 @@ public class HacerMaletaActivity extends AppCompatActivity {
 
     public void inicializar() {
         controlador = new Controlador_base_datos(this);
-        fab = findViewById(R.id.hacer_maleta_fab);
         listaPertenenciasMaleta = findViewById(R.id.hacer_maleta_lista_pertenencias);
     }
 
@@ -80,7 +76,7 @@ public class HacerMaletaActivity extends AppCompatActivity {
 
     public void confirmarHacerMaleta(View view) {
         int cuantos = listaPertenenciasMaleta.getAdapter().getCount();
-        cuantosSeleccionados=0;
+        int cuantosSeleccionados=0;
         for (int i = 0; i < cuantos; i++) {
 
             ViewGroup row = (ViewGroup) listaPertenenciasMaleta.getChildAt(i);
@@ -88,7 +84,7 @@ public class HacerMaletaActivity extends AppCompatActivity {
             CheckBox checkBox = row.findViewById(R.id.elementos_lista_maleta_check_elemento);
 
             if (checkBox.isChecked()) {
-                padre = (View) checkBox.getParent();
+                View padre = (View) checkBox.getParent();
                 pertenenciaCajaTexto = (TextView) padre.findViewById(R.id.elementos_lista_maleta_nombre_elemento);
                 nombrePertenencia = pertenenciaCajaTexto.getText().toString();
                 controlador.actualizarCampoHacerMaleta(nombrePertenencia);

@@ -2,6 +2,7 @@ package com.example.juasa.apporganizador;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -57,7 +58,6 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item ){
-        String titulo, mensaje;
         switch (item.getItemId()) {
             case R.id.menu_action_gestion_volver_atras:
                 volver();
@@ -82,12 +82,15 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
                 if (controlador.comprobarSiMaleta(nombrePert)){
                     AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                             .setTitle("AVISO")
-                            .setMessage("Va a eliminar una Pertenencia que está incluida en su Maleta")
+                            .setMessage("Va a eliminar una Pertenencia que está incluida en su Maleta " +
+                            "Esta acción no puede deshacerse")
                             .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
                                     controlador.borrarPertenencia(nombrePert);
                                     mostrar();
+                                    if (controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS)== 0)
+                                        Datos.numeroMaleta=0;
                                     volver();
                                 }
                             })
@@ -96,7 +99,7 @@ public class MostrarPertenenciaActivity extends AppCompatActivity {
                     dialog.show();
                 } else {AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                         .setTitle("Confirmar eliminación")
-                        .setMessage("¿Qué desea hacer?")
+                        .setMessage("¿Qué desea hacer?. Si selecciona Eliminar, esta acción no puede deshacerse")
                         .setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {

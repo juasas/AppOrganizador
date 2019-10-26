@@ -11,7 +11,7 @@
         <TextView
             android:id="@+id/crear_cat_titulo"
             style="@style/estilo_comun_textos"
-            android:text="Nueva categoría"
+            android:text="Nueva Categoría"
             android:textSize="40sp" />
 
         <ImageView

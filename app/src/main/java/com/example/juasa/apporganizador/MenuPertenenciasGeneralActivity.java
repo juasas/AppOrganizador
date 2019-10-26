@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
+import com.example.juasa.apporganizador.datos.Datos;
 
 public class MenuPertenenciasGeneralActivity extends AppCompatActivity {
 
@@ -89,10 +90,11 @@ public class MenuPertenenciasGeneralActivity extends AppCompatActivity {
 
     public void entrarMaletaPpal(View view) {
         if ((controlador.numRegistrosTabla(controlador.TABLA_PERTENENCIAS) == 0)){
+            Datos.numeroMaleta = 0;
             AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.estiloCuadrodDialogo))
                     .setTitle("AVISO")
                     .setMessage("No existe ninguna PERTENENCIA creada. Para poder usar esta " +
-                            " funcionalidad debe crear al menos una")
+                            "funcionalidad debe crear al menos una")
                     .setPositiveButton("Aceptar", null);
             AlertDialog dialog = builder.create();
             dialog.show();

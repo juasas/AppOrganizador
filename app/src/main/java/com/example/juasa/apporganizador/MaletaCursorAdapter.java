@@ -17,7 +17,6 @@ public class MaletaCursorAdapter extends CursorAdapter {
 
         private ImageView cajaIcono;
         private TextView cajaNombre, cajaCategoria, cajaUbicacion;
-        private CheckBox cajaCheck;
         private String imagen, nombre, categoria, ubicacion;
 
         public MaletaCursorAdapter(Context context, Cursor c) {
@@ -36,7 +35,6 @@ public class MaletaCursorAdapter extends CursorAdapter {
             cajaNombre = (TextView) view.findViewById(R.id.elementos_lista_maleta_nombre_elemento);
             cajaCategoria = (TextView) view.findViewById(R.id.elemtos_lista_maleta_cat_elemento);
             cajaUbicacion = (TextView) view.findViewById(R.id.elementos_lista_maleta_ubic_elemento);
-            cajaCheck = (CheckBox) view.findViewById(R.id.elementos_lista_maleta_check_elemento);
 
             nombre = cursor.getString(cursor.getColumnIndex("NOMBRE_PERT"));
             categoria = cursor.getString(cursor.getColumnIndex("NOMBRE_CATEGORIA"));

@@ -9,13 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.juasa.apporganizador.base_de_datos.Controlador_base_datos;
 public class BuscarPedirNombreActivity extends AppCompatActivity {
 
-    private Controlador_base_datos controlador;
     private EditText cajaNombreBuscado;
     private String nombreBuscado;
 
@@ -27,7 +25,6 @@ public class BuscarPedirNombreActivity extends AppCompatActivity {
     }
 
     public void inicializar(){
-        controlador = new Controlador_base_datos(this);
         cajaNombreBuscado = (EditText) findViewById(R.id.buscar_pedir_nombre_caja_nombre);
     }
 

@@ -3,7 +3,6 @@ package com.example.juasa.apporganizador.base_de_datos;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
@@ -13,7 +12,6 @@ import com.example.juasa.apporganizador.Pertenencia;
 import com.example.juasa.apporganizador.Categoria;
 import com.example.juasa.apporganizador.Ubicacion;
 import com.example.juasa.apporganizador.Usuario;
-import com.example.juasa.apporganizador.datos.Datos;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

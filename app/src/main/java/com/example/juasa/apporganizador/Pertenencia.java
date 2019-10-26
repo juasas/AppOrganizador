@@ -3,7 +3,7 @@ package com.example.juasa.apporganizador;
 public class Pertenencia {
 
     private int idPertenencia;
-    private String categoriaPertenencia, nombrePertenencia, detallePertenencia,
+    private String nombrePertenencia, detallePertenencia,
                    nombreCategoriaPertenencia, nombreUbicacionPertenencia, fotoPertenencia;
 
     public Pertenencia (){
